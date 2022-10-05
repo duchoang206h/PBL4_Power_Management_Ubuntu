@@ -1,29 +1,199 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
-    <link href="./styles.css" rel="stylesheet">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <div class="main">
-      <div class="power">
-        <h2>Power</h2>
-        <div>
-          <table class="table-light table-hover">
-            <thead>Screen and sleep</thead>
-          </table>
-        </div>
-      </div>
-      <div class="battery"></div>
 
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net; script-src 'self'  'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <!-- RESET CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <!-- LINE AWESOME -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"
+    integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- APP CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <title>Hello World!</title>
+</head>
+
+<body>
+  <div class="main">
+    <!-- POWER -->
+    <div class="section">
+      <h2 class="section__heading">
+        Power
+      </h2>
+      <div class="section__content">
+        <div class="section__content-item">
+          <div class="section__content-item__description">
+            <span class="section__content-item__icon">
+              <i class="las la-desktop"></i>
+            </span>
+            <div class="section__content-item__text">Screen and sleep</div>
+          </div>
+          <div class="section__content-item__list">
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                On battery power, turn off my screen after
+              </div>
+              <select name="" id="" class="section__content-item__list-item__select">
+                <option value="">5 minutes</option>
+                <option value="">10 minutes</option>
+                <option value="">15 minutes</option>
+                <option value="">20 minutes</option>
+              </select>
+            </div>
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                When plugged in, turn off my screen after
+              </div>
+              <select name="" id="" class="section__content-item__list-item__select">
+                <option value="">5 minutes</option>
+                <option value="">10 minutes</option>
+                <option value="">15 minutes</option>
+                <option value="">20 minutes</option>
+              </select>
+            </div>
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                On battery power, put my device to sleep after
+              </div>
+              <select name="" id="" class="section__content-item__list-item__select">
+                <option value="">5 minutes</option>
+                <option value="">10 minutes</option>
+                <option value="">15 minutes</option>
+                <option value="">20 minutes</option>
+              </select>
+            </div>
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                When plugged in, put my device to sleep after
+              </div>
+              <select name="" id="" class="section__content-item__list-item__select">
+                <option value="">5 minutes</option>
+                <option value="">10 minutes</option>
+                <option value="">15 minutes</option>
+                <option value="">20 minutes</option>
+              </select>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="section__content-item">
+          <div class="section__content-item__description">
+            <span class="section__content-item__icon">
+              <i class="las la-battery-three-quarters"></i>
+            </span>
+            <div class="section__content-item__text">
+              Power mode
+              <div class="section__content-item__text__description">
+                Optimize your device based on power use and performance
+              </div>
+            </div>
+            <select class="section__content-item__select">
+              <option>Best performance</option>
+              <option>Balanced</option>
+
+            </select>
+          </div>
+
+
+        </div>
+
+
+      </div>
     </div>
-    <script src="./renderer.js"></script>
-  </body>
+    <!-- BATTERY -->
+    <div class="section">
+      <h2 class="section__heading">
+        Battery
+      </h2>
+      <div class="section__content">
+        <div class="section__content-item">
+          <div class="section__content-item__description">
+            <span class="section__content-item__icon">
+              <i class="las la-car-battery"></i>
+            </span>
+            <div class="section__content-item__text">Battery saver
+              <div class="section__content-item__text__description">
+                Extend battery life by limiting some notifications and background activity
+              </div>
+            </div>
+            
+          </div>
+          <div class="section__content-item__list">
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                Battery saver
+              </div>
+              <select name="" id="" class="section__content-item__list-item__select">
+                <option value="">5 minutes</option>
+                <option value="">10 minutes</option>
+                <option value="">15 minutes</option>
+                <option value="">20 minutes</option>
+              </select>
+            </div>
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                Turn battery saver on automatically at
+              </div>
+              <select name="" id="" class="section__content-item__list-item__select">
+                <option value="">20%</option>
+                <option value="">25%</option>
+                <option value="">30%</option>
+                <option value="">35%</option>
+              </select>
+            </div>
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                Lower screen brightness when using battery saver
+              </div>
+              <select name="" id="" class="section__content-item__list-item__select">
+                <option value="">5 minutes</option>
+                <option value="">10 minutes</option>
+                <option value="">15 minutes</option>
+                <option value="">20 minutes</option>
+              </select>
+            </div>
+           
+          </div>
+
+
+        </div>
+        <div class="section__content-item">
+          <div class="section__content-item__description">
+            <span class="section__content-item__icon">
+              <i class="las la-chart-line"></i>
+            </span>
+            <div class="section__content-item__text">
+              Battery usage
+              
+            </div>
+            <select class="section__content-item__select">
+              <option>Best performance</option>
+              <option>Balanced</option>
+
+            </select>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <script src="./renderer.js"></script>
+</body>
+
 </html>

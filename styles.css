@@ -1,3 +1,62 @@
 /* styles.css */
+.main {
+  background-color: #ccc;
+  padding: 20px;
+}
+
+.section {
+}
+.section__heading {
+  font-weight: 400;
+}
+.section__content {
+  background-color: #fff;
+  border-radius: 2px;
+}
+.section__content-item {
+  border-bottom: 4px solid #ccc;
+  display: flex;
+  min-height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10px;
+}.section__content-item__description {
+    display: flex;
+    padding: 16px 0;
+}
+.section__content-item__list-item {
+    display: flex;
+    padding: 6px 26px 6px 31px;
+    border-top: 1px solid #ccc;
+}
+.section__heading {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+.section {
+    margin-bottom: 40px;
+}
+.section__content-item__list-item__text {
+    flex: 1;
+}
+.section__content-item__text__description {
+    font-size: 12px;
+    margin-top: 4px;
+}
+.section__content-item__description {
+    display: flex;
+    padding: 16px 26px 16px 6px;
+}
+.section__content-item__icon {
+}
+.section__content-item__text {
+  margin-left: 10px;
+  flex: 1;
+}
+.section__content-item__text__description {
+  font-size: 12px;
+}
 
 /* Add styles here to customize the appearance of your app */
