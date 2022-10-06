@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net; script-src 'self'  'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net">
+    content="default-src 'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net; script-src 'self'  'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net cdnjs.cloudflare.com">
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -17,9 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <!-- LINE AWESOME -->
   <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"
-    integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"/>
   <!-- APP CSS -->
   <link rel="stylesheet" href="styles.css">
   <title>Hello World!</title>
@@ -39,50 +37,101 @@
               <i class="las la-desktop"></i>
             </span>
             <div class="section__content-item__text">Screen and sleep</div>
+            <div class="section__content-item__toggle-btn">
+              <i class="las la-angle-right"></i>
+            </div>
           </div>
           <div class="section__content-item__list">
             <div class="section__content-item__list-item">
               <div class="section__content-item__list-item__text">
                 On battery power, turn off my screen after
               </div>
-              <select name="" id="" class="section__content-item__list-item__select">
-                <option value="">5 minutes</option>
+              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter">
+                <option value="">1 minutes</option>
+                <option value="">2 minutes</option>
+                <option value="">3 minutes</option>
+                <option value="" selected>5 minutes</option>
                 <option value="">10 minutes</option>
                 <option value="">15 minutes</option>
                 <option value="">20 minutes</option>
+                <option value="">25 minutes</option>
+                <option value="">30 minutes</option>
+                <option value="">45 minutes</option>
+                <option value="">1 hour</option>
+                <option value="">2 hour</option>
+                <option value="">3 hour</option>
+                <option value="">4 hour</option>
+                <option value="">5 hour</option>
+                <option value="">Never</option>
               </select>
             </div>
             <div class="section__content-item__list-item">
               <div class="section__content-item__list-item__text">
                 When plugged in, turn off my screen after
               </div>
-              <select name="" id="" class="section__content-item__list-item__select">
+              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter">
+                <option value="">1 minutes</option>
+                <option value="">2 minutes</option>
+                <option value="">3 minutes</option>
                 <option value="">5 minutes</option>
-                <option value="">10 minutes</option>
+                <option value="" selected>10 minutes</option>
                 <option value="">15 minutes</option>
                 <option value="">20 minutes</option>
+                <option value="">25 minutes</option>
+                <option value="">30 minutes</option>
+                <option value="">45 minutes</option>
+                <option value="">1 hour</option>
+                <option value="">2 hour</option>
+                <option value="">3 hour</option>
+                <option value="">4 hour</option>
+                <option value="">5 hour</option>
+                <option value="">Never</option>
               </select>
             </div>
             <div class="section__content-item__list-item">
               <div class="section__content-item__list-item__text">
                 On battery power, put my device to sleep after
               </div>
-              <select name="" id="" class="section__content-item__list-item__select">
-                <option value="">5 minutes</option>
+              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter">
+                <option value="">1 minutes</option>
+                <option value="">2 minutes</option>
+                <option value="">3 minutes</option>
+                <option value="" selected>5 minutes</option>
                 <option value="">10 minutes</option>
                 <option value="">15 minutes</option>
                 <option value="">20 minutes</option>
+                <option value="">25 minutes</option>
+                <option value="">30 minutes</option>
+                <option value="">45 minutes</option>
+                <option value="">1 hour</option>
+                <option value="">2 hour</option>
+                <option value="">3 hour</option>
+                <option value="">4 hour</option>
+                <option value="">5 hour</option>
+                <option value="">Never</option>
               </select>
             </div>
             <div class="section__content-item__list-item">
               <div class="section__content-item__list-item__text">
                 When plugged in, put my device to sleep after
               </div>
-              <select name="" id="" class="section__content-item__list-item__select">
+              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter">
+                <option value="">1 minutes</option>
+                <option value="">2 minutes</option>
+                <option value="">3 minutes</option>
                 <option value="">5 minutes</option>
                 <option value="">10 minutes</option>
                 <option value="">15 minutes</option>
                 <option value="">20 minutes</option>
+                <option value="">25 minutes</option>
+                <option value="" selected>30 minutes</option>
+                <option value="">45 minutes</option>
+                <option value="">1 hour</option>
+                <option value="">2 hour</option>
+                <option value="">3 hour</option>
+                <option value="">4 hour</option>
+                <option value="">5 hour</option>
+                <option value="">Never</option>
               </select>
             </div>
           </div>
@@ -100,9 +149,10 @@
                 Optimize your device based on power use and performance
               </div>
             </div>
-            <select class="section__content-item__select">
+            <select class="section__content-item__select section__content-item__list-item__setter">
               <option>Best performance</option>
-              <option>Balanced</option>
+              <option>Balanced (Recommended)</option>
+              <option>Power save</option>
 
             </select>
           </div>
@@ -129,43 +179,58 @@
                 Extend battery life by limiting some notifications and background activity
               </div>
             </div>
-            
+            <div class="section__content-item__toggle-btn">
+              <i class="las la-angle-right"></i>
+            </div>
           </div>
           <div class="section__content-item__list">
             <div class="section__content-item__list-item">
               <div class="section__content-item__list-item__text">
                 Battery saver
               </div>
-              <select name="" id="" class="section__content-item__list-item__select">
-                <option value="">5 minutes</option>
-                <option value="">10 minutes</option>
-                <option value="">15 minutes</option>
-                <option value="">20 minutes</option>
-              </select>
+              <button class="btn btn-disabled section__content-item__list-item__setter">
+                Turn on now
+              </button>
             </div>
             <div class="section__content-item__list-item">
               <div class="section__content-item__list-item__text">
                 Turn battery saver on automatically at
               </div>
-              <select name="" id="" class="section__content-item__list-item__select">
+              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter" >
                 <option value="">20%</option>
                 <option value="">25%</option>
                 <option value="">30%</option>
                 <option value="">35%</option>
+                <option value="">40%</option>
+                <option value="">50%</option>
+                <option value="">60%</option>
+                <option value="">70%</option>
+                <option value="">80%</option>
+                <option value="">90%</option>
+                <option value="">95%</option>
+                <option value="">100%</option>
               </select>
             </div>
             <div class="section__content-item__list-item">
               <div class="section__content-item__list-item__text">
                 Lower screen brightness when using battery saver
               </div>
-              <select name="" id="" class="section__content-item__list-item__select">
-                <option value="">5 minutes</option>
-                <option value="">10 minutes</option>
-                <option value="">15 minutes</option>
-                <option value="">20 minutes</option>
-              </select>
+              <div class="section__content-item__list-item__switch">
+                <span class="section__content-item__list-item__text">
+                  On
+                </span>                
+                <!-- <div class="switch-btn">
+                  <span class="switch-btn__status"></span>
+                </div> -->
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
+
+              </div>
             </div>
-           
+
+
           </div>
 
 
@@ -177,9 +242,9 @@
             </span>
             <div class="section__content-item__text">
               Battery usage
-              
+
             </div>
-            <select class="section__content-item__select">
+            <select class="section__content-item__select section__content-item__list-item__setter">
               <option>Best performance</option>
               <option>Balanced</option>
 
@@ -194,6 +259,7 @@
     </div>
   </div>
   <script src="./renderer.js"></script>
+  <script src="./script.js"></script>
 </body>
 
 </html>
