@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net; script-src 'self'  'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net cdnjs.cloudflare.com">
+    content="">
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -19,8 +19,8 @@
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"/>
   <!-- APP CSS -->
-  <link rel="stylesheet" href="styles.css">
-  <title>Hello World!</title>
+  <link rel="stylesheet" href="./style/styles.css">
+  <title>Power Management</title>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
               <div class="section__content-item__list-item__text font-sans ">
                 On battery power, turn off my screen after
               </div>
-              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter">
+              <select name="" id="batteryTurnOff" class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">1 minutes</option>
                 <option value="">2 minutes</option>
                 <option value="">3 minutes</option>
@@ -69,7 +69,7 @@
               <div class="section__content-item__list-item__text font-sans ">
                 When plugged in, turn off my screen after
               </div>
-              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter">
+              <select name="" id="pluggedInTurnOn" class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">1 minutes</option>
                 <option value="">2 minutes</option>
                 <option value="">3 minutes</option>
@@ -92,7 +92,7 @@
               <div class="section__content-item__list-item__text">
                 On battery power, put my device to sleep after
               </div>
-              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter">
+              <select name="" id="batterySleep" class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">1 minutes</option>
                 <option value="">2 minutes</option>
                 <option value="">3 minutes</option>
@@ -115,7 +115,7 @@
               <div class="section__content-item__list-item__text">
                 When plugged in, put my device to sleep after
               </div>
-              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter">
+              <select name="" id="pluggedInSleep" class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">1 minutes</option>
                 <option value="">2 minutes</option>
                 <option value="">3 minutes</option>
@@ -149,7 +149,7 @@
                 Optimize your device based on power use and performance
               </div>
             </div>
-            <select class="section__content-item__select section__content-item__list-item__setter">
+            <select id="powerMode" class="section__content-item__select section__content-item__list-item__setter">
               <option>Best performance</option>
               <option>Balanced (Recommended)</option>
               <option>Power save</option>
@@ -196,7 +196,7 @@
               <div class="section__content-item__list-item__text">
                 Turn battery saver on automatically at
               </div>
-              <select name="" id="" class="section__content-item__list-item__select section__content-item__list-item__setter" >
+              <select name="" id="batterySaveOn" class="section__content-item__list-item__select section__content-item__list-item__setter" >
                 <option value="">20%</option>
                 <option value="">25%</option>
                 <option value="">30%</option>
@@ -244,7 +244,7 @@
               Battery usage
 
             </div>
-            <select class="section__content-item__select section__content-item__list-item__setter">
+            <select id="batteryUsage" class="section__content-item__select section__content-item__list-item__setter">
               <option>Best performance</option>
               <option>Balanced</option>
 
@@ -259,7 +259,8 @@
     </div>
   </div>
   <script src="./renderer.js"></script>
-  <script src="./script.js"></script>
+  <script src="./script/toggleList.js"></script>
+  <script src="./script/handleClick.js"></script>
 </body>
 
 </html>
