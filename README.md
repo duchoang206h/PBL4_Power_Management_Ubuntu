@@ -19,3 +19,5 @@ You can learn more about each of these components in depth within the [Tutorial]
 ## To Use
 
 
+chart.js draw battery chart
+https://www.chartjs.org/
