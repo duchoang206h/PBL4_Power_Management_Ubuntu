@@ -1,10 +1,4 @@
-/**
- * The preload script runs before. It has access to web APIs
- * as well as Electron's renderer process modules and some
- * polyfilled Node.js functions.
- * 
- * https://www.electronjs.org/docs/latest/tutorial/sandbox
- */
+const { ipcMain, contextBridge, ipcRenderer } = require('electron');
 window.addEventListener('DOMContentLoaded', () => {
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)
@@ -14,4 +8,14 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const type of ['chrome', 'node', 'electron']) {
     replaceText(`${type}-version`, process.versions[type])
   }
+});
+// expose ipMain
+contextBridge.exposeInMainWorld('handle', {
+  setBatteryTurnOff : (minute) => ipcRenderer.invoke('batteryTurnOff', minute),
+  setPluggedInTurnOn: (minute) => ipcRenderer.invoke('pluggedInTurnOn', minute),
+  setBatterySleep: (minute) => ipcRenderer.invoke('batterySleep', minute),
+  setPluggedInSleep: (minute) => ipcRenderer.invoke('pluggedInSleep', minute),
+  setPowerMode: (mode) => ipcRenderer.invoke('powerMode', mode),
+  setBatterySaveOne: (minute) => ipcRenderer.invoke('batterySaveOn', minute),
+  setBatteryUsage: (mode) => ipcRenderer.invoke('batteryUsage', mode)
 })
