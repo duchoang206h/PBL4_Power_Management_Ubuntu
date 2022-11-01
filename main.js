@@ -1,7 +1,16 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow} = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const { WINDOW_SIZE } = require('./config')
+const { 
+  handleBatterySaveOn,
+  handleBatterySleep,
+  handleBatteryTurnOff,
+  handleBatteryUsage,
+  handlePluggedInSleep,
+  handlePowerMode,
+  handlePluggedInTurnOn
+} = require('./handlers')
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -29,7 +38,15 @@ app.whenReady().then(() => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
+  });
+  // handle ipcMain
+  ipcMain.handle('batteryTurnOff', handleBatteryTurnOff)
+  ipcMain.handle('pluggedInTurnOn', handlePluggedInTurnOn)
+  ipcMain.handle('batterySleep', handleBatterySleep)
+  ipcMain.handle('pluggedInSleep', handlePluggedInSleep)
+  ipcMain.handle('powerMode', handlePowerMode)
+  ipcMain.handle('batterySaveOn', handleBatterySaveOn)
+  ipcMain.handle('batteryUsage', handleBatteryUsage)
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
