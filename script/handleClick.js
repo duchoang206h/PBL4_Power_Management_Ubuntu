@@ -35,13 +35,6 @@ function handleClick (event){
         
     }
 }
-function handleBatteryTurnOff (value) {
-    try {
-        
-    } catch (error) {
-        
-    }
-}
 function handlePluggedInTurnOn (value) {
     try {
         
