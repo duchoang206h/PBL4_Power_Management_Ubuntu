@@ -3,13 +3,8 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const { WINDOW_SIZE } = require('./config')
 const { 
-  handleBatterySaveOn,
-  handleBatterySleep,
-  handleBatteryTurnOff,
-  handleBatteryUsage,
-  handlePluggedInSleep,
-  handlePowerMode,
-  handlePluggedInTurnOn
+  system,
+  handler
 } = require('./handlers')
 function createWindow () {
   // Create the browser window.
@@ -26,6 +21,16 @@ function createWindow () {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+  // handle ipcMain
+  ipcMain.handle('handle:batteryTurnOff', handler.handleBatteryTurnOff)
+  ipcMain.handle('handle:pluggedInTurnOn', handler.handlePluggedInTurnOn)
+  ipcMain.handle('handle:batterySleep', handler.handleBatterySleep)
+  ipcMain.handle('handle:pluggedInSleep', handler.handlePluggedInSleep)
+  ipcMain.handle('handle:powerMode', handler.handlePowerMode)
+  ipcMain.handle('handle:batterySaveOn', handler.handleBatterySaveOn)
+  ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage)
+  // system
+  ipcMain.handle('system:getCurrentBrightness', system.getCurrentBrightness)
 }
 
 // This method will be called when Electron has finished
@@ -33,20 +38,12 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow()
-
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   });
-  // handle ipcMain
-  ipcMain.handle('batteryTurnOff', handleBatteryTurnOff)
-  ipcMain.handle('pluggedInTurnOn', handlePluggedInTurnOn)
-  ipcMain.handle('batterySleep', handleBatterySleep)
-  ipcMain.handle('pluggedInSleep', handlePluggedInSleep)
-  ipcMain.handle('powerMode', handlePowerMode)
-  ipcMain.handle('batterySaveOn', handleBatterySaveOn)
-  ipcMain.handle('batteryUsage', handleBatteryUsage)
+  
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
