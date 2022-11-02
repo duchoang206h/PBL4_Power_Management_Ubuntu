@@ -1,15 +1,24 @@
+const { execCommand } = require('../commands/execCommand');
+const { 
+
+    
+} = require('../commands/commands');
 class Handler {
     constructor(){
 
     }
-    handleBatterySaveOn (value){
-
+    async handleBatterySaveOn (event, value){
+        
     }
     handleBatterySleep(value){
 
     }
-    handleBatteryTurnOff(value){
-
+    async handleBatteryTurnOff(value){
+        try {
+            const data = await execCommand('ls -la');
+        } catch (error) {
+            
+        }
     }
     handleBatteryUsage(value){
 

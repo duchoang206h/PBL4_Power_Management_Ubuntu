@@ -22,7 +22,7 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
-    "brightness": "^3.0.0",
+    "cron": "^2.1.0",
     "dotenv": "^16.0.3",
     "mongoose": "^6.7.0"
   }
