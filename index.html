@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy"
-    content="">
+  <meta http-equiv="Content-Security-Policy" content="">
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -17,7 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <!-- LINE AWESOME -->
   <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"/>
+    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" />
   <!-- APP CSS -->
   <link rel="stylesheet" href="./style/styles.css">
   <title>Power Management</title>
@@ -46,7 +45,8 @@
               <div class="section__content-item__list-item__text font-sans ">
                 On battery power, turn off my screen after
               </div>
-              <select name="" id="batteryTurnOff" class="section__content-item__list-item__select section__content-item__list-item__setter">
+              <select name="" id="batteryTurnOff"
+                class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">1 minutes</option>
                 <option value="">2 minutes</option>
                 <option value="">3 minutes</option>
@@ -69,7 +69,8 @@
               <div class="section__content-item__list-item__text font-sans ">
                 When plugged in, turn off my screen after
               </div>
-              <select name="" id="pluggedInTurnOn" class="section__content-item__list-item__select section__content-item__list-item__setter">
+              <select name="" id="pluggedInTurnOn"
+                class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">1 minutes</option>
                 <option value="">2 minutes</option>
                 <option value="">3 minutes</option>
@@ -92,7 +93,8 @@
               <div class="section__content-item__list-item__text">
                 On battery power, put my device to sleep after
               </div>
-              <select name="" id="batterySleep" class="section__content-item__list-item__select section__content-item__list-item__setter">
+              <select name="" id="batterySleep"
+                class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">1 minutes</option>
                 <option value="">2 minutes</option>
                 <option value="">3 minutes</option>
@@ -115,7 +117,8 @@
               <div class="section__content-item__list-item__text">
                 When plugged in, put my device to sleep after
               </div>
-              <select name="" id="pluggedInSleep" class="section__content-item__list-item__select section__content-item__list-item__setter">
+              <select name="" id="pluggedInSleep"
+                class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">1 minutes</option>
                 <option value="">2 minutes</option>
                 <option value="">3 minutes</option>
@@ -196,7 +199,8 @@
               <div class="section__content-item__list-item__text">
                 Turn battery saver on automatically at
               </div>
-              <select name="" id="batterySaveOn" class="section__content-item__list-item__select section__content-item__list-item__setter" >
+              <select name="" id="batterySaveOn"
+                class="section__content-item__list-item__select section__content-item__list-item__setter">
                 <option value="">20%</option>
                 <option value="">25%</option>
                 <option value="">30%</option>
@@ -218,7 +222,7 @@
               <div class="section__content-item__list-item__switch">
                 <span class="section__content-item__list-item__text">
                   On
-                </span>                
+                </span>
                 <!-- <div class="switch-btn">
                   <span class="switch-btn__status"></span>
                 </div> -->
@@ -228,8 +232,15 @@
                 </label>
 
               </div>
+             
+             
             </div>
-
+            <div>
+              <input type="range" id="vol" name="vol" min="0" max="100" style="
+                  width: 50%;
+                  margin-left: calc(50% - 26px);
+              ">
+            </div>
 
           </div>
 
