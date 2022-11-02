@@ -1,84 +1,98 @@
-const { MappingIndexToValue } = require('../config');
 const selects = document.querySelectorAll('select');
 selects.forEach(select => {
     select.addEventListener('change', handleClick)
 })
-function handleClick (event){
+async function handleClick (event){
     const { id, selectedIndex } = event.target;
     try {
+        let result = false;
         switch (id) {
             case "batteryTurnOff":
-                handleBatteryTurnOff(MappingIndexToValue.batteryTurnOff[selectedIndex])
+                result = await handleBatteryTurnOff(MappingIndexToValue.batteryTurnOff[selectedIndex])
                 break;
             case "pluggedInTurnOn":
-                handlePluggedInTurnOn(MappingIndexToValue.pluggedInTurnOn[selectedIndex])
+                result = await handlePluggedInTurnOn(MappingIndexToValue.pluggedInTurnOn[selectedIndex])
                 break;    
             case "batterySleep":
-                handleBatterySleep(MappingIndexToValue.batterySleep[selectedIndex])
+                result = await handleBatterySleep(MappingIndexToValue.batterySleep[selectedIndex])
                 break;    
             case "pluggedInSleep":
-                handlePluggedInSleep(MappingIndexToValue.pluggedInSleep[selectedIndex])
+                result = await handlePluggedInSleep(MappingIndexToValue.pluggedInSleep[selectedIndex])
                 break;    
             case "powerMode":
-                handlePowerMode(MappingIndexToValue.powerMode[selectedIndex])
+                result = await handlePowerMode(MappingIndexToValue.powerMode[selectedIndex])
                 break;    
             case "batterySaveOn":
-                handleBatterySaveOn(MappingIndexToValue.batterySaveOn[selectedIndex])
+                result = await handleBatterySaveOn(MappingIndexToValue.batterySaveOn[selectedIndex])
                 break;    
             case "batteryUsage":
-                handleBatteryUsage(MappingIndexToValue.batteryUsage[selectedIndex])
+                result = await handleBatteryUsage(MappingIndexToValue.batteryUsage[selectedIndex])
                 break;    
             default:
                 break;
         }
+    if(result){
+        // handle success
+    }else{
+        // handle fail 
+    }    
+    } catch (error) {
+         // handle error 
+    }
+}
+async function handlePluggedInTurnOn (value) {
+    try {
+       return await window.handle.setPluggedInTurnOn(value)
+    } catch (error) {
+      // handle error  
+    }
+}
+async function handleBatterySleep (value) {
+    try {
+        console.log(`value`, value)
+       return await window.handle.setBatterySleep(value)
     } catch (error) {
         
     }
 }
-function handlePluggedInTurnOn (value) {
+async function handlePluggedInSleep (value) {
     try {
-        
+        return await window.handle.setPluggedInSleep(value)
     } catch (error) {
         
     }
 }
-function handleBatterySleep (value) {
+async function handlePowerMode (value) {
     try {
-        
+        return await window.handle.setPowerMode(value)
     } catch (error) {
         
     }
 }
-function handlePluggedInSleep (value) {
+async function handleBatterySaveOn (value) {
     try {
-        
+        return await window.handle.setBatterySaveOn(value)
     } catch (error) {
         
     }
 }
-function handlePowerMode (value) {
+async function handleBatteryTurnOff (value) {
     try {
-        
+        return await window.handle.setBatteryTurnOff(value)
     } catch (error) {
         
     }
 }
-function handleBatterySaveOn (value) {
+async function handleBatteryUsage (value) {
     try {
-        
+        return await window.handle.setBatteryUsage(value)
     } catch (error) {
         
     }
 }
-function handleBatteryTurnOff (value) {
+async function handleChangeBright(value) {
     try {
-        
-    } catch (error) {
-        
-    }
-}
-function handleBatteryUsage (value) {
-    try {
+        return await window.handle.changeBright(value)
         
     } catch (error) {
         

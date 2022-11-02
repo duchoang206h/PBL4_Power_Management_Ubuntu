@@ -1,6 +1,7 @@
-function handleBatterySleep (value) {
+function handleBatterySleep (event, arg) {
     try {
-        
+        console.log(`event`, event)
+        console.log(`arg`, arg)
     } catch (error) {
         
     }
