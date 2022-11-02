@@ -1,6 +1,7 @@
-function handleBatteryUsage (value) {
+function handleBatteryUsage (event, arg) {
     try {
-        
+        console.log(`event`, event)
+        console.log(`arg`, arg)
     } catch (error) {
         
     }
