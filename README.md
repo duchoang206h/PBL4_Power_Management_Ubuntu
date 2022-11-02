@@ -1,9 +1,9 @@
 # install
 * Install Node: https://www.geeksforgeeks.org/installation-of-node-js-on-linux/
 * run script
-*** npm install
-*** npm start 
-**Clone and run for a quick way to see Electron in action.**
+* npm install
+* npm start 
+* Clone and run for a quick way to see Electron in action.**
 
 This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/latest/tutorial/quick-start) within the Electron documentation.
 
