@@ -1,6 +1,6 @@
 const { execCommand } = require('../commands/execCommand');
 const { 
-
+    changeBright
     
 } = require('../commands/commands');
 class Handler {
@@ -15,13 +15,17 @@ class Handler {
     }
     async handleBatteryTurnOff(value){
         try {
-            const data = await execCommand('ls -la');
+            const data = await execCommand(`command`);
         } catch (error) {
             
         }
     }
-    handleBatteryUsage(value){
-
+    async handleBatteryUsage(value){
+        try {
+            const data = await execCommand(changeBright);
+        } catch (error) {
+            
+        }
     }
     handlePluggedInSleep(value){
 
@@ -29,8 +33,12 @@ class Handler {
     handlePluggedInTurnOn(value){
 
     }
-    handlePowerMode(value){
-
+    async handlePowerMode(value){
+        try {
+            const data = await execCommand(changeBright);
+        } catch (error) {
+            
+        }
     }
 }
 module.exports = {
