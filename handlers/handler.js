@@ -1,37 +1,31 @@
 const { execCommand } = require('../commands/execCommand');
 const { 
-
+    changeBright,
+    turnOffBluetooth,
     
 } = require('../commands/commands');
+const { settingService } = require('./setting')
 class Handler {
     constructor(){
 
     }
-    async handleBatterySaveOn (event, value){
-        
-    }
-    handleBatterySleep(value){
-
-    }
-    async handleBatteryTurnOff(value){
+    handleTurnOnBatterySaver = async (event, arg) => {
         try {
-            const data = await execCommand('ls -la');
+            settingService.updateSetting("batterySaver", arg);
+            // turn on
+            if(arg === true){
+                await execCommand(changeBright(settingService.getSetting("brightness")))
+                await execCommand(turnOffBluetooth)
+                
+            }else{
+                await execCommand(changeBright(100))
+
+            }
         } catch (error) {
-            
+            console.log(error)
         }
     }
-    handleBatteryUsage(value){
-
-    }
-    handlePluggedInSleep(value){
-
-    }
-    handlePluggedInTurnOn(value){
-
-    }
-    handlePowerMode(value){
-
-    }
+    
 }
 module.exports = {
     handler: new Handler()
