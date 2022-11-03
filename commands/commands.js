@@ -15,3 +15,16 @@ const turnOffWifi = `nmcli radio wifi off`
  * @returns { String }
  */
 const setPowerMode = (mode) => `powerprofilesctl set ${mode}`
+
+const getChargingState = `upower -i $(upower -e | grep 'BAT') | grep -E "state"`
+const getBatteryLevel = `upower -i $(upower -e | grep 'BAT') | grep -E "percentage"`
+const getPowerMode = `gdbus introspect --system --dest net.hadess.PowerProfiles --object-path /net/hadess/PowerProfiles | grep -E "ActiveProfile = "`
+module.exports = {
+    changeBright,
+    getBatteryLevel,
+    getChargingState,
+    setPowerMode,
+    turnOffBluetooth,
+    turnOffWifi,
+    getPowerMode
+}
