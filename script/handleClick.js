@@ -5,6 +5,7 @@ selects.forEach(select => {
 async function handleClick (event){
     const { id, selectedIndex } = event.target;
     try {
+        console.log(id)
         let result = false;
         switch (id) {
             case "batteryTurnOff":
@@ -71,6 +72,7 @@ async function handlePowerMode (value) {
 }
 async function handleBatterySaveOn (value) {
     try {
+        console.log(value)
         return await window.handle.setBatterySaveOn(value)
     } catch (error) {
         
@@ -90,11 +92,20 @@ async function handleBatteryUsage (value) {
         
     }
 }
-async function handleChangeBright(value) {
-    try {
-        return await window.handle.changeBright(value)
-        
-    } catch (error) {
-        
+function handleBrightnessChange (){
+    console.log(`onchange`);
+    const brightness = Number(document.getElementById('brightness_range').value)
+    document.getElementById('brightness_value').innerHTML = brightness
+    window.handle.setBrightness(brightness)
+}
+async function handleTurnOnBatterySaver (){
+    const turnOnBatterySaverBTN = document.getElementById('turnOnBatterySaver')
+    if(turnOnBatterySaverBTN.innerText === `Turn off now` ){
+        await window.handle.turnOnBatterySaver(false);
+        turnOnBatterySaverBTN.innerText = `Turn on now`
+    }else{
+        await window.handle.turnOnBatterySaver(true);
+        turnOnBatterySaverBTN.innerText = `Turn off now`
     }
+
 }
