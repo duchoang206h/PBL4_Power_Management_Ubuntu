@@ -5,6 +5,7 @@ selects.forEach(select => {
 async function handleClick (event){
     const { id, selectedIndex } = event.target;
     try {
+        console.log(id)
         let result = false;
         switch (id) {
             case "batteryTurnOff":
@@ -71,6 +72,7 @@ async function handlePowerMode (value) {
 }
 async function handleBatterySaveOn (value) {
     try {
+        console.log(value)
         return await window.handle.setBatterySaveOn(value)
     } catch (error) {
         

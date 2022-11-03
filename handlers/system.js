@@ -72,6 +72,7 @@ class System {
     }
     setBatterySaveOn(event, value){
         try {
+            console.log(value)
             return settingService.updateSetting('batterySaveOn', value)
         } catch (error) {
             

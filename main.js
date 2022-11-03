@@ -30,8 +30,8 @@ function createWindow () {
   ipcMain.handle('handle:batterySleep', handler.handleBatterySleep)
   ipcMain.handle('handle:pluggedInSleep', handler.handlePluggedInSleep) */
   ipcMain.handle('handle:powerMode', system.setPowerMode)
- /*  ipcMain.handle('handle:batterySaveOn', handler.handleBatterySaveOn)
-  ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
+  ipcMain.handle('handle:setBatterySaveOn', system.setBatterySaveOn)
+  /* ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
   ipcMain.handle('handle:turnOnBatterySaver', handler.handleTurnOnBatterySaver)
   // system
   ipcMain.handle('system:getAllSetting', system.getAllSetting)
