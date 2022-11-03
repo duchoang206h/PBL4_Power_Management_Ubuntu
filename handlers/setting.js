@@ -1,7 +1,8 @@
 const fs = require('fs')
+const path = require('path')
 class SettingService {
     constructor(){
-        this.settings =  JSON.parse(fs.readFileSync('../setting.json', 'utf-8'))
+        this.settings =  JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'setting.json'), 'utf-8'))
     }
     initSetting (){
         try {
@@ -11,6 +12,9 @@ class SettingService {
         } catch (error) {
             
         }
+    }
+    getSetting (field) {
+        return this.settings[field] || null
     }
     /**
      * 
@@ -22,7 +26,6 @@ class SettingService {
                 this.settings[field] = value;
                 
             }
-
             // after handle update setting
             await fs.promises.writeFile('../setting.json', this.settings);
             return true;
