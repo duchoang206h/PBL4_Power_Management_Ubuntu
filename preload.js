@@ -7,8 +7,12 @@ contextBridge.exposeInMainWorld('handle', {
   setPluggedInSleep: (minute) => ipcRenderer.invoke('handle:pluggedInSleep', minute),
   setPowerMode: (mode) => ipcRenderer.invoke('handle:powerMode', mode),
   setBatterySaveOne: (minute) => ipcRenderer.invoke('handle:batterySaveOn', minute),
-  setBatteryUsage: (mode) => ipcRenderer.invoke('handle:batteryUsage', mode)
+  setBatteryUsage: (mode) => ipcRenderer.invoke('handle:batteryUsage', mode),
+  setBrightness : (value) => ipcRenderer.invoke('handle:setBrightness', value),
+  turnOnBatterySaver : (value) => ipcRenderer.invoke('handle:turnOnBatterySaver', value),
 })
 contextBridge.exposeInMainWorld('system', {
   getCurrentBrightness : () => ipcRenderer.invoke('system:getCurrentBrightness'),
+  getAllSetting : () => ipcRenderer.invoke('system:getAllSetting'),
+  
 })

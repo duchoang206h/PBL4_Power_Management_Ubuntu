@@ -14,8 +14,8 @@ function createWindow () {
     height: WINDOW_SIZE.height,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
-      contextIsolation: false
+     /*  nodeIntegration: true,
+      contextIsolation: false */
     }
   })
 
@@ -23,17 +23,20 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
   // handle ipcMain
-  ipcMain.handle('handle:batteryTurnOff', handler.handleBatteryTurnOff)
+  /* ipcMain.handle('handle:batteryTurnOff', handler.handleBatteryTurnOff)
   ipcMain.handle('handle:pluggedInTurnOn', handler.handlePluggedInTurnOn)
   ipcMain.handle('handle:batterySleep', handler.handleBatterySleep)
-  ipcMain.handle('handle:pluggedInSleep', handler.handlePluggedInSleep)
-  ipcMain.handle('handle:powerMode', handler.handlePowerMode)
-  ipcMain.handle('handle:batterySaveOn', handler.handleBatterySaveOn)
-  ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage)
+  ipcMain.handle('handle:pluggedInSleep', handler.handlePluggedInSleep) */
+  ipcMain.handle('handle:powerMode', system.setPowerMode)
+ /*  ipcMain.handle('handle:batterySaveOn', handler.handleBatterySaveOn)
+  ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
+  ipcMain.handle('handle:turnOnBatterySaver', handler.handleTurnOnBatterySaver)
   // system
-  //ipcMain.handle('system:getCurrentBrightness', system.getCurrentBrightness)
+  ipcMain.handle('system:getAllSetting', system.getAllSetting)
+  ipcMain.handle('system:getCurrentBrightness', system.getCurrentBrightness)
+  ipcMain.handle('handle:setBrightness', system.setBrightness)
 }
 
 // This method will be called when Electron has finished
