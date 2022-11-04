@@ -14,9 +14,13 @@
     crossorigin="anonymous"></script>
   <!-- RESET CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <!-- LINE AWESOME -->
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" />
+  <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet"
+    type="text/css" />
+
   <!-- APP CSS -->
   <link rel="stylesheet" href="./style/styles.css">
   <title>Power Management</title>
@@ -24,6 +28,32 @@
 
 <body>
   <div class="main">
+    <div class="section" style="
+    margin-bottom: 20px;
+">
+      <div class="battery-information--text">
+        <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
+        <div class="battery-information--text__percentage">
+          55%
+        </div>
+        <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "time to empty"" -->
+        <div class="battery-information--text__remaining-time">
+          2 hours 25 minutes remaining
+        </div>
+      </div>
+      <!-- Replace width with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
+      <div class="battery-information--range">
+        
+        <div class="w3-green" style="height:24px;width:80%; border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;">
+    <div class="battery-information--range__is-charging">
+      <i class="fas fa-battery-bolt"></i>
+    </div>
+    </div>
+      </div>
+
+    </div>
+
     <!-- POWER -->
     <div class="section">
       <h2 class="section__heading font-sans ">
@@ -191,7 +221,8 @@
               <div class="section__content-item__list-item__text">
                 Battery saver
               </div>
-              <button id="turnOnBatterySaver" onclick="handleTurnOnBatterySaver()" class="btn section__content-item__list-item__setter">
+              <button id="turnOnBatterySaver" onclick="handleTurnOnBatterySaver()"
+                class="btn section__content-item__list-item__setter">
                 Turn on now
               </button>
             </div>
@@ -227,22 +258,23 @@
                   <span class="switch-btn__status"></span>
                 </div> -->
                 <label class="switch">
-                  <input id="lowBrightnessOnBattery" onchange="handleSetLowBrightnessOnBattery()" type="checkbox" checked>
-                  <span  class="slider round"></span>
+                  <input id="lowBrightnessOnBattery" onchange="handleSetLowBrightnessOnBattery()" type="checkbox"
+                    checked>
+                  <span class="slider round"></span>
                 </label>
 
               </div>
-             
-             
+
+
             </div>
             <div class="section__content-item__list-item">
               <label>Brightness</label>
-              <input type="range" id="brightness_range" onchange="handleBrightnessChange()" name="vol" min="0" max="100" style="
+              <input type="range" id="brightness_range" onchange="handleBrightnessChange()" name="vol" min="0" max="100"
+                style="
                   width: 50%;
                   margin-left: calc(50% - 26px);
-              "
-              >
-              <label id="brightness_value" > 0 </label>
+              ">
+              <label id="brightness_value"> 0 </label>
             </div>
 
           </div>
