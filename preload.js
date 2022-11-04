@@ -9,7 +9,8 @@ contextBridge.exposeInMainWorld('handle', {
   setBatterySaveOn: (minute) => ipcRenderer.invoke('handle:setBatterySaveOn', minute),
   setBatteryUsage: (mode) => ipcRenderer.invoke('handle:batteryUsage', mode),
   setBrightness : (value) => ipcRenderer.invoke('handle:setBrightness', value),
-  turnOnBatterySaver : (value) => ipcRenderer.invoke('handle:turnOnBatterySaver', value),
+  turnOnBatterySaver: (value) => ipcRenderer.invoke('handle:turnOnBatterySaver', value),
+  updateBatterySaver: (callback) => ipcRenderer.on('updateBatterySaver', callback)
 })
 contextBridge.exposeInMainWorld('system', {
   getCurrentBrightness : () => ipcRenderer.invoke('system:getCurrentBrightness'),

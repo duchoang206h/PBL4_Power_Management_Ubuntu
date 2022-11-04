@@ -10,18 +10,18 @@ const {
  } = require('../commands/commands');
 const { system } = require('../handlers/system');
 let running = false;
-const job = new CronJob(
-	'*/5 * * * * *', //repeat 5s
-	async function() {
-        // handle here
-        await handleBatterySaveOn()
-       
-	},
-	null,
-	true,
-	'utc'
-);
-async function handleBatterySaveOn (){
+const cronJob = (mainWindow) => {
+	const job = new CronJob(
+		'*/5 * * * * *', //repeat 5s
+		() => handleBatterySaveOn(mainWindow),
+		null,
+		true,
+		'utc'
+	);
+	job.start()
+}
+
+async function handleBatterySaveOn(mainWindow){
 	try {
 		const [batteryLevel, isCharging] = await Promise.all([
 			system.getBatteryLevel(),
@@ -30,12 +30,18 @@ async function handleBatterySaveOn (){
 		// handle when on battery
 		console.log(`batteryLevel`, batteryLevel)
 		console.log(`chargingState`, isCharging)
-		if(isCharging){
-			if(batteryLevel <= settingService.getSetting('batterySaveOn')){
+		if (!isCharging) {
+			console.log(`--------------------------------`, batteryLevel)
+			console.log(`--------------------------------`, settingService.getSetting('batterySaveOn'))
+			if (batteryLevel <= settingService.getSetting('batterySaveOn')) {
+				
+				console.log(`--------------------------------`, batteryLevel)
+				console.log(`--------------------------------`, settingService.getSetting('batterySaveOn'))
 				// handle batterySaveOn
 				await execCommand(changeBright(settingService.getSetting('brightness')))
 				await execCommand(turnOffBluetooth)
 				await execCommand(turnOffWifi)
+				await mainWindow.webContents.send('updateBatterySaver', true)
 				
 			}
 		}
@@ -47,4 +53,4 @@ async function handleBatterySaveOn (){
 		console.log(error)
 	}
 }
-module.exports = job;
+module.exports = cronJob;
