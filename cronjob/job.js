@@ -9,6 +9,7 @@ const {
 	turnOffWifi
  } = require('../commands/commands');
 const { system } = require('../handlers/system');
+const setting = require('../handlers/setting');
 let running = false;
 const cronJob = (mainWindow) => {
 	const job = new CronJob(
@@ -38,10 +39,13 @@ async function handleBatterySaveOn(mainWindow){
 				console.log(`--------------------------------`, batteryLevel)
 				console.log(`--------------------------------`, settingService.getSetting('batterySaveOn'))
 				// handle batterySaveOn
-				await execCommand(changeBright(settingService.getSetting('brightness')))
-				await execCommand(turnOffBluetooth)
-				await execCommand(turnOffWifi)
-				await mainWindow.webContents.send('updateBatterySaver', true)
+				if(!settingService.getSetting('batterySaver')){
+					await execCommand(changeBright(settingService.getSetting('brightness')))
+					await execCommand(turnOffBluetooth)
+					await execCommand(turnOffWifi)
+					await mainWindow.webContents.send('updateBatterySaver', true)
+					settingService.updateSetting('batterySaver', true)
+				}
 				
 			}
 		}
