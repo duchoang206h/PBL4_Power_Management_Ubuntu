@@ -109,3 +109,11 @@ async function handleTurnOnBatterySaver (){
     }
 
 }
+async function handleSetLowBrightnessOnBattery() {
+    try {
+        const value = document.getElementById('lowBrightnessOnBattery').checked
+        return await window.handle.setLowBrightnessOnBattery(value);
+    } catch (error) {
+        
+    }
+}

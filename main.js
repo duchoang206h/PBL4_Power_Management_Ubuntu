@@ -33,6 +33,9 @@ function createWindow () {
   ipcMain.handle('handle:powerMode', system.setPowerMode)
   ipcMain.handle('handle:setBatterySaveOn', system.setBatterySaveOn)
   ipcMain.handle('handle:turnOnBatterySaver', handler.handleTurnOnBatterySaver)
+  ipcMain.handle('handle:setLowBrightnessOnBattery', system.setLowBrightnessOnBatterySaver)
+
+  
   // system
   ipcMain.handle('system:getAllSetting', system.getAllSetting)
   ipcMain.handle('system:getCurrentBrightness', system.getCurrentBrightness)

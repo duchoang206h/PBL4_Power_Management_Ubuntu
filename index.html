@@ -212,7 +212,7 @@
                 <option value="">80%</option>
                 <option value="">90%</option>
                 <option value="">95%</option>
-                <option value="">100%</option>
+                <option value="">Always</option>
               </select>
             </div>
             <div class="section__content-item__list-item">
@@ -227,7 +227,7 @@
                   <span class="switch-btn__status"></span>
                 </div> -->
                 <label class="switch">
-                  <input id="lowBrightnessOnBattery" type="checkbox" checked>
+                  <input id="lowBrightnessOnBattery" onchange="handleSetLowBrightnessOnBattery" type="checkbox" checked>
                   <span  class="slider round"></span>
                 </label>
 
