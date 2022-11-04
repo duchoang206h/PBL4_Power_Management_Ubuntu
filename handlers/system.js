@@ -2,10 +2,12 @@ const { execCommand} = require('../commands/execCommand')
 const { 
     getChargingState,
     getBatteryLevel,
-    getPowerMode
+    getPowerMode,
+    getRemainingTime
  } = require('../commands/commands')
 const { settingService } = require('../handlers/setting')
 const getBatteryLevelRegex = /\d+/g;
+const getBatteryRemainingTimeRegex = /\d+,\d+/g;
 class System {
     constructor(){
         console.log(this)
@@ -35,6 +37,17 @@ class System {
             return true;
         } catch (error) {
             return false
+        }
+    }
+    getBatteryRemainingTime = async () => {
+        try {
+            const result = await execCommand(getRemainingTime);
+            const match = result.match(getBatteryRemainingTimeRegex);
+            if(match) return Number(match[0])
+            // default
+            return 10
+        } catch (error) {
+            return 10
         }
     }
     getBatteryLevel = async () => {
@@ -92,13 +105,14 @@ class System {
         const powerMode = await this.getCurrentPowerMode();
         const lowBrightBatterySaver = settingService.getSetting('lowBrightnessOnBatterySaver');
         const batterySaveOn = settingService.getSetting('batterySaveOn');
-            /// more here
+        /// more here
         return {
             batterySaver,
             brightness,
             powerMode, 
             lowBrightBatterySaver,
-            batterySaveOn
+            batterySaveOn,
+            
         }
        } catch (error) {
         console.log("------------", error);

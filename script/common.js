@@ -28,4 +28,26 @@ window.onload = async () => {
             batterySaverBtn.innerHTML = 'Turn on now';
         }
     })
+    window.handle.updateCurrentBattery((event, { batteryLevel,
+        chargingState,
+        remainingTime }) => {
+            // do update battery
+        console.log({
+            batteryLevel,
+        chargingState,
+        remainingTime 
+        })
+        const batteryLevelDiv = document.getElementById('batteryLevel')
+        const batteryRemainingTime = document.getElementById('batteryRemainingTime')
+        const chargingStateDiv = document.getElementById('chargingState')
+        //
+        batteryLevelDiv.innerHTML = batteryLevel;
+        const minutes = Math.round(remainingTime%1 * 60);
+        const hours = Math.floor(remainingTime);
+        batteryRemainingTime.innerHTML = `${hours} hours ${minutes} minutes remaining`;
+        if(!chargingState){
+            chargingStateDiv.style.display = "none";
+        }
+    })
+   
 }
