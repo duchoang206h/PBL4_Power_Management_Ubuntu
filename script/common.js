@@ -9,6 +9,7 @@ window.onload = async () => {
     const batterySaveOnSelect = document.getElementById("batterySaveOn");
     for (const [key, value] of Object.entries(MappingIndexToValue.batterySaveOn)) {
         if (value == batterySaveOn) {
+
             batterySaveOnSelect.selectedIndex = key;
         }
     }

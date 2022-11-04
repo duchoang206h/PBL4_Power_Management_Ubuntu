@@ -104,6 +104,13 @@ class System {
         console.log("------------", error);
        }
     }
+    setLowBrightnessOnBatterySaver(event, value) {
+        try {
+            return  settingService.updateSetting('lowBrightnessOnBatterySaver', value)
+        } catch (error) {
+            
+        }
+    }
 }
 module.exports = {
     system: new System()

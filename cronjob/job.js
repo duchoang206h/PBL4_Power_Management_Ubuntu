@@ -39,11 +39,12 @@ async function handleBatterySaveOn(mainWindow){
 				console.log(`--------------------------------`, batteryLevel)
 				console.log(`--------------------------------`, settingService.getSetting('batterySaveOn'))
 				// handle batterySaveOn
-				if(!settingService.getSetting('batterySaver')){
-					await execCommand(changeBright(settingService.getSetting('brightness')))
-					await execCommand(turnOffBluetooth)
-					await execCommand(turnOffWifi)
-					await mainWindow.webContents.send('updateBatterySaver', true)
+				if (!settingService.getSetting('batterySaver')) {
+					console.log(settingService.getSetting("lowBrightnessOnBattery"));
+				settingService.getSetting("lowBrightnessOnBattery") ? await execCommand(changeBright(settingService.getSetting('brightness'))) : null;
+				await execCommand(turnOffBluetooth)
+				await execCommand(turnOffWifi)
+				await mainWindow.webContents.send('updateBatterySaver', true)
 					settingService.updateSetting('batterySaver', true)
 				}
 				
