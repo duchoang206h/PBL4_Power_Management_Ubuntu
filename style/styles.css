@@ -159,3 +159,18 @@ input:checked + .slider:before {
 }
 
 /* Add styles here to customize the appearance of your app */
+.battery-information--text {
+    display: flex;
+    margin-bottom: 10px;
+}
+.battery-information--text__remaining-time {
+    margin-left: auto;
+}.battery-information--range {
+    background-color: #fff;
+    border-radius: 5px;
+    
+}
+.battery-information--range__is-charging {
+    font-size: 20px;
+    margin-left: 5px;
+}
