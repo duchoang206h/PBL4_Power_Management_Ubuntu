@@ -106,6 +106,7 @@ class System {
     }
     setLowBrightnessOnBatterySaver(event, value) {
         try {
+            console.log(`lowBrightnessOnBatterySaver`,value)
             return  settingService.updateSetting('lowBrightnessOnBatterySaver', value)
         } catch (error) {
             
