@@ -29,22 +29,24 @@ function createWindow () {
   ipcMain.handle('handle:pluggedInTurnOn', handler.handlePluggedInTurnOn)
   ipcMain.handle('handle:batterySleep', handler.handleBatterySleep)
   ipcMain.handle('handle:pluggedInSleep', handler.handlePluggedInSleep) */
+  /* ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
   ipcMain.handle('handle:powerMode', system.setPowerMode)
   ipcMain.handle('handle:setBatterySaveOn', system.setBatterySaveOn)
-  /* ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
   ipcMain.handle('handle:turnOnBatterySaver', handler.handleTurnOnBatterySaver)
   // system
   ipcMain.handle('system:getAllSetting', system.getAllSetting)
   ipcMain.handle('system:getCurrentBrightness', system.getCurrentBrightness)
   ipcMain.handle('handle:setBrightness', system.setBrightness)
+
+  return mainWindow
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
-  job.start()
+  const mainWindow = createWindow()
+  job(mainWindow)
   app.on('activate', function () {
    
     // On macOS it's common to re-create a window in the app when the
