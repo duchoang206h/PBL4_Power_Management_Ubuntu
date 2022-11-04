@@ -13,7 +13,7 @@ window.onload = async () => {
             batterySaveOnSelect.selectedIndex = key;
         }
     }
-    document.getElementById('lowBrightnessOnBattery').checked = lowBrightnessOnBattery
+    document.getElementById('lowBrightnessOnBattery').checked = lowBrightBatterySaver
     document.getElementById('brightness_range').value = brightness;
     document.getElementById('brightness_value').innerHTML = brightness;
     if(batterySaver === true){

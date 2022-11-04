@@ -13,8 +13,9 @@ class Handler {
         try {
             settingService.updateSetting("batterySaver", arg);
             // turn on
-            if(arg === true){
-                await execCommand(changeBright(settingService.getSetting("brightness")))
+            if (arg === true) {
+                
+                settingService.getSetting("lowBrightnessOnBatterySaver") ? await execCommand(changeBright(settingService.getSetting("brightness"))) : null;
                 await execCommand(turnOffBluetooth)
                 
             }else{
