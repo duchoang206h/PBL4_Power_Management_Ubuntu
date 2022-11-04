@@ -19,6 +19,7 @@ const setPowerMode = (mode) => `powerprofilesctl set ${mode}`
 const getChargingState = `upower -i $(upower -e | grep 'BAT') | grep -E "state"`
 const getBatteryLevel = `upower -i $(upower -e | grep 'BAT') | grep -E "percentage"`
 const getPowerMode = `gdbus introspect --system --dest net.hadess.PowerProfiles --object-path /net/hadess/PowerProfiles | grep -E "ActiveProfile = "`
+const getRemainingTime = `upower -i $(upower -e | grep 'BAT') | grep -E "time to empty"`
 module.exports = {
     changeBright,
     getBatteryLevel,
@@ -26,5 +27,6 @@ module.exports = {
     setPowerMode,
     turnOffBluetooth,
     turnOffWifi,
-    getPowerMode
+    getPowerMode,
+    getRemainingTime
 }

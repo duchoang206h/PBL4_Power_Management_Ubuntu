@@ -24,10 +24,16 @@ const cronJob = (mainWindow) => {
 
 async function handleBatterySaveOn(mainWindow){
 	try {
-		const [batteryLevel, isCharging] = await Promise.all([
+		const [batteryLevel, isCharging, remainingTime] = await Promise.all([
 			system.getBatteryLevel(),
-			system.getChargingState()
+			system.getChargingState(),
+			system.getBatteryRemainingTime()
 		])
+		await mainWindow.webContents.send('currentBattery', { 
+			batteryLevel,
+			chargingState: isCharging,
+			remainingTime
+		})
 		// handle when on battery
 		console.log(`batteryLevel`, batteryLevel)
 		console.log(`chargingState`, isCharging)
@@ -42,18 +48,20 @@ async function handleBatterySaveOn(mainWindow){
 				// handle batterySaveOn
 				if (!settingService.getSetting('batterySaver')) {
 					
-					settingService.getSetting("lowBrightnessOnBatterySaver") ? await execCommand(changeBright(settingService.getSetting('brightness'))) : null;
+				settingService.getSetting("lowBrightnessOnBatterySaver") ? await execCommand(changeBright(settingService.getSetting('brightness'))) : null;
 				await execCommand(turnOffBluetooth)
 				await execCommand(turnOffWifi)
 				await mainWindow.webContents.send('updateBatterySaver', true)
 					settingService.updateSetting('batterySaver', true)
+				
+				
 				}
 				
 			}
 		}
 		// handle when on power
 		else{
-			
+			///
 		}
 	} catch (error) {
 		console.log(error)
