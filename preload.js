@@ -1,10 +1,10 @@
 const { contextBridge, ipcRenderer } = require('electron');
 // expose ipMain
 contextBridge.exposeInMainWorld('handle', {
-  setBatteryTurnOff : (minute) => ipcRenderer.invoke('handle:batteryTurnOff', minute),
-  setPluggedInTurnOn: (minute) => ipcRenderer.invoke('handle:pluggedInTurnOn', minute),
-  setBatterySleep: (minute) => ipcRenderer.invoke('handle:batterySleep', minute),
-  setPluggedInSleep: (minute) => ipcRenderer.invoke('handle:pluggedInSleep', minute),
+  setBatteryTurnOff : (seconds) => ipcRenderer.invoke('handle:setBatteryTurnOffScreenAfter', seconds),
+  setPluggedInTurnOn: (seconds) => ipcRenderer.invoke('handle:setPluggedInTurnOffScreenAfter', seconds),
+  setBatterySleep: (seconds) => ipcRenderer.invoke('handle:setBatterySleepAfter', seconds),
+  setPluggedInSleep: (seconds) => ipcRenderer.invoke('handle:setPluggedInSleepAfter', seconds),
   setPowerMode: (mode) => ipcRenderer.invoke('handle:powerMode', mode),
   setBatterySaveOn: (minute) => ipcRenderer.invoke('handle:setBatterySaveOn', minute),
   setBatteryUsage: (mode) => ipcRenderer.invoke('handle:batteryUsage', mode),
@@ -13,10 +13,12 @@ contextBridge.exposeInMainWorld('handle', {
   turnOnBatterySaver: (value) => ipcRenderer.invoke('handle:turnOnBatterySaver', value),
   updateBatterySaver: (callback) => ipcRenderer.on('updateBatterySaver', callback),
   updateCurrentBattery: (callback) => ipcRenderer.on('currentBattery', callback),
-  updateChargingState: (callback) => ipcRenderer.on('updateChargingState', callback)
+  updateChargingState: (callback) => ipcRenderer.on('updateChargingState', callback),
+  setTurnOffWifiOnBattery: (value) => ipcRenderer.invoke('setTurnOffWifiOnBattery', value),
+  setTurnOffBluetoothOnBattery: (value) => ipcRenderer.invoke('setTurnOffBluetoothOnBattery', value)
 })
 contextBridge.exposeInMainWorld('system', {
   getCurrentBrightness : () => ipcRenderer.invoke('system:getCurrentBrightness'),
   getAllSetting : () => ipcRenderer.invoke('system:getAllSetting'),
   
-})
+});

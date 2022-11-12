@@ -44,8 +44,8 @@ async function handleBatterySaveOn(mainWindow){
 				if (!settingService.getSetting('batterySaver')) {
 					
 				settingService.getSetting("lowBrightnessOnBatterySaver") ? await execCommand(changeBright(settingService.getSetting('brightness'))) : null;
-				await execCommand(turnOffBluetooth)
-				await execCommand(turnOffWifi)
+				settingService.getSetting("turnOffBluetooth") ? await execCommand(turnOffBluetooth): null
+				settingService.getSetting("turnOffWifi") ? await execCommand(turnOffWifi): null
 				await mainWindow.webContents.send('updateBatterySaver', true)
 				settingService.updateSetting('batterySaver', true)
 				
