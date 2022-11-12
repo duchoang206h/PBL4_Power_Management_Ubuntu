@@ -105,6 +105,10 @@ class System {
         const powerMode = await this.getCurrentPowerMode();
         const lowBrightBatterySaver = settingService.getSetting('lowBrightnessOnBatterySaver');
         const batterySaveOn = settingService.getSetting('batterySaveOn');
+        const batteryTurnOff = settingService.getSetting('batteryTurnOff');
+        const pluggedInTurnOff = settingService.getSetting('pluggedInTurnOff');
+        const batterySleep = settingService.getSetting('batterySleep');
+        const pluggedInSleep = settingService.getSetting('pluggedInSleep');
         /// more here
         return {
             batterySaver,
@@ -112,7 +116,10 @@ class System {
             powerMode, 
             lowBrightBatterySaver,
             batterySaveOn,
-            
+            batterySleep,
+            batteryTurnOff,
+            pluggedInSleep,
+            pluggedInTurnOff
         }
        } catch (error) {
         console.log("------------", error);

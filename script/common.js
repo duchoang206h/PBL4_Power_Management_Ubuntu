@@ -4,9 +4,16 @@ window.onload = async () => {
         brightness,
         powerMode, 
         lowBrightBatterySaver,
-        batterySaveOn
+        batterySaveOn,
+        batteryTurnOff,
+        batterySleep,
+        pluggedInTurnOff,
+        pluggedInSleep
     } = await window.system.getAllSetting();
     const batterySaveOnSelect = document.getElementById("batterySaveOn");
+    const batteryTurnOffSelect = document.getElementById("batteryTurnOff");
+    const batterySleepSelect = document.getElementById("batteryTurnOff");
+    const batterySaverBtn = document.getElementById('turnOnBatterySaver');
     for (const [key, value] of Object.entries(MappingIndexToValue.batterySaveOn)) {
         if (value == batterySaveOn) {
 
@@ -21,7 +28,7 @@ window.onload = async () => {
     }
     window.handle.updateBatterySaver((event, batterySaver) => {
         console.log(`-----------batterySaver`, batterySaver)
-        const batterySaverBtn = document.getElementById('turnOnBatterySaver');
+        
         if (batterySaver === true) {
             batterySaverBtn.innerHTML = 'Turn off now';
         } else {
@@ -32,22 +39,20 @@ window.onload = async () => {
         chargingState,
         remainingTime }) => {
             // do update battery
-        console.log({
-            batteryLevel,
-        chargingState,
-        remainingTime 
-        })
         const batteryLevelDiv = document.getElementById('batteryLevel')
         const batteryRemainingTime = document.getElementById('batteryRemainingTime')
         const chargingStateDiv = document.getElementById('chargingState')
         //
         batteryLevelDiv.innerHTML = batteryLevel;
-        const minutes = Math.round(remainingTime%1 * 60);
+        const minutes = Math.round(remainingTime %1 * 60);
         const hours = Math.floor(remainingTime);
         batteryRemainingTime.innerHTML = `${hours} hours ${minutes} minutes remaining`;
         if(!chargingState){
             chargingStateDiv.style.display = "none";
         }
+    })
+    window.handle.updateChargingState((event, value) => {
+        batterySaverBtn.disabled  = value;
     })
    
 }
