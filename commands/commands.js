@@ -20,6 +20,11 @@ const getChargingState = `upower -i $(upower -e | grep 'BAT') | grep -E "state"`
 const getBatteryLevel = `upower -i $(upower -e | grep 'BAT') | grep -E "percentage"`
 const getPowerMode = `gdbus introspect --system --dest net.hadess.PowerProfiles --object-path /net/hadess/PowerProfiles | grep -E "ActiveProfile = "`
 const getRemainingTime = `upower -i $(upower -e | grep 'BAT') | grep -E "time to empty"`
+const setBatteryPowerSleepAfter = (time) => `gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type ‘suspend’
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout ${time}`;
+const setACPowerSleepAfter = (time) => `gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type ‘suspend’
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout ${time}`
+const setScreenTurnOffAfter = (time) => `gsettings set org.gnome.desktop.session idle-delay ${time}`
 module.exports = {
     changeBright,
     getBatteryLevel,
@@ -28,5 +33,8 @@ module.exports = {
     turnOffBluetooth,
     turnOffWifi,
     getPowerMode,
-    getRemainingTime
+    getRemainingTime,
+    setACPowerSleepAfter,
+    setBatteryPowerSleepAfter,
+    setScreenTurnOffAfter
 }

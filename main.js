@@ -25,10 +25,10 @@ function createWindow () {
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
   // handle ipcMain
-  /* ipcMain.handle('handle:batteryTurnOff', handler.handleBatteryTurnOff)
-  ipcMain.handle('handle:pluggedInTurnOn', handler.handlePluggedInTurnOn)
-  ipcMain.handle('handle:batterySleep', handler.handleBatterySleep)
-  ipcMain.handle('handle:pluggedInSleep', handler.handlePluggedInSleep) */
+  ipcMain.handle('handle:setBatteryTurnOffAfter', handler.handleBatteryTurnOffAfter)
+  ipcMain.handle('handle:setPluggedInTurnOffAfter', handler.handlePluggedInTurnOffAfter)
+  ipcMain.handle('handle:setScreenOnBatteryTurnOffAfter', handler.handleScreenOnBatteryTurnOffAfter)
+  ipcMain.handle('handle:setScreenOnPluggedInTurnOffAfter', handler.handlePluggedInTurnOffAfter)
   /* ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
   ipcMain.handle('handle:powerMode', system.setPowerMode)
   ipcMain.handle('handle:setBatterySaveOn', system.setBatterySaveOn)
