@@ -1,37 +1,37 @@
-const { execCommand} = require('../commands/execCommand')
-const { 
+const { execCommand } = require('../commands/execCommand')
+const {
     getChargingState,
     getBatteryLevel,
     getPowerMode,
     getRemainingTime
- } = require('../commands/commands')
+} = require('../commands/commands')
 const { settingService } = require('../handlers/setting')
 const getBatteryLevelRegex = /\d+/g;
 const getBatteryRemainingTimeRegex = /\d+,\d+/g;
 class System {
-    constructor(){
+    constructor() {
         console.log(this)
     }
     getCurrentPowerMode = async () => {
         try {
             const result = await execCommand(getPowerMode);
             console.log(result)
-            if(result.includes("performance")) return "performance";
-            if(result.includes("balanced")) return "balanced";
-            if(result.includes("power-saver")) return "power-saver";
+            if (result.includes("performance")) return "performance";
+            if (result.includes("balanced")) return "balanced";
+            if (result.includes("power-saver")) return "power-saver";
             return "balanced";
         } catch (error) {
             return "balanced";
         }
     }
-    getCurrentBrightness (){
+    getCurrentBrightness() {
         return settingService.getSetting('brightness')
     }
-    
+
     getChargingState = async () => {
         try {
             const result = await execCommand(getChargingState);
-            if(result.includes('discharging')){
+            if (result.includes('discharging')) {
                 return false;
             }
             return true;
@@ -43,7 +43,8 @@ class System {
         try {
             const result = await execCommand(getRemainingTime);
             const match = result.match(getBatteryRemainingTimeRegex);
-            if(match) return Number(match[0])
+            console.log(match);
+            if (match) return Number(match[0].replace(",", "."))
             // default
             return 10
         } catch (error) {
@@ -54,7 +55,7 @@ class System {
         try {
             const result = await execCommand(getBatteryLevel);
             const match = result.match(getBatteryLevelRegex)
-            if(match){
+            if (match) {
                 return Number(match[0])
             }
             return 100;
@@ -66,36 +67,36 @@ class System {
         try {
             return settingService.updateSetting('brightness', value)
         } catch (error) {
-            
+
         }
     }
     setLowBrightnessOnBatterySaver(event, value) {
         try {
             return settingService.updateSetting('lowBrightnessOnBatterySaver', value)
         } catch (error) {
-            
+
         }
     }
-    setPowerMode(event, value){
+    setPowerMode(event, value) {
         try {
             return settingService.updateSetting('powerMode', value)
         } catch (error) {
-            
+
         }
     }
-    setBatterySaveOn(event, value){
+    setBatterySaveOn(event, value) {
         try {
             console.log(value)
             return settingService.updateSetting('batterySaveOn', value)
         } catch (error) {
-            
+
         }
     }
-    setBatterySaver(event, value){
+    setBatterySaver(event, value) {
         try {
             return settingService.updateSetting('batterySaver', value)
         } catch (error) {
-            
+
         }
     }
     getAllSetting = async () => {
@@ -121,16 +122,16 @@ class System {
             pluggedInSleep,
             pluggedInTurnOff
         }
-       } catch (error) {
-        console.log("------------", error);
-       }
+    }catch(error){
+
     }
-    setLowBrightnessOnBatterySaver(event, value) {
+    }
+    setLowBrightnessOnBatterySaver = (event, value) => {
         try {
-            console.log(`lowBrightnessOnBatterySaver`,value)
-            return  settingService.updateSetting('lowBrightnessOnBatterySaver', value)
+            console.log(`lowBrightnessOnBatterySaver`, value)
+            return settingService.updateSetting('lowBrightnessOnBatterySaver', value)
         } catch (error) {
-            
+
         }
     }
 }

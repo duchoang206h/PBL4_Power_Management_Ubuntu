@@ -95,7 +95,7 @@ async function handleBatteryUsage (value) {
 function handleBrightnessChange (){
     console.log(`onchange`);
     const brightness = Number(document.getElementById('brightness_range').value)
-    document.getElementById('brightness_value').innerHTML = brightness
+    document.getElementById('brightness_value').innerHTML = brightness +'%'
     window.handle.setBrightness(brightness)
 }
 async function handleTurnOnBatterySaver (){
