@@ -43,13 +43,13 @@
       </div>
       <!-- Replace width with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
       <div class="battery-information--range">
-        
+
         <div class="w3-green" style="height:24px;width:80%; border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;">
-    <div class="battery-information--range__is-charging" id="chargingState"> 
-      <i class="fas fa-battery-bolt"></i>
-    </div>
-    </div>
+    border-bottom-left-radius: 5px;" id="batteryLevelRange">
+          <div class="battery-information--range__is-charging" id="chargingState">
+            <i class="fas fa-battery-bolt"></i>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -267,39 +267,61 @@
 
 
             </div>
-            <div class="section__content-item__list-item">
+            <div class="section__content-item__list-item" style="
+    border-top: none;
+    margin-left: 40px;
+">
               <label>Brightness</label>
               <input type="range" id="brightness_range" onchange="handleBrightnessChange()" name="vol" min="0" max="100"
                 style="
                   width: 50%;
+                  margin-left: calc(50% - 26px); 
+                  width: 50%;
                   margin-left: calc(50% - 26px);
+              
               ">
-              <label id="brightness_value"> 0 </label>
+              <label id="brightness_value" style="margin-left: 4px;"> 0% </label>
+            </div>
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                Turn off wifi when using battery saver
+              </div>
+              <div class="section__content-item__list-item__switch">
+                <span class="section__content-item__list-item__text">
+                  On
+                </span>
+                <label class="switch">
+                  <input id="turnOffWifiOnBattery" onchange="handleSetTurnOffWifiOnBattery()" type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
+
+              </div>
+
+
+            </div>
+            <div class="section__content-item__list-item">
+              <div class="section__content-item__list-item__text">
+                Turn off bluetooth when using battery saver
+              </div>
+              <div class="section__content-item__list-item__switch">
+                <span class="section__content-item__list-item__text">
+                  On
+                </span>
+                <label class="switch">
+                  <input id="turnOffBluetoothOnBattery" onchange="handleSetTurnOffBluetoothOnBattery()" type="checkbox"
+                    checked>
+                  <span class="slider round"></span>
+                </label>
+
+              </div>
+
+
             </div>
 
           </div>
 
 
         </div>
-        <div class="section__content-item">
-          <div class="section__content-item__description">
-            <span class="section__content-item__icon">
-              <i class="las la-chart-line"></i>
-            </span>
-            <div class="section__content-item__text">
-              Battery usage
-
-            </div>
-            <select id="batteryUsage" class="section__content-item__select section__content-item__list-item__setter">
-              <option>Best performance</option>
-              <option>Balanced</option>
-
-            </select>
-          </div>
-
-
-        </div>
-
 
       </div>
     </div>
