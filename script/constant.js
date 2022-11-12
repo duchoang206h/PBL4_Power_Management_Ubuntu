@@ -17,7 +17,7 @@ const MappingIndexToValue =  {
             14: 18000,
             16: 0
         },
-        pluggedInTurnOn: {
+        pluggedInTurnOff: {
             0: 60,
             1: 120,
             2: 180,

@@ -11,6 +11,13 @@ class Handler {
     constructor(){
 
     }
+    initSetting = async () => {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
     handleTurnOnBatterySaver = async (event, arg) => {
         try {
             settingService.updateSetting("batterySaver", arg);
@@ -29,36 +36,36 @@ class Handler {
         }
     }
 
-    handleBatteryTurnOffAfter = async(event, value) => {
+    handleBatteryTurnOffScreenAfter = async(event, value) => {
         try {
             settingService.updateSetting("batteryTurnOff", value);
-            //await execCommand(setBatteryPowerSleepAfter(value))
+            await execCommand(setScreenTurnOffAfter(value))
         } catch (error) {
             
         }
     }
-    handlePluggedInTurnOffAfter = async (event, value) => {
+    handlePluggedInTurnOffScreenAfter = async (event, value) => {
         try {
             settingService.updateSetting("pluggedInTurnOff", value);
-            //await execCommand(setACPowerSleepAfter(value))
+            await execCommand(setScreenTurnOffAfter(value))
         } catch (error) {
             
         }
     }
-    handleSBatterySleep = async (event, value) => {
+    handleBatterySleepAfter = async (event, value) => {
         try {
             
             settingService.updateSetting("batterySleep", value);
-            // await execCommand(setACPowerSleepAfter(value))
+            await execCommand(setBatteryPowerSleepAfter(value))
         } catch (error) {
             
         }
     }
-    handlePluggedInSleep = async (event, value) => {
+    handlePluggedInSleepAfter = async (event, value) => {
         try {
             
             settingService.updateSetting("pluggedInSleep", value);
-            // await execCommand(setACPowerSleepAfter(value))
+            await execCommand(setACPowerSleepAfter(value))
         } catch (error) {
             
         }

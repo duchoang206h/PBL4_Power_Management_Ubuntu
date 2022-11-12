@@ -25,15 +25,17 @@ function createWindow () {
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
   // handle ipcMain
-  ipcMain.handle('handle:setBatteryTurnOffAfter', handler.handleBatteryTurnOffAfter)
-  ipcMain.handle('handle:setPluggedInTurnOffAfter', handler.handlePluggedInTurnOffAfter)
-  ipcMain.handle('handle:setScreenOnBatteryTurnOffAfter', handler.handleScreenOnBatteryTurnOffAfter)
-  ipcMain.handle('handle:setScreenOnPluggedInTurnOffAfter', handler.handlePluggedInTurnOffAfter)
+  ipcMain.handle('handle:setBatteryTurnOffScreenAfter', handler.handleBatteryTurnOffScreenAfter)
+  ipcMain.handle('handle:setPluggedInTurnOffScreenAfter', handler.handlePluggedInTurnOffScreenAfter)
+  ipcMain.handle('handle:setBatterySleepAfter', handler.handleBatterySleepAfter)
+  ipcMain.handle('handle:setPluggedInSleepAfter', handler.handlePluggedInSleepAfter)
   /* ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
   ipcMain.handle('handle:powerMode', system.setPowerMode)
   ipcMain.handle('handle:setBatterySaveOn', system.setBatterySaveOn)
   ipcMain.handle('handle:turnOnBatterySaver', handler.handleTurnOnBatterySaver)
   ipcMain.handle('handle:setLowBrightnessOnBattery', system.setLowBrightnessOnBatterySaver)
+  ipcMain.handle('handle:setTurnOffWifiOnBattery', system.setTurnOffWifiOnBattery),
+  ipcMain.handle('handle:setTurnOffBluetoothOnBattery', system.setTurnOffBluetoothOnBattery),
 
   
   // system

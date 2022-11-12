@@ -99,7 +99,7 @@ class System {
 
         }
     }
-    getAllSetting = async () => {
+    getAllSetting = async (event, value) => {
        try {
         const batterySaver = settingService.getSetting('batterySaver');
         const brightness = await this.getCurrentBrightness();
@@ -123,7 +123,7 @@ class System {
             pluggedInTurnOff
         }
     }catch(error){
-
+        console.log(error)
     }
     }
     setLowBrightnessOnBatterySaver = (event, value) => {
@@ -132,6 +132,22 @@ class System {
             return settingService.updateSetting('lowBrightnessOnBatterySaver', value)
         } catch (error) {
 
+        }
+    }
+    setTurnOffWifiOnBattery = (event, value) => {
+        try {
+            return settingService.updateSetting('turnOffWifi', value)
+            
+        } catch (error) {
+            
+        }
+    }
+    setTurnOffBluetoothOnBattery = (event, value) => {
+        try {
+            return settingService.updateSetting('turnOffBluetooth', value)
+            
+        } catch (error) {
+            
         }
     }
 }

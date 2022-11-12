@@ -117,3 +117,11 @@ async function handleSetLowBrightnessOnBattery() {
         
     }
 }
+async function handleSetTurnOffWifiOnBattery() {
+    const value = document.getElementById("turnOffWifiOnBattery").checked;
+    return await window.handle.setTurnOffWifiOnBattery(value);
+}
+async function handleSetTurnOffBluetoothOnBattery() {
+    const value = document.getElementById("turnOffBluetoothOnBattery").checked;
+    return await window.handle.setTurnOffBluetoothOnBattery(value);
+}
