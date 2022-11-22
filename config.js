@@ -1,7 +1,7 @@
 module.exports = {
     WINDOW_SIZE : {
-        height: 750,
-        width: 800
+        height: 900,
+        width: 1000
     },
     MappingIndexToValue: {
         batteryTurnOff: {
