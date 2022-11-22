@@ -168,6 +168,7 @@ input:checked + .slider:before {
 }.battery-information--range {
     background-color: #fff;
     border-radius: 5px;
+    overflow: hidden;
     
 }
 .battery-information--range__is-charging {
