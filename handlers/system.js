@@ -102,6 +102,7 @@ class System {
     getAllSetting = async (event, value) => {
        try {
         const batterySaver = settingService.getSetting('batterySaver');
+        const batteryLevel = await this.getBatteryLevel();
         const brightness = await this.getCurrentBrightness();
         const powerMode = await this.getCurrentPowerMode();
         const lowBrightBatterySaver = settingService.getSetting('lowBrightnessOnBatterySaver');
@@ -120,7 +121,8 @@ class System {
             batterySleep,
             batteryTurnOff,
             pluggedInSleep,
-            pluggedInTurnOff
+            pluggedInTurnOff,
+            batteryLevel
         }
     }catch(error){
         console.log(error)

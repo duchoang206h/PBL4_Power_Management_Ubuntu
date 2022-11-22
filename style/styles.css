@@ -71,7 +71,7 @@ select {
     align-items: center;
 }
 .section__content-item__text__description {
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 4px;
 }
 .section__content-item__description {
@@ -85,7 +85,7 @@ select {
   flex: 1;
 }
 .section__content-item__text__description {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* TOGGLE SWITCH BTN */
