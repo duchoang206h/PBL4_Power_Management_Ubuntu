@@ -26,6 +26,7 @@ window.onload = async () => {
 
     const batterySaverBtn = document.getElementById('turnOnBatterySaver');
     //
+    console.log(`batteryLevel`, batteryLevel);
     batteryLevelRangeDiv.style.width = batteryLevel + '%';
     batteryLevelDiv.innerHTML = batteryLevel + '%';
     const minutes = Math.round(remainingTime % 1 * 60);
@@ -83,7 +84,7 @@ window.onload = async () => {
         const batteryLevelRangeDiv = document.getElementById('batteryLevelRange');
         //
         batteryLevelDiv.innerHTML = batteryLevel;
-        const minutes = Math.round(remainingTime %1 * 60);
+        const minutes = Math.round(remainingTime % 1 * 60);
         const hours = Math.floor(remainingTime);
         batteryRemainingTime.innerHTML = `${hours} hours ${minutes} minutes remaining`;
         if(!chargingState){
