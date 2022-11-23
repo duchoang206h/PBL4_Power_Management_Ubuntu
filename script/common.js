@@ -20,7 +20,7 @@ window.onload = async () => {
     const batteryLevelRangeDiv = document.getElementById('batteryLevelRange');
     const batterySaveOnSelect = document.getElementById("batterySaveOn");
     const batteryTurnOffSelect = document.getElementById("batteryTurnOff");
-    const batterySleepSelect = document.getElementById("batteryTurnOff");
+    const batterySleepSelect = document.getElementById("batterySleep");
     const pluggedInSleepSelect = document.getElementById("pluggedInSleep");
     const pluggedInTurnOffSelect = document.getElementById("pluggedInTurnOff");
 
@@ -39,10 +39,10 @@ window.onload = async () => {
     for(const [key, value] of Object.entries(MappingIndexToValue.batterySleep)){
         if(value == batterySleep) batterySleepSelect.selectedIndex = key;
     }
-    for(const [key, value] of Object.entries(MappingIndexToValue.batteryTurnOff)){
+    /* for(const [key, value] of Object.entries(MappingIndexToValue.batteryTurnOff)){
         if(value == batteryTurnOff) batteryTurnOffSelect.selectedIndex = key;
         
-    }
+    } */
     for(const [key, value] of Object.entries(MappingIndexToValue.pluggedInTurnOff)){
         if(value == pluggedInTurnOff) pluggedInTurnOffSelect.selectedIndex = key;
         
