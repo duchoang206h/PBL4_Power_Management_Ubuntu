@@ -65,6 +65,7 @@ select {
 }
 .section__content-item__list-item__setter {
     min-width: 120px;
+    border-radius: 4px;
 }
 .section__content-item__list-item__switch {
     display: flex;

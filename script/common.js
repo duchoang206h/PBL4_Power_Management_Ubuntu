@@ -40,10 +40,10 @@ window.onload = async () => {
     for(const [key, value] of Object.entries(MappingIndexToValue.batterySleep)){
         if(value == batterySleep) batterySleepSelect.selectedIndex = key;
     }
-    for(const [key, value] of Object.entries(MappingIndexToValue.batteryTurnOff)){
+    /* for(const [key, value] of Object.entries(MappingIndexToValue.batteryTurnOff)){
         if(value == batteryTurnOff) batteryTurnOffSelect.selectedIndex = key;
         
-    }
+    } */
     for(const [key, value] of Object.entries(MappingIndexToValue.pluggedInTurnOff)){
         if(value == pluggedInTurnOff) pluggedInTurnOffSelect.selectedIndex = key;
         
