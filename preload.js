@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 // expose ipMain
 contextBridge.exposeInMainWorld('handle', {
   setBatteryTurnOff : (seconds) => ipcRenderer.invoke('handle:setBatteryTurnOffScreenAfter', seconds),
-  setPluggedInTurnOn: (seconds) => ipcRenderer.invoke('handle:setPluggedInTurnOffScreenAfter', seconds),
+  setPluggedInTurnOff: (seconds) => ipcRenderer.invoke('handle:setPluggedInTurnOffScreenAfter', seconds),
   setBatterySleep: (seconds) => ipcRenderer.invoke('handle:setBatterySleepAfter', seconds),
   setPluggedInSleep: (seconds) => ipcRenderer.invoke('handle:setPluggedInSleepAfter', seconds),
   setPowerMode: (mode) => ipcRenderer.invoke('handle:powerMode', mode),

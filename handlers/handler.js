@@ -41,15 +41,16 @@ class Handler {
             settingService.updateSetting("batteryTurnOff", value);
             await execCommand(setScreenTurnOffAfter(value))
         } catch (error) {
-            
+            console.log(error);
         }
     }
     handlePluggedInTurnOffScreenAfter = async (event, value) => {
         try {
+            console.log(`value:`, value);
             settingService.updateSetting("pluggedInTurnOff", value);
             await execCommand(setScreenTurnOffAfter(value))
         } catch (error) {
-            
+            console.log(error);
         }
     }
     handleBatterySleepAfter = async (event, value) => {
@@ -58,7 +59,7 @@ class Handler {
             settingService.updateSetting("batterySleep", value);
             await execCommand(setBatteryPowerSleepAfter(value))
         } catch (error) {
-            
+            console.log(error);
         }
     }
     handlePluggedInSleepAfter = async (event, value) => {
@@ -67,7 +68,7 @@ class Handler {
             settingService.updateSetting("pluggedInSleep", value);
             await execCommand(setACPowerSleepAfter(value))
         } catch (error) {
-            
+            console.log(error);
         }
     }
 }
