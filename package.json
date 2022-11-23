@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
+  "build": {
+    "appId": "your.id",
+    "linux": {
+      "target": "AppImage"
+    }
+  },
   "scripts": {
     "start": "electron .",
-    "dev": "nodemon --exec electron ."
+    "dev": "nodemon --exec electron .",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -19,6 +27,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^21.2.1",
+    "electron-builder": "^23.6.0",
     "nodemon": "^2.0.20"
   },
   "dependencies": {
