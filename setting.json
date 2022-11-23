@@ -1,1 +1,1 @@
-{"batteryTurnOff":180,"pluggedInTurnOff":60,"batterySleep":1800,"pluggedInSleep":60,"powerMode":"power-saver","batterySaveOn":95,"batteryUsage":0,"brightness":46,"lowBrightnessOnBatterySaver":true,"batterySaver":true,"turnOffWifi":true,"turnOffBluetooth":true}
+{"batteryTurnOff":180,"pluggedInTurnOff":60,"batterySleep":1800,"pluggedInSleep":300,"powerMode":"power-saver","batterySaveOn":95,"batteryUsage":0,"brightness":36,"lowBrightnessOnBatterySaver":false,"batterySaver":true,"turnOffWifi":true,"turnOffBluetooth":true}

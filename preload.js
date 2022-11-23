@@ -20,5 +20,4 @@ contextBridge.exposeInMainWorld('handle', {
 contextBridge.exposeInMainWorld('system', {
   getCurrentBrightness : () => ipcRenderer.invoke('system:getCurrentBrightness'),
   getAllSetting : () => ipcRenderer.invoke('system:getAllSetting'),
-  
 });
