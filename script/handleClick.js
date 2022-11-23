@@ -11,8 +11,8 @@ async function handleClick (event){
             case "batteryTurnOff":
                 result = await handleBatteryTurnOff(MappingIndexToValue.batteryTurnOff[selectedIndex])
                 break;
-            case "pluggedInTurnOn":
-                result = await handlePluggedInTurnOn(MappingIndexToValue.pluggedInTurnOn[selectedIndex])
+            case "pluggedInTurnOff":
+                result = await handlePluggedInTurnOff(MappingIndexToValue.pluggedInTurnOff[selectedIndex])
                 break;    
             case "batterySleep":
                 result = await handleBatterySleep(MappingIndexToValue.batterySleep[selectedIndex])
@@ -41,9 +41,10 @@ async function handleClick (event){
          // handle error 
     }
 }
-async function handlePluggedInTurnOn (value) {
+async function handlePluggedInTurnOff (value) {
     try {
-       return await window.handle.setPluggedInTurnOn(value)
+        console.log(`handlePluggedInTurnOff`, value);
+       return await window.handle.setPluggedInTurnOff(value)
     } catch (error) {
       // handle error  
     }

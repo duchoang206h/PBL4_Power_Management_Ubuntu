@@ -23,7 +23,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
   // handle ipcMain
   ipcMain.handle('handle:setBatteryTurnOffScreenAfter', handler.handleBatteryTurnOffScreenAfter)
   ipcMain.handle('handle:setPluggedInTurnOffScreenAfter', handler.handlePluggedInTurnOffScreenAfter)
