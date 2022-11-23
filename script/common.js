@@ -20,8 +20,9 @@ window.onload = async () => {
     const batteryLevelRangeDiv = document.getElementById('batteryLevelRange');
     const batterySaveOnSelect = document.getElementById("batterySaveOn");
     const batteryTurnOffSelect = document.getElementById("batteryTurnOff");
-    const batterySleepSelect = document.getElementById("batteryTurnOff");
+    const batterySleepSelect = document.getElementById("batterySleep");
     const pluggedInSleepSelect = document.getElementById("pluggedInSleep");
+
     const pluggedInTurnOffSelect = document.getElementById("pluggedInTurnOff");
 
     const batterySaverBtn = document.getElementById('turnOnBatterySaver');
@@ -29,8 +30,8 @@ window.onload = async () => {
     console.log(`batteryLevel`, batteryLevel);
     batteryLevelRangeDiv.style.width = batteryLevel + '%';
     batteryLevelDiv.innerHTML = batteryLevel + '%';
-    const minutes = Math.round(remainingTime % 1 * 60);
-    const hours = Math.floor(remainingTime);
+    const minutes = Math.round(remainingTime % 1 * 60) || 0;
+    const hours = Math.floor(remainingTime) || 10;
     batteryRemainingTime.innerHTML = `${hours} hours ${minutes} minutes remaining`;
     batterySaverBtn.disabled  = chargingState;
     if (!chargingState) {
@@ -83,9 +84,9 @@ window.onload = async () => {
         const chargingStateDiv = document.getElementById('chargingState')
         const batteryLevelRangeDiv = document.getElementById('batteryLevelRange');
         //
-        batteryLevelDiv.innerHTML = batteryLevel;
-        const minutes = Math.round(remainingTime % 1 * 60);
-        const hours = Math.floor(remainingTime);
+        batteryLevelDiv.innerHTML = batteryLevel + "%";
+        const minutes = Math.round(remainingTime % 1 * 60) || 0;
+        const hours = Math.floor(remainingTime) || 10;
         batteryRemainingTime.innerHTML = `${hours} hours ${minutes} minutes remaining`;
         if(!chargingState){
             chargingStateDiv.style.display = "none";
