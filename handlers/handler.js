@@ -4,16 +4,26 @@ const {
     turnOffBluetooth,
     setACPowerSleepAfter,
     setBatteryPowerSleepAfter,
-    setScreenTurnOffAfter
+    setScreenTurnOffAfter,
+    setPowerMode
 } = require('../commands/commands');
-const { settingService } = require('./setting')
+const { settingService } = require('./setting');
 class Handler {
     constructor(){
 
     }
     initSetting = async () => {
         try {
-            
+            const batteryTurnOff = settingService.getSetting('batteryTurnOff');
+            const batterySleep = settingService.getSetting('batterySleep');
+            const pluggedInSleep = settingService.getSetting('pluggedInSleep');
+            const pluggedInTurnOff = settingService.getSetting('pluggedInTurnOff');
+            await Promise.all([
+                execCommand(setScreenTurnOffAfter(pluggedInTurnOff)),
+                execCommand(setBatteryPowerSleepAfter(batterySleep)),
+                execCommand(setACPowerSleepAfter(pluggedInSleep))
+            ])
+
         } catch (error) {
             
         }
@@ -69,6 +79,14 @@ class Handler {
             await execCommand(setACPowerSleepAfter(value))
         } catch (error) {
             console.log(error);
+        }
+    }
+    handleSetPowerMode = async (event, value) => {
+        try {
+            settingService.updateSetting("powerMode", value);
+            await execCommand(setPowerMode(value))
+        } catch (error) {
+            
         }
     }
 }

@@ -14,8 +14,8 @@ contextBridge.exposeInMainWorld('handle', {
   updateBatterySaver: (callback) => ipcRenderer.on('updateBatterySaver', callback),
   updateCurrentBattery: (callback) => ipcRenderer.on('currentBattery', callback),
   updateChargingState: (callback) => ipcRenderer.on('updateChargingState', callback),
-  setTurnOffWifiOnBattery: (value) => ipcRenderer.invoke('setTurnOffWifiOnBattery', value),
-  setTurnOffBluetoothOnBattery: (value) => ipcRenderer.invoke('setTurnOffBluetoothOnBattery', value)
+  setTurnOffWifiOnBattery: (value) => ipcRenderer.invoke('handle:setTurnOffWifiOnBattery', value),
+  setTurnOffBluetoothOnBattery: (value) => ipcRenderer.invoke('handle:setTurnOffBluetoothOnBattery', value)
 })
 contextBridge.exposeInMainWorld('system', {
   getCurrentBrightness : () => ipcRenderer.invoke('system:getCurrentBrightness'),
