@@ -30,7 +30,7 @@ function createWindow () {
   ipcMain.handle('handle:setBatterySleepAfter', handler.handleBatterySleepAfter)
   ipcMain.handle('handle:setPluggedInSleepAfter', handler.handlePluggedInSleepAfter)
   /* ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
-  ipcMain.handle('handle:powerMode', system.setPowerMode)
+  ipcMain.handle('handle:powerMode', handler.handleSetPowerMode)
   ipcMain.handle('handle:setBatterySaveOn', system.setBatterySaveOn)
   ipcMain.handle('handle:turnOnBatterySaver', handler.handleTurnOnBatterySaver)
   ipcMain.handle('handle:setLowBrightnessOnBattery', system.setLowBrightnessOnBatterySaver)
@@ -50,7 +50,10 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  const mainWindow = createWindow()
+  const mainWindow = createWindow();
+  // init setting when startup
+  handler.initSetting();
+  // cronjob
   job(mainWindow)
   app.on('activate', function () {
    
