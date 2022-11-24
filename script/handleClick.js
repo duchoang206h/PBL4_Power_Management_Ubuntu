@@ -73,7 +73,8 @@ async function handlePowerMode (value) {
 }
 async function handleBatterySaveOn (value) {
     try {
-        console.log(value)
+        console.log(value);
+        document.getElementById('powerMode').style.display = 'none';
         return await window.handle.setBatterySaveOn(value)
     } catch (error) {
         
@@ -103,9 +104,12 @@ async function handleTurnOnBatterySaver (){
     const turnOnBatterySaverBTN = document.getElementById('turnOnBatterySaver')
     if(turnOnBatterySaverBTN.innerText === `Turn off now` ){
         await window.handle.turnOnBatterySaver(false);
+        document.getElementById('powerMode').style.display = 'inline';
+
         turnOnBatterySaverBTN.innerText = `Turn on now`
     }else{
         await window.handle.turnOnBatterySaver(true);
+        document.getElementById('powerMode').style.display  = 'none';
         turnOnBatterySaverBTN.innerText = `Turn off now`
     }
 
