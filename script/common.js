@@ -35,7 +35,8 @@ window.onload = async () => {
     const minutes = Math.round(remainingTime % 1 * 60) || 0;
     const hours = Math.floor(remainingTime) || 10;
     batteryRemainingTime.innerHTML = `${hours} hours ${minutes} minutes remaining`;
-    batterySaverBtn.disabled  = chargingState;
+    batterySaverBtn.disabled = chargingState;
+    powerModeSelect.style.display = batterySaver ? 'none' : 'block';
     if (!chargingState) {
         chargingStateDiv.style.display = "none";
     }
@@ -69,19 +70,32 @@ window.onload = async () => {
     document.getElementById('lowBrightnessOnBattery').checked = lowBrightBatterySaver
     document.getElementById('brightness_range').value = brightness;
     document.getElementById('brightness_value').innerHTML = brightness +'%';
-    if(batterySaver === true && chargingState === false){
-        document.getElementById('turnOnBatterySaver').innerHTML = 'Turn off now';
+    if (batterySaver === true) {
+        powerModeSelect.style.display = "none";
     }
+    if (batterySaver === true && chargingState === false) {
+        batterySaverBtn.innerHTML = 'Turn off now';
+    } else if (batterySaver === false && chargingState === false) {
+        batterySaverBtn.innerHTML = 'Turn on now';
+    } else if (chargingState === true) {
+        batterySaverBtn.innerHTML = 'Turn on now';
+        batterySaverBtn.disabled = true;
+    }
+    console.log(`chargingState`, chargingState);
+    console.log(`batterySaver`, batterySaver);
+
     document.getElementById("turnOffWifiOnBattery").checked = turnOffWifi;
     document.getElementById("turnOffBluetoothOnBattery").checked = turnOffBluetooth
     window.handle.updateBatterySaver((event, { batterySaver, chargingState}) => {
         console.log(`-----------batterySaver`, batterySaver)
-        
+        if (batterySaver === true) {
+            powerModeSelect.style.display = "none";
+        }
         if (batterySaver === true && chargingState === false) {
             batterySaverBtn.innerHTML = 'Turn off now';
         } else if( batterySaver === false && chargingState === false ) {
             batterySaverBtn.innerHTML = 'Turn on now';
-        }else if(hargingState === true){
+        }else if(chargingState === true){
             batterySaverBtn.innerHTML = 'Turn on now';
             batterySaverBtn.disabled  = true;
         }

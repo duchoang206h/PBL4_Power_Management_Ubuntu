@@ -113,6 +113,7 @@ class System {
         const pluggedInSleep = settingService.getSetting('pluggedInSleep');
         const turnOffBluetooth = settingService.getSetting('turnOffBluetooth');
         const turnOffWifi = settingService.getSetting('turnOffWifi');
+        const chargingState = await this.getChargingState();   
         /// more here
         return {
             batterySaver,
@@ -126,7 +127,8 @@ class System {
             pluggedInTurnOff,
             batteryLevel,
             turnOffBluetooth,
-            turnOffWifi
+            turnOffWifi,
+            chargingState
         }
     }catch(error){
         console.log(error)
