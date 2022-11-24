@@ -40,7 +40,9 @@ class Handler {
         settingService.getSetting("turnOffWifi")
           ? await execCommand(turnOffWifi)
           : null;
+        await execCommand(setPowerMode("power-saver"));
       } else {
+        await execCommand(setPowerMode(settingService.getSetting("powerMode")));
         await execCommand(changeBright(100));
       }
     } catch (error) {

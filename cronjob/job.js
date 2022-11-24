@@ -6,7 +6,8 @@ const { execCommand } = require('../commands/execCommand');
 const { 
 	changeBright,
 	turnOffBluetooth,
-	turnOffWifi
+	turnOffWifi,
+	setPowerMode,
  } = require('../commands/commands');
 const { system } = require('../handlers/system');
 const setting = require('../handlers/setting');
@@ -46,6 +47,7 @@ async function handleBatterySaveOn(mainWindow){
 				settingService.getSetting("lowBrightnessOnBatterySaver") ? await execCommand(changeBright(settingService.getSetting('brightness'))) : null;
 				settingService.getSetting("turnOffBluetooth") ? await execCommand(turnOffBluetooth): null
 				settingService.getSetting("turnOffWifi") ? await execCommand(turnOffWifi): null
+				await execCommand(setPowerMode('power-saver'))
 				await mainWindow.webContents.send('updateBatterySaver', {
 					batterySaver: true,
 					chargingState: isCharging
