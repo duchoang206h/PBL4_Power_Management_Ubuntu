@@ -1,10 +1,11 @@
 {
-  "name": "electron-quick-start",
+  "name": "Power Management",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "build": {
     "appId": "your.id",
+    "productName": "Power Management",
     "linux": {
       "target": "deb",
       "icon": "./icon.png"
