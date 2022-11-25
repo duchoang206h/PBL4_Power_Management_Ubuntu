@@ -1,11 +1,14 @@
 {
-  "name": "Power Management",
+  "name": "PowerManagement",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "build": {
     "appId": "your.id",
     "productName": "Power Management",
+    "files": [
+      "**/*"
+    ],
     "linux": {
       "target": "deb",
       "icon": "./icon.png"
