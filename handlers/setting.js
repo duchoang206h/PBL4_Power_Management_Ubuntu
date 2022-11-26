@@ -1,9 +1,17 @@
 const fs = require("fs");
 const path = require("path");
-const settings = require("./config");
+const defaultSettings = require("./config");
+const { app } = require("electron");
 class SettingService {
   constructor() {
-    this.settings = settings;
+    console.log(fs.existsSync(app.getAppPath("userData") + "/settings.json"));
+    if (fs.existsSync(app.getAppPath("userData") + "/settings.json")) {
+      this.settings = JSON.parse(
+        fs.readFileSync(app.getAppPath("userData") + "/settings.json", {
+          encoding: "utf-8",
+        })
+      );
+    } else this.settings = defaultSettings;
   }
   initSetting() {
     try {
@@ -24,10 +32,12 @@ class SettingService {
         this.settings[field] = value;
       }
       // after handle update setting
-      await fs.promises.writeFile(
-        path.resolve(__dirname, "config.js"),
-        "module.exports =" + JSON.stringify(this.settings)
+      fs.writeFileSync(
+        app.getAppPath("userData") + "/settings.json",
+        JSON.stringify(this.settings),
+        { encoding: "utf-8" }
       );
+      fs.close();
       return true;
     } catch (error) {
       console.log(error);
