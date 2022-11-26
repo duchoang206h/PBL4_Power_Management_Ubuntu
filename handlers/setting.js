@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const settings = require("./setting.json");
+const settings = require("./config");
 class SettingService {
   constructor() {
     this.settings = settings;
@@ -25,8 +25,8 @@ class SettingService {
       }
       // after handle update setting
       await fs.promises.writeFile(
-        path.resolve(__dirname, "setting.json"),
-        JSON.stringify(this.settings)
+        path.resolve(__dirname, "config.js"),
+        "module.exports =" + JSON.stringify(this.settings)
       );
       return true;
     } catch (error) {
