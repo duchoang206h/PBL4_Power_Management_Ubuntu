@@ -6,10 +6,13 @@
   "build": {
     "appId": "your.id",
     "productName": "Power Management",
-    "files": [
-      "**/*",
-      "./setting.json"
-    ],
+    "extraResources" :
+    [
+        {
+            "filter": ["./setting.json"]
+        }
+    ]
+    ,
     "linux": {
       "target": "deb",
       "icon": "./icon.png"
