@@ -1,0 +1,11 @@
+.infor-section__heading {
+    font-weight: 600;
+}
+.infor-section__list {
+    margin-left: 40px;
+}
+.container {
+    margin-left: 20px;
+    font-size: 18px;
+    margin-top: 20px;
+}
