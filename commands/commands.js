@@ -25,6 +25,13 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-tim
 const setACPowerSleepAfter = (time) => `gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'suspend'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout ${time}`
 const setScreenTurnOffAfter = (time) => `gsettings set org.gnome.desktop.session idle-delay ${time}`
+const getPowerButtonAction = `gsettings get org.gnome.settings-daemon.plugins.power power-button-action`;
+const setPowerButtonAction = (action) =>
+  `gsettings set org.gnome.settings-daemon.plugins.power power-button-action ${action}`;
+const getCloseLidOnBattery = `gsettings get org.gnome.settings-daemon.plugins.power lid-close-battery-action`;
+const getCloseLidOnPluggedIn = `gsettings get org.gnome.settings-daemon.plugins.power lid-close-battery-action`;
+const getBatteryDetail = `upower -i $(upower -e | grep 'BAT')`;
+
 module.exports = {
     changeBright,
     getBatteryLevel,
