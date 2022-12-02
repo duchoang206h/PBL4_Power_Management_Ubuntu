@@ -3,14 +3,18 @@ const {
     getChargingState,
     getBatteryLevel,
     getPowerMode,
-    getRemainingTime
+    getRemainingTime,
+    getBatteryHistory
 } = require('../commands/commands')
 const { settingService } = require('../handlers/setting')
 const getBatteryLevelRegex = /\d+/g;
 const getBatteryRemainingTimeRegex = /\d+,\d+/g;
+const batteryHistoryRegex =/(struct\s*{\s*uint32\s*\d+\s*double\s*\d+\s*uint32\s*\d+\s*})/g;
+const digitsRegex = /\s+\d+/g;
 class System {
     constructor() {
         console.log(this)
+       
     }
     getCurrentPowerMode = async () => {
         try {
@@ -156,6 +160,24 @@ class System {
             
         } catch (error) {
             
+        }
+    }
+    getBatteryHistory = async() =>{
+        try {
+                const data = await execCommand(getBatteryHistory);
+                const result = [];
+                data.match(batteryHistoryRegex).forEach(element => {
+                    const struct = element.match(digitsRegex).map(e => e.trim());
+                    result.push({
+                      timestamps: Number(struct[0]),
+                      level: Number(struct[1]),
+                      state: Number(struct[2]),
+                    });
+                })
+                console.log(result);
+                return result;
+        } catch (error) {
+                return []
         }
     }
 }
