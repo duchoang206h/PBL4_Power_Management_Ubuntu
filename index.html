@@ -20,7 +20,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" />
   <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet"
     type="text/css" />
-
   <!-- APP CSS -->
   <link rel="stylesheet" href="./style/styles.css">
   <title>Power Management</title>
@@ -31,7 +30,8 @@
     <div class="section" style="
     margin-bottom: 20px;
 ">
-      <div class="battery-information--text">
+      <div class="container" style="display: flex;">
+        <div class="battery-information--text" style="width: 10px;">
         <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
         <div class="battery-information--text__percentage" id="batteryLevel">
           55%
@@ -41,15 +41,17 @@
           2 hours 25 minutes remaining
         </div>
       </div>
+        <div style="width: 800px;"><canvas id="chart"></canvas></div>
+
+      </div>
       <!-- Replace width with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
       <div class="battery-information--range">
-
-        <div class="w3-green" style="height:24px;width:80%; border-top-left-radius: 5px;
+        <!-- <div class="w3-green" style="height:24px;width:80%; border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;" id="batteryLevelRange">
           <div class="battery-information--range__is-charging" id="chargingState">
             <i class="fas fa-battery-bolt"></i>
           </div>
-        </div>
+        </div> -->
       </div>
       <a href ="battery-details.html" target="_blank" class="battery-detail">View battery details</a>
     </div>
@@ -360,11 +362,13 @@
       </div>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js" integrity="sha512-tQYZBKe34uzoeOjY9jr3MX7R/mo7n25vnqbnrkskGr4D6YOoPYSpyafUAzQVjV6xAozAqUFIEFsCO4z8mnVBXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="./renderer.js"></script>
+  <script src="./script/chart.js"></script>
   <script src="./script/constant.js"></script>
   <script src="./script/toggleList.js"></script>
   <script src="./script/handleClick.js"></script>
-  <script src="./script/common.js"></script>
+  <!-- <script src="./script/common.js"></script> -->
 </body>
 
 </html>
