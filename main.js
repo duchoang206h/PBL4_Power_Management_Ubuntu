@@ -57,6 +57,7 @@ function createWindow() {
     // system
     ipcMain.handle("system:getAllSetting", system.getAllSetting);
   ipcMain.handle("system:getCurrentBrightness", system.getCurrentBrightness);
+  ipcMain.handle("system:getBatteryHistory", system.getBatteryHistory)
   ipcMain.handle("handle:setBrightness", system.setBrightness);
 
   return mainWindow;
