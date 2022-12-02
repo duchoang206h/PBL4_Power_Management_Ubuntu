@@ -162,7 +162,7 @@ class System {
             
         }
     }
-    getBatteryHistory = async() =>{
+    getBatteryHistory = async(event, value) =>{
         try {
                 const data = await execCommand(getBatteryHistory);
                 const result = [];
