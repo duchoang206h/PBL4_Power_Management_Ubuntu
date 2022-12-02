@@ -38,7 +38,7 @@ const getCloseLidOnBattery = `gsettings get org.gnome.settings-daemon.plugins.po
 const getCloseLidOnPluggedIn = `gsettings get org.gnome.settings-daemon.plugins.power lid-close-battery-action`;
 const getBatteryDetail = (attribute) =>
   `upower -i $(upower -e | grep 'BAT') | grep -E "${attribute}"`;
-const getBatteryHistory = `dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower/devices/battery_BAT0 org.freedesktop.UPower.Device.GetHistory string:charge uint32:604800 uint32:10080`;
+const getBatteryHistory = `dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower/devices/battery_BAT0 org.freedesktop.UPower.Device.GetHistory string:charge uint32:604800 uint32:12`;
 module.exports = {
   changeBright,
   getBatteryLevel,
