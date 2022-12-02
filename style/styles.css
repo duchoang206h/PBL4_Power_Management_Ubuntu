@@ -189,3 +189,17 @@ a.battery-detail {
     font-size: 18px;
     float: right; 
 }
+
+.battery-history-chart {
+    width: 50%; 
+}
+#chart{
+height: 200px;
+}
+
+.battery-info {
+    flex-basis: 30%;
+}
+.battery-history-chart {
+    flex-basis: 70%;
+}
