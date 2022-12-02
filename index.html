@@ -22,6 +22,7 @@
     type="text/css" />
   <!-- APP CSS -->
   <link rel="stylesheet" href="./style/styles.css">
+  <link rel="stylesheet" href="./style/chartist.css">
   <title>Power Management</title>
 </head>
 
@@ -29,31 +30,36 @@
   <div class="main">
     <div class="section" style="
     margin-bottom: 20px;
-">
-      <div class="container" style="display: flex;">
-        <div class="battery-information--text" style="width: 10px;">
-        <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
-        <div class="battery-information--text__percentage" id="batteryLevel">
-          55%
-        </div>
-        <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "time to empty"" -->
-        <div class="battery-information--text__remaining-time" id="batteryRemainingTime">
-          2 hours 25 minutes remaining
-        </div>
-      </div>
-        <div class="ct-chart ct-golden-section" id="chart"></div>
+    display: flex;
+    height: 200px;
 
-      </div>
-      <!-- Replace width with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
-      <div class="battery-information--range">
-        <!-- <div class="w3-green" style="height:24px;width:80%; border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;" id="batteryLevelRange">
-          <div class="battery-information--range__is-charging" id="chargingState">
-            <i class="fas fa-battery-bolt"></i>
+">
+      <div class="battery-info">
+        <div class="battery-information--text">
+          <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
+          <div class="battery-information--text__percentage" id="batteryLevel">
+            55%
           </div>
-        </div> -->
+          <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "time to empty"" -->
+          <div class="battery-information--text__remaining-time" id="batteryRemainingTime">
+            2 hours 25 minutes remaining
+          </div>
+        </div>
+        <!-- Replace width with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
+        <div class="battery-information--range">
+
+          <div class="w3-green" style="height:24px;width:80%; border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;" id="batteryLevelRange">
+            <div class="battery-information--range__is-charging" id="chargingState">
+              <i class="fas fa-battery-bolt"></i>
+            </div>
+          </div>
+        </div>
+        <a href="battery-details.html" target="_blank" class="battery-detail">View battery details</a>
       </div>
-      <a href ="battery-details.html" target="_blank" class="battery-detail">View battery details</a>
+      <div class="battery-history-chart">
+        <div class="ct-chart ct-golden-section" id="chart"></div>
+      </div>
     </div>
 
     <!-- POWER -->
@@ -170,7 +176,7 @@
                 <option value="suspend">Suspend</option>
                 <option value="hibernate">Hibernate</option>
                 <option value="interactive">Interactive</option>
-                
+
               </select>
             </div>
             <div class="section__content-item__list-item">
@@ -204,8 +210,8 @@
               </select>
             </div>
           </div>
-        
-        
+
+
         </div>
         <div class="section__content-item">
           <div class="section__content-item__description">
@@ -362,13 +368,15 @@
       </div>
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js" integrity="sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js"
+    integrity="sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="./renderer.js"></script>
   <script src="./script/chart.js"></script>
   <script src="./script/constant.js"></script>
   <script src="./script/toggleList.js"></script>
   <script src="./script/handleClick.js"></script>
-  <!-- <script src="./script/common.js"></script> -->
+  <script src="./script/common.js"></script>
 </body>
 
 </html>
