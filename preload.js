@@ -28,6 +28,9 @@ contextBridge.exposeInMainWorld("handle", {
     ipcRenderer.invoke("handle:setTurnOffWifiOnBattery", value),
   setTurnOffBluetoothOnBattery: (value) =>
     ipcRenderer.invoke("handle:setTurnOffBluetoothOnBattery", value),
+  setPowerButtonAction: (value) => ipcRenderer.invoke("handle:setPowerButtonAction", value),
+  setBatteryCloseLid: (value) => ipcRenderer.invoke("handle:setBatteryCloseLid", value),
+  setPluggedInCloseLid: (value) => ipcRenderer.invoke("handle:setPluggedInCloseLid", value)
 });
 contextBridge.exposeInMainWorld("system", {
   getCurrentBrightness: () => ipcRenderer.invoke("system:getCurrentBrightness"),

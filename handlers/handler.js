@@ -7,6 +7,9 @@ const {
   setScreenTurnOffAfter,
   setPowerMode,
   turnOffWifi,
+  setPowerButtonAction,
+  setCloseLidOnBattery,
+  setCloseLidOnPluggedIn,
 } = require("../commands/commands");
 const { settingService } = require("./setting");
 class Handler {
@@ -89,6 +92,32 @@ class Handler {
       await execCommand(setPowerMode(value));
     } catch (error) {}
   };
+  handleSetPowerButtonAction = async(event, value) => {
+    try {
+      settingService.updateSetting("powerButtonAction", value);
+      await execCommand(setPowerButtonAction(value));
+    } catch (error) {
+      
+    }
+  }
+  handleSetBatteryCloseLid = async (event, value) => {
+    try {
+      settingService.updateSetting("batteryCloseLid", value);
+      await execCommand(setCloseLidOnBattery(value));
+    } catch (error) {
+      
+    }
+  }
+
+  handleSetPluggedInCloseLid = async (event, value) => {
+    try {
+      console.log(`handleSetPluggedInCloseLid`, value)
+      settingService.updateSetting("pluggedInCloseLid", value);
+      await execCommand(setCloseLidOnPluggedIn(value));
+    } catch (error) {
+      
+    }
+  }
 }
 module.exports = {
   handler: new Handler(),
