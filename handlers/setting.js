@@ -2,16 +2,13 @@ const fs = require("fs");
 const path = require("path");
 const defaultSettings = require("./config");
 const { app } = require("electron");
+const Store = require('electron-store');
+const store = new Store();
 class SettingService {
   constructor() {
-    console.log(fs.existsSync(app.getAppPath("userData") + "/settings.json"));
-    if (fs.existsSync(app.getAppPath("userData") + "/settings.json")) {
-      this.settings = JSON.parse(
-        fs.readFileSync(app.getAppPath("userData") + "/settings.json", {
-          encoding: "utf-8",
-        })
-      );
-    } else this.settings = defaultSettings;
+    for(const [key, value] of Object.entries(defaultSettings)){
+      if(!store.get(key)) store.set(key, value)
+    }
   }
   initSetting() {
     try {
@@ -20,7 +17,7 @@ class SettingService {
     } catch (error) {}
   }
   getSetting(field) {
-    return this.settings[field];
+    return store.get(field)
   }
   /**
    *
@@ -28,16 +25,10 @@ class SettingService {
    */
   updateSetting = async (field, value) => {
     try {
-      if (this.settings.hasOwnProperty(field)) {
-        this.settings[field] = value;
+      if (store.get(field)) {
+       store.set(field, value);
       }
       // after handle update setting
-      fs.writeFileSync(
-        app.getAppPath("userData") + "/settings.json",
-        JSON.stringify(this.settings),
-        { encoding: "utf-8" }
-      );
-      fs.close();
       return true;
     } catch (error) {
       console.log(error);
