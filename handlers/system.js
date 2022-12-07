@@ -4,7 +4,10 @@ const {
     getBatteryLevel,
     getPowerMode,
     getRemainingTime,
-    getBatteryHistory
+    getBatteryHistory,
+    getPowerButtonAction,
+    getCloseLidOnBattery,
+    getCloseLidOnPluggedIn
 } = require('../commands/commands')
 const { settingService } = require('../handlers/setting')
 const getBatteryLevelRegex = /\d+/g;
@@ -118,6 +121,9 @@ class System {
         const turnOffBluetooth = settingService.getSetting('turnOffBluetooth');
         const turnOffWifi = settingService.getSetting('turnOffWifi');
         const chargingState = await this.getChargingState();   
+        const powerButtonAction = await this.getPowerButtonAction();
+        const batteryCloseLid = await this.getCloseLidOnBattery();
+        const pluggedInCloseLid = await this.getCloseLidOnPluggedIn();
         /// more here
         return {
             batterySaver,
@@ -132,7 +138,10 @@ class System {
             batteryLevel,
             turnOffBluetooth,
             turnOffWifi,
-            chargingState
+            chargingState,
+            powerButtonAction,
+            batteryCloseLid,
+            pluggedInCloseLid
         }
     }catch(error){
         console.log(error)
@@ -178,6 +187,30 @@ class System {
                 return result;
         } catch (error) {
                 return []
+        }
+    }
+    getPowerButtonAction = async () => {
+        try {
+            const data = await execCommand(getPowerButtonAction);
+            return String(data.replaceAll('\'', '')).trim()
+        } catch (error) {
+            return 'nothing'
+        }
+    }
+    getCloseLidOnBattery = async () => {
+        try {
+            const data = await execCommand(getCloseLidOnBattery)
+            return String(data.replaceAll('\'', '')).trim()
+        } catch (error) {
+            return 'nothing'
+        }
+    }
+    getCloseLidOnPluggedIn = async () => {
+        try {
+            const data =  await execCommand(getCloseLidOnPluggedIn);
+            return String(data.replaceAll('\'', '')).trim()
+        } catch (error) {
+            return 'nothing'
         }
     }
 }

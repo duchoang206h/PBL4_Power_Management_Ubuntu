@@ -28,7 +28,15 @@ async function handleClick (event){
                 break;    
             case "batteryUsage":
                 result = await handleBatteryUsage(MappingIndexToValue.batteryUsage[selectedIndex])
-                break;    
+                break;  
+            case "powerButtonAction":
+                result = await handlePowerButtonAction(MappingIndexToValue.powerButtonAction[selectedIndex])
+
+            case "batteryCloseLid":
+                result = await handleBatteryCloseLid(MappingIndexToValue.batteryCloseLid[selectedIndex])
+
+            case "pluggedInCloseLid":
+                result = await handlePluggedInCloseLid(MappingIndexToValue.pluggedInCloseLid[selectedIndex])
             default:
                 break;
         }
@@ -129,4 +137,26 @@ async function handleSetTurnOffWifiOnBattery() {
 async function handleSetTurnOffBluetoothOnBattery() {
     const value = document.getElementById("turnOffBluetoothOnBattery").checked;
     return await window.handle.setTurnOffBluetoothOnBattery(value);
+}
+async function hadlePowerButtonAction(value){
+    try {
+        return await window.handle.setPowrButtonAction(value)
+    } catch (error) {
+        
+    }
+}
+async function handleBatteryCloseLid(value){
+    try {
+        return await window.handle.setBatteryCloseLid(value)
+    } catch (error) {
+        
+    }
+}
+async function handlePluggedInCloseLid(value){
+    console.log(`handlePluggedCloseLid`, value)
+    try {
+        return await window.handle.setPluggedInCloseLid(value)
+    } catch (error) {
+        
+    }
 }

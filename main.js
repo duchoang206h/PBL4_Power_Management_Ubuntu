@@ -54,12 +54,14 @@ function createWindow() {
       "handle:setTurnOffBluetoothOnBattery",
       system.setTurnOffBluetoothOnBattery
     ),
-    // system
-    ipcMain.handle("system:getAllSetting", system.getAllSetting);
+  // system
+  ipcMain.handle("system:getAllSetting", system.getAllSetting);
   ipcMain.handle("system:getCurrentBrightness", system.getCurrentBrightness);
   ipcMain.handle("system:getBatteryHistory", system.getBatteryHistory)
   ipcMain.handle("handle:setBrightness", system.setBrightness);
-
+  ipcMain.handle("handle:setBatteryCloseLid", handler.handleSetBatteryCloseLid);
+  ipcMain.handle("handle:setPluggedInCloseLid", handler.handleSetPluggedInCloseLid);
+  ipcMain.handle("handle:setPowerButtonAction", handler.handleSetPowerButtonAction);
   return mainWindow;
 }
 
