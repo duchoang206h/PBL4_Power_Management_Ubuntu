@@ -37,6 +37,10 @@ async function handleClick (event){
 
             case "pluggedInCloseLid":
                 result = await handlePluggedInCloseLid(MappingIndexToValue.pluggedInCloseLid[selectedIndex])
+            case "batteryChartSelect":
+                result = await window.system.getBatteryHistory(MappingIndexToValue.batteryDetail[selectedIndex]) 
+                console.log(result)
+                await updateChart(result)  
             default:
                 break;
         }

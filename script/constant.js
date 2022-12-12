@@ -117,5 +117,10 @@ const MappingIndexToValue =  {
             4: "hibernate",
             5: "interactive",
             6: "logout"
+        },
+        batteryDetail: {
+            0: 24,
+            1: 6,
+            2: 12
         }
     }

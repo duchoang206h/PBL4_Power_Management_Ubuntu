@@ -57,8 +57,15 @@
         </div>
         
       </div>
+      <div>
+        <select id="batteryChartSelect">
+          <option value="">24h</option>
+          <option value="">6h</option>
+          <option value="">12h</option>
+        </select>
+      </div>
       <div class="battery-history-chart">
-        <a href="battery-details.html" onclick="openBatteryDetail(event)" target="_blank" class="battery-detail">View battery details</a>
+        <a onclick="openBatteryDetail(event)" class="battery-detail">View battery details</a>
         <div class="ct-chart ct-golden-section" id="chart"></div>
       </div>
     </div>

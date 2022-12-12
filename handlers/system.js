@@ -160,7 +160,7 @@ class System {
   getBatteryHistory = async (event, value) => {
     try {
       let data;
-      switch (value) {
+      switch (Number(value)) {
         case 24:
           data = await execCommand(getBatteryHistory(24 * 3600, 24));
           break;
