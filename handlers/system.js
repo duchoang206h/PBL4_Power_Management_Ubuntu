@@ -1,18 +1,5 @@
 const { execCommand } = require("../commands/execCommand");
 const {
-<<<<<<< HEAD
-    getChargingState,
-    getBatteryLevel,
-    getPowerMode,
-    getRemainingTime,
-    getBatteryHistory,
-    getPowerButtonAction,
-    getCloseLidOnBattery,
-    getCloseLidOnPluggedIn,
-    getBatteryDetail
-} = require('../commands/commands')
-const { settingService } = require('../handlers/setting')
-=======
   getChargingState,
   getBatteryLevel,
   getPowerMode,
@@ -21,9 +8,9 @@ const { settingService } = require('../handlers/setting')
   getPowerButtonAction,
   getCloseLidOnBattery,
   getCloseLidOnPluggedIn,
+  getBatteryDetail,
 } = require("../commands/commands");
 const { settingService } = require("../handlers/setting");
->>>>>>> 414bd9accb951e28addca71c076a9805061dcbb9
 const getBatteryLevelRegex = /\d+/g;
 const batteryDetailRegex = /:\s*.*/g;
 const getBatteryRemainingTimeRegex = /\d+,\d+/g;
@@ -187,7 +174,7 @@ class System {
           data = await execCommand(getBatteryHistory(24 * 3600, 24));
           break;
       }
-      data = await execCommand(getBatteryHistory);
+      console.log(data)
       const result = [];
       data.match(batteryHistoryRegex).forEach((element) => {
         const struct = element.match(digitsRegex).map((e) => e.trim());
@@ -199,6 +186,7 @@ class System {
       });
       return result;
     } catch (error) {
+      console.log(error)
       return [];
     }
   };
@@ -217,140 +205,6 @@ class System {
     } catch (error) {
       return "nothing";
     }
-<<<<<<< HEAD
-    setBatterySaver(event, value) {
-        try {
-            return settingService.updateSetting('batterySaver', value)
-        } catch (error) {
-
-        }
-    }
-    getAllSetting = async (event, value) => {
-       try {
-        const batterySaver = settingService.getSetting('batterySaver');
-        const batteryLevel = await this.getBatteryLevel();
-        const brightness = await this.getCurrentBrightness();
-        const powerMode = await this.getCurrentPowerMode();
-        const lowBrightBatterySaver = settingService.getSetting('lowBrightnessOnBatterySaver');
-        const batterySaveOn = settingService.getSetting('batterySaveOn');
-        const batteryTurnOff = settingService.getSetting('batteryTurnOff');
-        const pluggedInTurnOff = settingService.getSetting('pluggedInTurnOff');
-        const batterySleep = settingService.getSetting('batterySleep');
-        const pluggedInSleep = settingService.getSetting('pluggedInSleep');
-        const turnOffBluetooth = settingService.getSetting('turnOffBluetooth');
-        const turnOffWifi = settingService.getSetting('turnOffWifi');
-        const chargingState = await this.getChargingState();   
-        const powerButtonAction = await this.getPowerButtonAction();
-        const batteryCloseLid = await this.getCloseLidOnBattery();
-        const pluggedInCloseLid = await this.getCloseLidOnPluggedIn();
-        /// more here
-        return {
-            batterySaver,
-            brightness,
-            powerMode, 
-            lowBrightBatterySaver,
-            batterySaveOn,
-            batterySleep,
-            batteryTurnOff,
-            pluggedInSleep,
-            pluggedInTurnOff,
-            batteryLevel,
-            turnOffBluetooth,
-            turnOffWifi,
-            chargingState,
-            powerButtonAction,
-            batteryCloseLid,
-            pluggedInCloseLid
-        }
-    }catch(error){
-        console.log(error)
-    }
-    }
-    setLowBrightnessOnBatterySaver = (event, value) => {
-        try {
-            console.log(`lowBrightnessOnBatterySaver`, value)
-            return settingService.updateSetting('lowBrightnessOnBatterySaver', value)
-        } catch (error) {
-
-        }
-    }
-    setTurnOffWifiOnBattery = (event, value) => {
-        try {
-            return settingService.updateSetting('turnOffWifi', value)
-            
-        } catch (error) {
-            
-        }
-    }
-    setTurnOffBluetoothOnBattery = (event, value) => {
-        try {
-            return settingService.updateSetting('turnOffBluetooth', value)
-            
-        } catch (error) {
-            
-        }
-    }
-    getBatteryHistory = async(event, value) =>{
-        try {
-                const data = await execCommand(getBatteryHistory);
-                const result = [];
-                data.match(batteryHistoryRegex).forEach(element => {
-                    const struct = element.match(digitsRegex).map(e => e.trim());
-                    result.push({
-                      timestamps: Number(struct[0]),
-                      level: Number(struct[1]),
-                      state: Number(struct[2]),
-                    });
-                })
-                console.log(result);
-                return result.reverse().slice(0, 5);
-        } catch (error) {
-                return []
-        }
-    }
-    getPowerButtonAction = async () => {
-        try {
-            const data = await execCommand(getPowerButtonAction);
-            return String(data.replaceAll('\'', '')).trim()
-        } catch (error) {
-            return 'nothing'
-        }
-    }
-    getCloseLidOnBattery = async () => {
-        try {
-            const data = await execCommand(getCloseLidOnBattery)
-            return String(data.replaceAll('\'', '')).trim()
-        } catch (error) {
-            return 'nothing'
-        }
-    }
-    getCloseLidOnPluggedIn = async () => {
-        try {
-            const data =  await execCommand(getCloseLidOnPluggedIn);
-            return String(data.replaceAll('\'', '')).trim()
-        } catch (error) {
-            return 'nothing'
-        }
-    }
-    getBatteryDetail = async () => {
-        try {
-            const modelProperties =["vendor", "model", "serial", "state", "energy", "energy-full", "energy-full-design", "percentage", "technology", "charge-cycles", "capacity"]
-            const data = await Promise.all(modelProperties.map((e) => {
-                return execCommand(getBatteryDetail(e))
-            }))
-            let result = {}
-            for(let i = 0; i< modelProperties.length; i++ ){
-                let pro = data[i].match(batteryDetailRegex)[0];
-                pro.replaceAll(":", "").replaceAll(" ", "");
-                result[modelProperties[i]] = pro;
-            }
-            result["time-to-end"] = await this.getBatteryRemainingTime();
-            return result;
-        } catch (error) {
-            
-        }
-    }
-=======
   };
   getCloseLidOnPluggedIn = async () => {
     try {
@@ -360,7 +214,24 @@ class System {
       return "nothing";
     }
   };
->>>>>>> 414bd9accb951e28addca71c076a9805061dcbb9
+  getBatteryDetail = async () => {
+    try {
+      const properties = ["vendor", "capacity", "charge-cycles", "percentage", "energy-full-design", "energy-full", "energy", "state", "serial", "model"]
+      const result = {};
+      const data = await Promise.all(properties.map( async (property) => {
+        return { property: property, data: await execCommand(getBatteryDetail(property))}
+      }));
+      data.forEach(d => {
+        result[d.property] = d.data.match(batteryDetailRegex)[0].replaceAll(":", "").replaceAll(" ", "");
+      })
+      result["time-to-empty"] = await this.getBatteryRemainingTime()
+      console.log(result)
+      return result;
+    } catch (error) {
+      console.log(error);
+      return {}
+    }
+  }
 }
 module.exports = {
   system: new System(),

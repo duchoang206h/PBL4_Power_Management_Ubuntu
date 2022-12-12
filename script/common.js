@@ -145,8 +145,12 @@ window.onload = async () => {
     })
    
 }
-function openBatteryDetail (event){
-    event.preventDefault();
-   
-    window.open('./battery-details.html');
+async function openBatteryDetail (event){
+    try {
+        event.preventDefault();
+        const data = await window.system.getBatteryDetail();
+        await window.handle.openBatteryDetailWindow();
+    } catch (error) {
+        console.log(error);
+    }
 }
