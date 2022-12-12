@@ -36,4 +36,5 @@ contextBridge.exposeInMainWorld("system", {
   getCurrentBrightness: () => ipcRenderer.invoke("system:getCurrentBrightness"),
   getAllSetting: () => ipcRenderer.invoke("system:getAllSetting"),
   getBatteryHistory: () => ipcRenderer.invoke("system:getBatteryHistory"),
+  getBatteryDetail: () => ipcRenderer.invoke("system:getBatteryDetail")
 });

@@ -7,10 +7,12 @@ const {
     getBatteryHistory,
     getPowerButtonAction,
     getCloseLidOnBattery,
-    getCloseLidOnPluggedIn
+    getCloseLidOnPluggedIn,
+    getBatteryDetail
 } = require('../commands/commands')
 const { settingService } = require('../handlers/setting')
 const getBatteryLevelRegex = /\d+/g;
+const batteryDetailRegex = /:\s*.*/g;
 const getBatteryRemainingTimeRegex = /\d+,\d+/g;
 const batteryHistoryRegex =/(struct\s*{\s*uint32\s*\d+\s*double\s*\d+\s*uint32\s*\d+\s*})/g;
 const digitsRegex = /\s+\d+/g;
@@ -184,7 +186,7 @@ class System {
                     });
                 })
                 console.log(result);
-                return result;
+                return result.reverse().slice(0, 5);
         } catch (error) {
                 return []
         }
@@ -211,6 +213,24 @@ class System {
             return String(data.replaceAll('\'', '')).trim()
         } catch (error) {
             return 'nothing'
+        }
+    }
+    getBatteryDetail = async () => {
+        try {
+            const modelProperties =["vendor", "model", "serial", "state", "energy", "energy-full", "energy-full-design", "percentage", "technology", "charge-cycles", "capacity"]
+            const data = await Promise.all(modelProperties.map((e) => {
+                return execCommand(getBatteryDetail(e))
+            }))
+            let result = {}
+            for(let i = 0; i< modelProperties.length; i++ ){
+                let pro = data[i].match(batteryDetailRegex)[0];
+                pro.replaceAll(":", "").replaceAll(" ", "");
+                result[modelProperties[i]] = pro;
+            }
+            result["time-to-end"] = await this.getBatteryRemainingTime();
+            return result;
+        } catch (error) {
+            
         }
     }
 }

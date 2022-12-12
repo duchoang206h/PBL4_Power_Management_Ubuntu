@@ -62,6 +62,7 @@ function createWindow() {
   ipcMain.handle("handle:setBatteryCloseLid", handler.handleSetBatteryCloseLid);
   ipcMain.handle("handle:setPluggedInCloseLid", handler.handleSetPluggedInCloseLid);
   ipcMain.handle("handle:setPowerButtonAction", handler.handleSetPowerButtonAction);
+  ipcMain.handle("system:getBatteryDetail", system.getBatteryDetail)
   return mainWindow;
 }
 

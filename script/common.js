@@ -145,3 +145,8 @@ window.onload = async () => {
     })
    
 }
+function openBatteryDetail (event){
+    event.preventDefault();
+   
+    window.open('./battery-details.html');
+}
