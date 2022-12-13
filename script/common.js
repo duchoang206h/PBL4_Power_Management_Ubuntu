@@ -14,7 +14,10 @@ window.onload = async () => {
         remainingTime,
         chargingState,
         turnOffWifi,
-        turnOffBluetooth
+        turnOffBluetooth,
+        batteryCloseLid,
+        pluggedInCloseLid,
+        powerButtonAction
     } = await window.system.getAllSetting();
     const batteryLevelDiv = document.getElementById('batteryLevel')
     const batteryRemainingTime = document.getElementById('batteryRemainingTime')
@@ -24,7 +27,9 @@ window.onload = async () => {
     const batteryTurnOffSelect = document.getElementById("batteryTurnOff");
     const batterySleepSelect = document.getElementById("batterySleep");
     const pluggedInSleepSelect = document.getElementById("pluggedInSleep");
-
+    const batteryCloseLidSelect = document.getElementById("batteryCloseLid");
+    const pluggedInCloseLidSelet = document.getElementById("pluggedInCloseLid");
+    const powerButtonActionSelect = document.getElementById("powerButtonAction");
     const pluggedInTurnOffSelect = document.getElementById("pluggedInTurnOff");
     const powerModeSelect = document.getElementById('powerMode');
     const batterySaverBtn = document.getElementById('turnOnBatterySaver');
@@ -67,6 +72,22 @@ window.onload = async () => {
     for(const [key, value] of Object.entries(MappingIndexToValue.powerMode)){
         if(value === powerMode) powerModeSelect.selectedIndex = key;
     }
+    console.log({
+        powerButtonAction,
+        batteryCloseLid,
+        pluggedInCloseLid
+    })
+    for(const [key, value] of Object.entries(MappingIndexToValue.batteryCloseLid)){
+        if(value === batteryCloseLid) batteryCloseLidSelect.selectedIndex = key
+    }
+
+    for(const [key, value] of Object.entries(MappingIndexToValue.pluggedInCloseLid)){
+        if(value === pluggedInCloseLid) pluggedInCloseLidSelet.selectedIndex = key
+    }
+    for(const [key, value] of Object.entries(MappingIndexToValue.powerButtonAction)){
+        if(value === powerButtonAction) powerButtonActionSelect.selectedIndex = key
+    }
+
     document.getElementById('lowBrightnessOnBattery').checked = lowBrightBatterySaver
     document.getElementById('brightness_range').value = brightness;
     document.getElementById('brightness_value').innerHTML = brightness +'%';
@@ -123,4 +144,13 @@ window.onload = async () => {
         batterySaverBtn.disabled  = value;
     })
    
+}
+async function openBatteryDetail (event){
+    try {
+        event.preventDefault();
+        const data = await window.system.getBatteryDetail();
+        await window.handle.openBatteryDetailWindow();
+    } catch (error) {
+        console.log(error);
+    }
 }
