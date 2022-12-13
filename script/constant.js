@@ -93,5 +93,34 @@ const MappingIndexToValue =  {
         batteryUsage: {
             0: "Best Performance",
             1: "Balanced",
+        },
+        powerButtonAction: {
+            0: "nothing",
+            1: "suspend",
+            2: "hibernate",
+            3: "interactive"
+        },
+        batteryCloseLid: {
+            0: "nothing",
+            1: "blank",
+            2: "suspend",
+            3: "shutdown",
+            4: "hibernate",
+            5: "interactive",
+            6: "logout"
+        },
+        pluggedInCloseLid: {
+            0: "nothing",
+            1: "blank",
+            2: "suspend",
+            3: "shutdown",
+            4: "hibernate",
+            5: "interactive",
+            6: "logout"
+        },
+        batteryDetail: {
+            0: 24,
+            1: 6,
+            2: 12
         }
     }
