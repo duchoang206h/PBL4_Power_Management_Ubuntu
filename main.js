@@ -59,6 +59,15 @@ function createWindow() {
   ipcMain.handle("system:getCurrentBrightness", system.getCurrentBrightness);
   ipcMain.handle("system:getBatteryHistory", system.getBatteryHistory)
   ipcMain.handle("handle:setBrightness", system.setBrightness);
+  ipcMain.handle("system:getCloseLidOnBattery", system.getCloseLidOnBattery)
+  ipcMain.handle("system:getCloseLidOnPluggedIn", system.getCloseLidOnPluggedIn)
+  ipcMain.handle("system:setCloseLidOnBattery", system.setCloseLidOnBattery)
+  ipcMain.handle("system:setCloseLidOnPluggedIn", system.setCloseLidOnPluggedIn)
+  ipcMain.handle("system:setPowerButtonAction", system.setPowerButtonAction)
+
+
+
+
 
   return mainWindow;
 }
