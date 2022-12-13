@@ -28,7 +28,7 @@ async function handleClick (event){
                 break;    
             case "batteryUsage":
                 result = await handleBatteryUsage(MappingIndexToValue.batteryUsage[selectedIndex])
-                break;    
+                break;  
             default:
                 break;
         }
@@ -130,3 +130,6 @@ async function handleSetTurnOffBluetoothOnBattery() {
     const value = document.getElementById("turnOffBluetoothOnBattery").checked;
     return await window.handle.setTurnOffBluetoothOnBattery(value);
 }
+// document.getElementById("powerButtonAction").addEventListener("change", async() => {
+//     await window.system.setPowerButtonAction(document.getElementById("powerButtonAction").selectedIndex)
+// })

@@ -33,4 +33,10 @@ contextBridge.exposeInMainWorld("system", {
   getCurrentBrightness: () => ipcRenderer.invoke("system:getCurrentBrightness"),
   getAllSetting: () => ipcRenderer.invoke("system:getAllSetting"),
   getBatteryHistory: () => ipcRenderer.invoke("system:getBatteryHistory"),
+  getCloseLidOnBattery: () => ipcRenderer.invoke("system:getCloseLidOnBattery"),
+  getCloseLidOnPluggedIn: () => ipcRenderer.invoke("system:getCloseLidOnPluggedIn"),
+  setCloseLidOnBattery: (value) => ipcRenderer.invoke("system:setCloseLidOnBattery", value),
+  setCloseLidOnPluggedIn: (value) => ipcRenderer.invoke("system:setCloseLidOnPluggedIn", value),
+  setPowerButtonAction: (value) => ipcRenderer.invoke("system:setPowerButtonAction", value),
+
 });

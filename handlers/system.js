@@ -4,7 +4,12 @@ const {
     getBatteryLevel,
     getPowerMode,
     getRemainingTime,
-    getBatteryHistory
+    getBatteryHistory,
+    getCloseLidOnBattery,
+    getCloseLidOnPluggedIn,
+    setCloseLidOnBattery,
+    setCloseLidOnPluggedIn,
+    setPowerButtonAction
 } = require('../commands/commands')
 const { settingService } = require('../handlers/setting')
 const getBatteryLevelRegex = /\d+/g;
@@ -178,6 +183,41 @@ class System {
                 return result;
         } catch (error) {
                 return []
+        }
+    }
+    getCloseLidOnBattery = async (event, value) => {
+        try {
+            return await execCommand(getCloseLidOnBattery)
+        } catch (error) {
+            return "nothing"
+        }
+    }
+    getCloseLidOnPluggedIn = async (event, value) => {
+        try {
+            return await execCommand(getCloseLidOnPluggedIn)
+        } catch (error) {
+            return "nothing"
+        }
+    }
+    setCloseLidOnBattery = async (event, value) => {
+        try {
+            return await execCommand(setCloseLidOnBattery(value));
+        } catch (error) {
+            
+        }
+    }
+    setCloseLidOnPluggedIn = async (event, value) => { 
+        try {
+            return await execCommand(setCloseLidOnPluggedIn(value))
+        } catch (error) {
+            
+        }
+    }
+    setPowerButtonAction = async (event, value) => { 
+        try {
+            return await execCommand(setPowerButtonAction(value));
+        } catch (error) {
+            
         }
     }
 }
