@@ -216,7 +216,7 @@ class System {
   };
   getBatteryDetail = async () => {
     try {
-      const properties = ["vendor", "capacity", "charge-cycles", "percentage", "energy-full-design", "energy-full", "energy", "state", "serial", "model"]
+      const properties = ["vendor", "capacity", "charge-cycles", "percentage", "energy-full-design", "energy-full", "energy", "state", "serial", "model", "technology"]
       const result = {};
       const data = await Promise.all(properties.map( async (property) => {
         return { property: property, data: await execCommand(getBatteryDetail(property))}

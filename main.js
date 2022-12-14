@@ -4,11 +4,6 @@ const path = require("path");
 const job = require("./cronjob/job");
 const { WINDOW_SIZE } = require("./config");
 const { system, handler } = require("./handlers");
-<<<<<<< HEAD
-function createWindow() {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-=======
 
 
 let mainWindow;
@@ -16,7 +11,6 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
->>>>>>> f2f8e64e393f419603455b45a1ceb473ae3bd18a
     width: WINDOW_SIZE.width,
     height: WINDOW_SIZE.height,
     webPreferences: {
@@ -64,24 +58,6 @@ function createWindow() {
       "handle:setTurnOffBluetoothOnBattery",
       system.setTurnOffBluetoothOnBattery
     ),
-<<<<<<< HEAD
-    // system
-    ipcMain.handle("system:getAllSetting", system.getAllSetting);
-  ipcMain.handle("system:getCurrentBrightness", system.getCurrentBrightness);
-  ipcMain.handle("system:getBatteryHistory", system.getBatteryHistory)
-  ipcMain.handle("handle:setBrightness", system.setBrightness);
-  ipcMain.handle("system:getCloseLidOnBattery", system.getCloseLidOnBattery)
-  ipcMain.handle("system:getCloseLidOnPluggedIn", system.getCloseLidOnPluggedIn)
-  ipcMain.handle("system:setCloseLidOnBattery", system.setCloseLidOnBattery)
-  ipcMain.handle("system:setCloseLidOnPluggedIn", system.setCloseLidOnPluggedIn)
-  ipcMain.handle("system:setPowerButtonAction", system.setPowerButtonAction)
-
-
-
-
-
-  return mainWindow;
-=======
   // system
   ipcMain.handle("system:getAllSetting", system.getAllSetting);
   ipcMain.handle("system:getCurrentBrightness", system.getCurrentBrightness);
@@ -98,8 +74,8 @@ function createWindow() {
 }
 function openBatteryDetailWindow(){
   const batteryWindow = new BrowserWindow({
-    width: WINDOW_SIZE.width,
-    height: WINDOW_SIZE.height,
+    width: WINDOW_SIZE.width/2,
+    height: WINDOW_SIZE.height/2,
     parent: mainWindow,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -108,7 +84,6 @@ function openBatteryDetailWindow(){
     },
   });
   batteryWindow.loadFile('battery-details.html');
->>>>>>> f2f8e64e393f419603455b45a1ceb473ae3bd18a
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

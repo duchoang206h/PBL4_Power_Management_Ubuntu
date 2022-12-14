@@ -6,15 +6,6 @@
   "build": {
     "appId": "your.id",
     "productName": "Power Management",
-<<<<<<< HEAD
-    "extraResources" :
-    [
-        {
-            "filter": ["./setting.json"]
-        }
-    ]
-    ,
-=======
     "extraResources": [
       {
         "filter": [
@@ -22,7 +13,6 @@
         ]
       }
     ],
->>>>>>> f2f8e64e393f419603455b45a1ceb473ae3bd18a
     "linux": {
       "target": "deb",
       "icon": "./icon.png"
@@ -56,10 +46,7 @@
     "battery": "^1.0.1",
     "cron": "^2.1.0",
     "dotenv": "^16.0.3",
-<<<<<<< HEAD
-=======
     "electron-store": "^8.1.0",
->>>>>>> f2f8e64e393f419603455b45a1ceb473ae3bd18a
     "mongoose": "^6.7.0"
   }
 }
