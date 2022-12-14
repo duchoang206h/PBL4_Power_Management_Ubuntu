@@ -13,8 +13,10 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: WINDOW_SIZE.width,
     height: WINDOW_SIZE.height,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+
       /*  nodeIntegration: true,
       contextIsolation: false */
     },
@@ -77,6 +79,7 @@ function openBatteryDetailWindow(){
     width: WINDOW_SIZE.width/2,
     height: WINDOW_SIZE.height/2,
     parent: mainWindow,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       /*  nodeIntegration: true,

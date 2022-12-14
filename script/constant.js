@@ -119,8 +119,10 @@ const MappingIndexToValue =  {
             6: "logout"
         },
         batteryDetail: {
-            0: 24,
-            1: 6,
-            2: 12
+            0: 1,
+            1: 3,
+            2: 6,
+            3: 12,
+            4: 24
         }
     }

@@ -31,12 +31,7 @@ async function handleClick (event){
                 break;  
             case "powerButtonAction":
                 result = await handlePowerButtonAction(MappingIndexToValue.powerButtonAction[selectedIndex])
-
-            case "batteryCloseLid":
-                result = await handleBatteryCloseLid(MappingIndexToValue.batteryCloseLid[selectedIndex])
-
-            case "pluggedInCloseLid":
-                result = await handlePluggedInCloseLid(MappingIndexToValue.pluggedInCloseLid[selectedIndex])
+                break;
             case "batteryChartSelect":
                 result = await window.system.getBatteryHistory(MappingIndexToValue.batteryDetail[selectedIndex]) 
                 console.log(result)
@@ -128,7 +123,8 @@ async function handleTurnOnBatterySaver (){
 }
 async function handleSetLowBrightnessOnBattery() {
     try {
-        const value = document.getElementById('lowBrightnessOnBattery').checked
+        const value = document.getElementById('lowBrightnessOnBattery').checked;
+        console.log("lowBrightnessOnBattery", value)
         return await window.handle.setLowBrightnessOnBattery(value);
     } catch (error) {
         
@@ -142,9 +138,10 @@ async function handleSetTurnOffBluetoothOnBattery() {
     const value = document.getElementById("turnOffBluetoothOnBattery").checked;
     return await window.handle.setTurnOffBluetoothOnBattery(value);
 }
-async function hadlePowerButtonAction(value){
+async function handlePowerButtonAction(value){
     try {
-        return await window.handle.setPowrButtonAction(value)
+        console.log("handlePowerButtonAction", value)
+        return await window.handle.setPowerButtonAction(value)
     } catch (error) {
         
     }

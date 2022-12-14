@@ -1,9 +1,9 @@
 window.onload = async () => {
     try {
         const batteryDetail = await window.system.getBatteryDetail();
-        ["vendor", "capacity", "charge-cycles", "percentage", "energy-full-design", "energy-full", "energy", "state", "serial", "model"].forEach(property => {
-            document.getElementById(property).innerHTML = batteryDetail[property]
-        })
+        for(const [key, value] of Object.entries(batteryDetail)){
+            document.getElementById(key).innerHTML = value
+        }
         console.log(batteryDetail)
     } catch (error) {
         console.log(error)
