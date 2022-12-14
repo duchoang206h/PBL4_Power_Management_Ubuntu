@@ -39,7 +39,7 @@ const getCloseLidOnPluggedIn = `gsettings get org.gnome.settings-daemon.plugins.
 const setCloseLidOnBattery = (action) =>
   `gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action ${action}`;
 const setCloseLidOnPluggedIn = (action) =>
-  `gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action ${action}`;
+  `gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action ${action}`;
 const getBatteryDetail = (attribute) =>
   `upower -i $(upower -e | grep 'BAT') | grep -E "${attribute}"`;
 const getBatteryHistory = (time, points = 12) =>

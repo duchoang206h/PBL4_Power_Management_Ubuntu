@@ -28,28 +28,14 @@ contextBridge.exposeInMainWorld("handle", {
     ipcRenderer.invoke("handle:setTurnOffWifiOnBattery", value),
   setTurnOffBluetoothOnBattery: (value) =>
     ipcRenderer.invoke("handle:setTurnOffBluetoothOnBattery", value),
-<<<<<<< HEAD
-=======
   setPowerButtonAction: (value) => ipcRenderer.invoke("handle:setPowerButtonAction", value),
   setBatteryCloseLid: (value) => ipcRenderer.invoke("handle:setBatteryCloseLid", value),
   setPluggedInCloseLid: (value) => ipcRenderer.invoke("handle:setPluggedInCloseLid", value),
   openBatteryDetailWindow: () => ipcRenderer.invoke("openBatteryDetailWindow")
->>>>>>> f2f8e64e393f419603455b45a1ceb473ae3bd18a
 });
 contextBridge.exposeInMainWorld("system", {
   getCurrentBrightness: () => ipcRenderer.invoke("system:getCurrentBrightness"),
   getAllSetting: () => ipcRenderer.invoke("system:getAllSetting"),
-<<<<<<< HEAD
-  getBatteryHistory: () => ipcRenderer.invoke("system:getBatteryHistory"),
-  getCloseLidOnBattery: () => ipcRenderer.invoke("system:getCloseLidOnBattery"),
-  getCloseLidOnPluggedIn: () => ipcRenderer.invoke("system:getCloseLidOnPluggedIn"),
-  setCloseLidOnBattery: (value) => ipcRenderer.invoke("system:setCloseLidOnBattery", value),
-  setCloseLidOnPluggedIn: (value) => ipcRenderer.invoke("system:setCloseLidOnPluggedIn", value),
-  setPowerButtonAction: (value) => ipcRenderer.invoke("system:setPowerButtonAction", value),
-
-});
-=======
   getBatteryHistory: (value) => ipcRenderer.invoke("system:getBatteryHistory", value),
   getBatteryDetail: () => ipcRenderer.invoke("system:getBatteryDetail")
 });
->>>>>>> f2f8e64e393f419603455b45a1ceb473ae3bd18a
