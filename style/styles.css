@@ -2,6 +2,13 @@
 select {
   padding: 2px 6px;
 }
+.infor-section {
+    font-size: 20px;
+    margin-top: 10px;
+}
+.infor-section__list-item {
+    line-height: 22px;
+}
 .main {
   background-color: #eee;
   padding: 20px;
@@ -183,10 +190,18 @@ input:checked + .slider:before {
   margin-left: 5px;
 }
 
-a.battery-detail {
-  margin-top: 4px;
-  font-size: 18px;
-  float: right;
+
+.battery-detail {
+    margin-top: -4px;
+    margin-left: 60px;
+    font-size: 16px;
+    text-decoration: none;
+}
+#batteryChartSelect {
+    margin-top: -4px;
+    margin-left: 48px;
+    font-size: 14px;
+    float: left;
 }
 
 .battery-history-chart {

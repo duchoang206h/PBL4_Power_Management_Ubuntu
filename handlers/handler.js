@@ -94,10 +94,11 @@ class Handler {
   };
   handleSetPowerButtonAction = async(event, value) => {
     try {
+      console.log("handleSetPowerButtonAction", value)
       settingService.updateSetting("powerButtonAction", value);
       await execCommand(setPowerButtonAction(value));
     } catch (error) {
-      
+      console.log(error)
     }
   }
   handleSetBatteryCloseLid = async (event, value) => {

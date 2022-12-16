@@ -4,13 +4,19 @@ const path = require("path");
 const job = require("./cronjob/job");
 const { WINDOW_SIZE } = require("./config");
 const { system, handler } = require("./handlers");
+
+
+let mainWindow;
+
 function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: WINDOW_SIZE.width,
     height: WINDOW_SIZE.height,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+
       /*  nodeIntegration: true,
       contextIsolation: false */
     },
@@ -62,9 +68,26 @@ function createWindow() {
   ipcMain.handle("handle:setBatteryCloseLid", handler.handleSetBatteryCloseLid);
   ipcMain.handle("handle:setPluggedInCloseLid", handler.handleSetPluggedInCloseLid);
   ipcMain.handle("handle:setPowerButtonAction", handler.handleSetPowerButtonAction);
+  ipcMain.handle("system:getBatteryDetail", system.getBatteryDetail);
+  ipcMain.handle("openBatteryDetailWindow", (event)=> {
+    return openBatteryDetailWindow()
+  })
   return mainWindow;
 }
-
+function openBatteryDetailWindow(){
+  const batteryWindow = new BrowserWindow({
+    width: WINDOW_SIZE.width/2,
+    height: WINDOW_SIZE.height/2,
+    parent: mainWindow,
+    autoHideMenuBar: true,
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js"),
+      /*  nodeIntegration: true,
+      contextIsolation: false */
+    },
+  });
+  batteryWindow.loadFile('battery-details.html');
+}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
