@@ -34,7 +34,7 @@ window.onload = async () => {
     const powerModeSelect = document.getElementById('powerMode');
     const batterySaverBtn = document.getElementById('turnOnBatterySaver');
     //
-    console.log(`batteryLevel`, batteryLevel);
+    console.log(`chargin`, chargingState);
     batteryLevelRangeDiv.style.width = batteryLevel + '%';
     batteryLevelDiv.innerHTML = batteryLevel + '%';
     const minutes = Math.round(remainingTime % 1 * 60) || 0;
@@ -77,17 +77,17 @@ window.onload = async () => {
         batteryCloseLid,
         pluggedInCloseLid
     })
-    for(const [key, value] of Object.entries(MappingIndexToValue.batteryCloseLid)){
+    /* for(const [key, value] of Object.entries(MappingIndexToValue.batteryCloseLid)){
         if(value === batteryCloseLid) batteryCloseLidSelect.selectedIndex = key
     }
 
     for(const [key, value] of Object.entries(MappingIndexToValue.pluggedInCloseLid)){
         if(value === pluggedInCloseLid) pluggedInCloseLidSelet.selectedIndex = key
-    }
+    } */
     for(const [key, value] of Object.entries(MappingIndexToValue.powerButtonAction)){
         if(value === powerButtonAction) powerButtonActionSelect.selectedIndex = key
     }
-
+    console.log("lowBrightBatterySaver", lowBrightBatterySaver)
     document.getElementById('lowBrightnessOnBattery').checked = lowBrightBatterySaver
     document.getElementById('brightness_range').value = brightness;
     document.getElementById('brightness_value').innerHTML = brightness +'%';
@@ -117,6 +117,7 @@ window.onload = async () => {
         } else if( batterySaver === false && chargingState === false ) {
             batterySaverBtn.innerHTML = 'Turn on now';
         }else if(chargingState === true){
+            powerModeSelect.style.display = "block";
             batterySaverBtn.innerHTML = 'Turn on now';
             batterySaverBtn.disabled  = true;
         }
@@ -144,4 +145,13 @@ window.onload = async () => {
         batterySaverBtn.disabled  = value;
     })
    
+}
+async function openBatteryDetail (event){
+    try {
+        event.preventDefault();
+        const data = await window.system.getBatteryDetail();
+        await window.handle.openBatteryDetailWindow();
+    } catch (error) {
+        console.log(error);
+    }
 }

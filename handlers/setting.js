@@ -7,7 +7,7 @@ const store = new Store();
 class SettingService {
   constructor() {
     for(const [key, value] of Object.entries(defaultSettings)){
-      if(!store.get(key)) store.set(key, value)
+      if(!store.has(key)) store.set(key, value)
     }
   }
   initSetting() {
@@ -25,7 +25,7 @@ class SettingService {
    */
   updateSetting = async (field, value) => {
     try {
-      if (store.get(field)) {
+      if (store.has(field)) {
        store.set(field, value);
       }
       // after handle update setting

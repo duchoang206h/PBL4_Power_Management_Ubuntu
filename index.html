@@ -57,8 +57,18 @@
         </div>
         
       </div>
+      
       <div class="battery-history-chart">
-        <a href="battery-details.html" target="_blank" class="battery-detail">View battery details</a>
+        
+          <select id="batteryChartSelect">
+            <option value="">1h</option>
+            <option value="">3h</option>
+            <option value="">6h</option>
+            <option value="">12h</option>
+            <option value="">24h</option>
+          </select>
+        
+        <a onclick="openBatteryDetail(event)" class="battery-detail">View battery details</a>
         <div class="ct-chart ct-golden-section" id="chart"></div>
       </div>
     </div>
@@ -161,7 +171,7 @@
             <span class="section__content-item__icon">
               <i class="las la-desktop"></i>
             </span>
-            <div class="section__content-item__text">Power button and lid settings</div>
+            <div class="section__content-item__text">Power button</div>
             <div class="section__content-item__toggle-btn">
               <i class="las la-angle-right"></i>
             </div>
@@ -178,36 +188,6 @@
                 <option value="hibernate">Hibernate</option>
                 <option value="interactive">Interactive</option>
 
-              </select>
-            </div>
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
-                On battery power, when i close the lid
-              </div>
-              <select name="" id="batteryCloseLid"
-                class="section__content-item__list-item__select section__content-item__list-item__setter">
-                <option value="nothing">Nothing</option>
-                <option value="blank">Blank</option>
-                <option value="suspend">Suspend</option>
-                <option value="shutdown">Shutdown</option>
-                <option value="hibernate">Hibernate</option>
-                <option value="interactive">Interactive</option>
-                <option value="logout">Logout</option>
-              </select>
-            </div>
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
-                When plugged in, when i close the lid
-              </div>
-              <select name="" id="pluggedInCloseLid"
-                class="section__content-item__list-item__select section__content-item__list-item__setter">
-                <option value="nothing">Nothing</option>
-                <option value="blank">Blank</option>
-                <option value="suspend">Suspend</option>
-                <option value="shutdown">Shutdown</option>
-                <option value="hibernate">Hibernate</option>
-                <option value="interactive">Interactive</option>
-                <option value="logout">Logout</option>
               </select>
             </div>
           </div>
