@@ -9,10 +9,24 @@ const chart = new Chartist.Line(
     showArea: true,
   }
 );
-async function updateChart(update = null){
-      const data = update ? update: await window.system.getBatteryHistory(1);
-      const labels = data.map(({ timestamps}) => new Date(timestamps*1000).getHours() + "h" + new Date(timestamps*1000).getMinutes() + "m");
-      const levels = data.map(({ level}) => level)
-      chart.update({ labels, series: [levels]})
+async function updateChart(update = null) {
+  const data = update ? update : await window.system.getBatteryHistory(1);
+  const labels = data.map(
+    ({ timestamps }) =>
+      new Date(timestamps * 1000).getHours() +
+      "h" +
+      new Date(timestamps * 1000).getMinutes() +
+      "m"
+  );
+  const levels = data.map(({ level }) => level);
+  chart.update({ labels, series: [levels] });
 }
-updateChart()
+updateChart();
+setInterval(async () => {
+  const time =
+    MappingIndexToValue[
+      document.getElementById("batteryChartSelect").selectedIndex
+    ];
+  const updatesData = await window.system.getBatteryHistory(time);
+  await updateChart(updatesData);
+}, 30000); // update chart data every 30 seconds
