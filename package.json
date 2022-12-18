@@ -44,7 +44,9 @@
   },
   "dependencies": {
     "battery": "^1.0.1",
+    "brightness": "^3.0.0",
     "cron": "^2.1.0",
+    "delay": "^5.0.0",
     "dotenv": "^16.0.3",
     "electron-store": "^8.1.0",
     "mongoose": "^6.7.0"

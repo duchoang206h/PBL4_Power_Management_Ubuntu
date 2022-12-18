@@ -11,6 +11,8 @@ const {
   getBatteryDetail,
 } = require("../commands/commands");
 const { settingService } = require("../handlers/setting");
+const brightness = require("brightness");
+const delay = require("delay");
 const getBatteryLevelRegex = /\d+/g;
 const batteryDetailRegex = /:\s*.*/g;
 const getBatteryRemainingTimeRegex = /\d+,\d+/g;
@@ -72,8 +74,12 @@ class System {
       return 100;
     }
   };
-  setBrightness(event, value) {
+  setBrightness = async (event, value) => {
     try {
+      const currentBrightness = await brightness.get();
+      await execCommand(this.setBrightness(value));
+      await delay(10000);
+      await execCommand(currentBrightness*100);
       return settingService.updateSetting("brightness", value);
     } catch (error) {}
   }
