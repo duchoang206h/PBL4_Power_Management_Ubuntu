@@ -79,7 +79,7 @@ class System {
   }
   setLowBrightnessOnBatterySaver(event, value) {
     try {
-      console.log("setLowBrightnessOnBatterySaver", value)
+      console.log("setLowBrightnessOnBatterySaver", value);
       return settingService.updateSetting("lowBrightnessOnBatterySaver", value);
     } catch (error) {}
   }
@@ -172,16 +172,16 @@ class System {
           data = await execCommand(getBatteryHistory(6 * 3600, 10));
           break;
         case 3:
-            data = await execCommand(getBatteryHistory(3 * 3600, 10));
-            break;  
+          data = await execCommand(getBatteryHistory(3 * 3600, 10));
+          break;
         case 1:
           data = await execCommand(getBatteryHistory(1 * 3600, 10));
-          break;   
+          break;
         default:
           data = await execCommand(getBatteryHistory(24 * 3600, 10));
           break;
       }
-      console.log(data)
+      console.log(data);
       const result = [];
       data.match(batteryHistoryRegex).forEach((element) => {
         const struct = element.match(digitsRegex).map((e) => e.trim());
@@ -191,10 +191,14 @@ class System {
           state: Number(struct[2]),
         });
       });
-      result.sort((a, b) => a.timestamps - b.timestamps)
+      result.sort((a, b) => a.timestamps - b.timestamps);
+      let mid = Math.floor(result.length / 2);
+      if (result.length > 8) {
+        result.splice(mid, result.length - 8);
+      }
       return result;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return [];
     }
   };
@@ -225,25 +229,49 @@ class System {
   };
   getBatteryDetail = async () => {
     try {
-      const properties = ["vendor", "capacity", "charge-cycles", "percentage", "energy-full-design", "energy-full", "energy", "state", "serial", "model", "technology"]
+      const properties = [
+        "vendor",
+        "capacity",
+        "charge-cycles",
+        "percentage",
+        "energy-full-design",
+        "energy-full",
+        "energy",
+        "state",
+        "serial",
+        "model",
+        "technology",
+      ];
       const result = {};
-      const data = await Promise.all(properties.map( async (property) => {
-        return { property: property, data: await new Promise((resolve, _) => {
-          execCommand(getBatteryDetail(property)).then(data => resolve(data)).catch(()=> resolve("N/A"))
-        })}
-      }));
-      console.log(data)
-      data.forEach(d => {
-        result[d.property] = d.data.match(batteryDetailRegex) ? d.data.match(batteryDetailRegex)[0].replaceAll(":", "").replaceAll(" ", ""): "N/A";
-      })
-      result["time-to-empty"] = await this.getBatteryRemainingTime()
-      console.log(result)
+      const data = await Promise.all(
+        properties.map(async (property) => {
+          return {
+            property: property,
+            data: await new Promise((resolve, _) => {
+              execCommand(getBatteryDetail(property))
+                .then((data) => resolve(data))
+                .catch(() => resolve("N/A"));
+            }),
+          };
+        })
+      );
+      console.log(data);
+      data.forEach((d) => {
+        result[d.property] = d.data.match(batteryDetailRegex)
+          ? d.data
+              .match(batteryDetailRegex)[0]
+              .replaceAll(":", "")
+              .replaceAll(" ", "")
+          : "N/A";
+      });
+      result["time-to-empty"] = await this.getBatteryRemainingTime();
+      console.log(result);
       return result;
     } catch (error) {
       console.log(error);
-      return {}
+      return {};
     }
-  }
+  };
 }
 module.exports = {
   system: new System(),
