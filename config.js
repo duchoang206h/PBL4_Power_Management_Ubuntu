@@ -4,7 +4,7 @@ module.exports = {
         width: 1000
     },
     MappingIndexToValue: {
-        batteryTurnOff: {
+        screenTurnOff: {
             0: 1,
             1: 2,
             2: 3,
