@@ -182,7 +182,7 @@ class System {
           break;
       }
       console.log(data);
-      const result = [];
+      let result = [];
       data.match(batteryHistoryRegex).forEach((element) => {
         const struct = element.match(digitsRegex).map((e) => e.trim());
         result.push({
@@ -192,7 +192,7 @@ class System {
         });
       });
       result.sort((a, b) => a.timestamps - b.timestamps);
-      result = result.filter((value) => value > 0);
+      result = result.filter(({ level }) => level > 0);
       let mid = Math.floor(result.length / 2);
       if (result.length > 8) {
         result.splice(mid, result.length - 8);
