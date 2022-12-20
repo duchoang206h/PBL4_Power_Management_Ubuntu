@@ -6,9 +6,8 @@ window.onload = async () => {
         powerMode, 
         lowBrightBatterySaver,
         batterySaveOn,
-        batteryTurnOff,
+        screenTurnOff,
         batterySleep,
-        pluggedInTurnOff,
         pluggedInSleep,
         batteryLevel,
         remainingTime,
@@ -19,18 +18,19 @@ window.onload = async () => {
         pluggedInCloseLid,
         powerButtonAction
     } = await window.system.getAllSetting();
+    console.log({ screenTurnOff})
     const batteryLevelDiv = document.getElementById('batteryLevel')
     const batteryRemainingTime = document.getElementById('batteryRemainingTime')
     const chargingStateDiv = document.getElementById('chargingState')
     const batteryLevelRangeDiv = document.getElementById('batteryLevelRange');
     const batterySaveOnSelect = document.getElementById("batterySaveOn");
-    const batteryTurnOffSelect = document.getElementById("batteryTurnOff");
+    const batteryTurnOffSelect = document.getElementById("screenTurnOff");
     const batterySleepSelect = document.getElementById("batterySleep");
     const pluggedInSleepSelect = document.getElementById("pluggedInSleep");
     const batteryCloseLidSelect = document.getElementById("batteryCloseLid");
     const pluggedInCloseLidSelet = document.getElementById("pluggedInCloseLid");
     const powerButtonActionSelect = document.getElementById("powerButtonAction");
-    const pluggedInTurnOffSelect = document.getElementById("pluggedInTurnOff");
+    const pluggedInTurnOffSelect = document.getElementById("screenTurnOff");
     const powerModeSelect = document.getElementById('powerMode');
     const batterySaverBtn = document.getElementById('turnOnBatterySaver');
     //
@@ -48,12 +48,12 @@ window.onload = async () => {
     for(const [key, value] of Object.entries(MappingIndexToValue.batterySleep)){
         if(value == batterySleep) batterySleepSelect.selectedIndex = key;
     }
-    /* for(const [key, value] of Object.entries(MappingIndexToValue.batteryTurnOff)){
-        if(value == batteryTurnOff) batteryTurnOffSelect.selectedIndex = key;
+    /* for(const [key, value] of Object.entries(MappingIndexToValue.screenTurnOff)){
+        if(value == screenTurnOff) batteryTurnOffSelect.selectedIndex = key;
         
     } */
-    for(const [key, value] of Object.entries(MappingIndexToValue.pluggedInTurnOff)){
-        if(value == pluggedInTurnOff) pluggedInTurnOffSelect.selectedIndex = key;
+    for(const [key, value] of Object.entries(MappingIndexToValue.screenTurnOff)){
+        if(value == screenTurnOff) pluggedInTurnOffSelect.selectedIndex = key;
         
     }
     for(const [key, value] of Object.entries(MappingIndexToValue.pluggedInSleep)){

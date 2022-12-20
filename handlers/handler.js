@@ -16,12 +16,11 @@ class Handler {
   constructor() {}
   initSetting = async () => {
     try {
-      const batteryTurnOff = settingService.getSetting("batteryTurnOff");
       const batterySleep = settingService.getSetting("batterySleep");
       const pluggedInSleep = settingService.getSetting("pluggedInSleep");
-      const pluggedInTurnOff = settingService.getSetting("pluggedInTurnOff");
+      const screenTurnOff = settingService.getSetting("screenTurnOff");
       await Promise.all([
-        execCommand(setScreenTurnOffAfter(pluggedInTurnOff)),
+        execCommand(setScreenTurnOffAfter(screenTurnOff)),
         execCommand(setBatteryPowerSleepAfter(batterySleep)),
         execCommand(setACPowerSleepAfter(pluggedInSleep)),
       ]);
@@ -55,7 +54,7 @@ class Handler {
 
   handleBatteryTurnOffScreenAfter = async (event, value) => {
     try {
-      settingService.updateSetting("batteryTurnOff", value);
+      settingService.updateSetting("screenTurnOff", value);
       await execCommand(setScreenTurnOffAfter(value));
     } catch (error) {
       console.log(error);
@@ -64,7 +63,7 @@ class Handler {
   handlePluggedInTurnOffScreenAfter = async (event, value) => {
     try {
       console.log(`value:`, value);
-      settingService.updateSetting("pluggedInTurnOff", value);
+      settingService.updateSetting("screenTurnOff", value);
       await execCommand(setScreenTurnOffAfter(value));
     } catch (error) {
       console.log(error);

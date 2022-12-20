@@ -8,11 +8,11 @@ async function handleClick (event){
         console.log(id)
         let result = false;
         switch (id) {
-            case "batteryTurnOff":
-                result = await handleBatteryTurnOff(MappingIndexToValue.batteryTurnOff[selectedIndex])
+            case "screenTurnOff":
+                result = await handleBatteryTurnOff(MappingIndexToValue.screenTurnOff[selectedIndex])
                 break;
-            case "pluggedInTurnOff":
-                result = await handlePluggedInTurnOff(MappingIndexToValue.pluggedInTurnOff[selectedIndex])
+            case "screenTurnOff":
+                result = await handlePluggedInTurnOff(MappingIndexToValue.screenTurnOff[selectedIndex])
                 break;    
             case "batterySleep":
                 result = await handleBatterySleep(MappingIndexToValue.batterySleep[selectedIndex])
