@@ -41,8 +41,8 @@ async function handleBatterySaveOn(mainWindow){
 		console.log(`chargingState`, isCharging);
 		const batterySaver = settingService.getSetting('batterySaver');
 		if (!isCharging) {
-			if (batteryLevel <= settingService.getSetting('batterySaveOn')) {
-				// handle batterySaveOn
+			if (batteryLevel <= settingService.getSetting('thresholdAutoBatterySaver')) {
+				// handle thresholdAutoBatterySaver
 				if (!batterySaver) {
 					
 				settingService.getSetting("lowBrightnessOnBatterySaver") ? await new Promise((resolve, reject)=> {

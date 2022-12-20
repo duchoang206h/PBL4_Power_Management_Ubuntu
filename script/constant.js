@@ -52,7 +52,7 @@ const MappingIndexToValue =  {
             1: "balanced",
             2: "power-saver"
         },
-        batterySaveOn: {
+        thresholdAutoBatterySaver: {
             0: 20,
             1: 25,
             2: 30,

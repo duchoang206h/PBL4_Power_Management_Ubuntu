@@ -5,7 +5,7 @@ window.onload = async () => {
         brightness,
         powerMode, 
         lowBrightBatterySaver,
-        batterySaveOn,
+        thresholdAutoBatterySaver,
         screenTurnOff,
         batterySleep,
         pluggedInSleep,
@@ -18,12 +18,12 @@ window.onload = async () => {
         pluggedInCloseLid,
         powerButtonAction
     } = await window.system.getAllSetting();
-    console.log({ screenTurnOff})
+    console.log({ pluggedInSleep })
     const batteryLevelDiv = document.getElementById('batteryLevel')
     const batteryRemainingTime = document.getElementById('batteryRemainingTime')
     const chargingStateDiv = document.getElementById('chargingState')
     const batteryLevelRangeDiv = document.getElementById('batteryLevelRange');
-    const batterySaveOnSelect = document.getElementById("batterySaveOn");
+    const batterySaveOnSelect = document.getElementById("thresholdAutoBatterySaver");
     const batteryTurnOffSelect = document.getElementById("screenTurnOff");
     const batterySleepSelect = document.getElementById("batterySleep");
     const pluggedInSleepSelect = document.getElementById("pluggedInSleep");
@@ -45,33 +45,22 @@ window.onload = async () => {
     if (!chargingState) {
         chargingStateDiv.style.display = "none";
     }
-    for(const [key, value] of Object.entries(MappingIndexToValue.batterySleep)){
-        if(value == batterySleep) batterySleepSelect.selectedIndex = key;
-    }
-    /* for(const [key, value] of Object.entries(MappingIndexToValue.screenTurnOff)){
-        if(value == screenTurnOff) batteryTurnOffSelect.selectedIndex = key;
-        
-    } */
-    for(const [key, value] of Object.entries(MappingIndexToValue.screenTurnOff)){
-        if(value == screenTurnOff) pluggedInTurnOffSelect.selectedIndex = key;
-        
-    }
-    for(const [key, value] of Object.entries(MappingIndexToValue.pluggedInSleep)){
-        if(value == pluggedInSleep) pluggedInSleepSelect.selectedIndex = key;
-        
-    }
+    console.log(batterySleepSelect.options[0].value);
+    handleUpdateState(batterySleepSelect, batterySleep/60);
+    handleUpdateState(pluggedInTurnOffSelect, screenTurnOff/60)
+    handleUpdateState(pluggedInSleepSelect, pluggedInSleep/60)
+    handleUpdateState(batterySaveOnSelect, thresholdAutoBatterySaver)
+    handleUpdateState(powerModeSelect, powerMode)
+    handleUpdateState(powerButtonActionSelect, powerButtonAction)
 
 
-    for (const [key, value] of Object.entries(MappingIndexToValue.batterySaveOn)) {
-        if (value == batterySaveOn) {
+    
+    
 
-            batterySaveOnSelect.selectedIndex = key;
-        }
-    }
 
-    for(const [key, value] of Object.entries(MappingIndexToValue.powerMode)){
-        if(value === powerMode) powerModeSelect.selectedIndex = key;
-    }
+
+
+    
     console.log({
         powerButtonAction,
         batteryCloseLid,
@@ -84,9 +73,7 @@ window.onload = async () => {
     for(const [key, value] of Object.entries(MappingIndexToValue.pluggedInCloseLid)){
         if(value === pluggedInCloseLid) pluggedInCloseLidSelet.selectedIndex = key
     } */
-    for(const [key, value] of Object.entries(MappingIndexToValue.powerButtonAction)){
-        if(value === powerButtonAction) powerButtonActionSelect.selectedIndex = key
-    }
+   
     console.log("lowBrightBatterySaver", lowBrightBatterySaver)
     document.getElementById('lowBrightnessOnBattery').checked = lowBrightBatterySaver
     document.getElementById('brightness_range').value = brightness;
@@ -153,5 +140,10 @@ async function openBatteryDetail (event){
         await window.handle.openBatteryDetailWindow();
     } catch (error) {
         console.log(error);
+    }
+}
+function handleUpdateState(selectDiv, value) {
+    for (let i = 0; i < selectDiv.options.length; i++) {
+        if (selectDiv.options[i].value == value) selectDiv.selectedIndex = i;
     }
 }

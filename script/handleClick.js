@@ -4,36 +4,34 @@ selects.forEach(select => {
 })
 async function handleClick (event){
     const { id, selectedIndex } = event.target;
+    const value = event.target.value;
     try {
         console.log(id)
         let result = false;
         switch (id) {
             case "screenTurnOff":
-                result = await handleBatteryTurnOff(MappingIndexToValue.screenTurnOff[selectedIndex])
+                result = await handleBatteryTurnOff(+value*60)
                 break;
-            case "screenTurnOff":
-                result = await handlePluggedInTurnOff(MappingIndexToValue.screenTurnOff[selectedIndex])
-                break;    
+            // case "screenTurnOff":
+            //     result = await handlePluggedInTurnOff(value)
+            //     break;    
             case "batterySleep":
-                result = await handleBatterySleep(MappingIndexToValue.batterySleep[selectedIndex])
+                result = await handleBatterySleep(+value*60)
                 break;    
             case "pluggedInSleep":
-                result = await handlePluggedInSleep(MappingIndexToValue.pluggedInSleep[selectedIndex])
+                result = await handlePluggedInSleep(+value*60)
                 break;    
             case "powerMode":
-                result = await handlePowerMode(MappingIndexToValue.powerMode[selectedIndex])
+                result = await handlePowerMode(value)
                 break;    
-            case "batterySaveOn":
-                result = await handleBatterySaveOn(MappingIndexToValue.batterySaveOn[selectedIndex])
+            case "thresholdAutoBatterySaver":
+                result = await handleBatterySaveOn(+value)
                 break;    
-            case "batteryUsage":
-                result = await handleBatteryUsage(MappingIndexToValue.batteryUsage[selectedIndex])
-                break;  
             case "powerButtonAction":
-                result = await handlePowerButtonAction(MappingIndexToValue.powerButtonAction[selectedIndex])
+                result = await handlePowerButtonAction(value)
                 break;
             case "batteryChartSelect":
-                result = await window.system.getBatteryHistory(MappingIndexToValue.batteryDetail[selectedIndex]) 
+                result = await window.system.getBatteryHistory(+value) 
                 console.log(result)
                 await updateChart(result)  
             default:

@@ -81,7 +81,7 @@ module.exports = {
             1: "Balanced",
             2: "Power save"
         },
-        batterySaveOn: {
+        thresholdAutoBatterySaver: {
             0: 20,
             1: 25,
             2: 30,

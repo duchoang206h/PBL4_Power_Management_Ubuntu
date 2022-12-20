@@ -20,7 +20,7 @@ const getBatteryLevelRegex = /\d+/g;
 const batteryDetailRegex = /:\s*.*/g;
 const getBatteryRemainingTimeRegex = /\d+,\d+/g;
 const batteryHistoryRegex =
-  /(struct\s*{\s*uint32\s*\d+\s*double\s*\d+\s*uint32\s*\d+\s*})/g;
+  /(struct\s*{\s*uint32\s*\d+\s*double\s*\d.*\s*uint32\s*\d+\s*})/g;
 const digitsRegex = /\s+\d+/g;
 class System {
   constructor() {
@@ -105,7 +105,7 @@ class System {
   setBatterySaveOn(event, value) {
     try {
       console.log(value);
-      return settingService.updateSetting("batterySaveOn", value);
+      return settingService.updateSetting("thresholdAutoBatterySaver", value);
     } catch (error) {}
   }
   setBatterySaver(event, value) {
@@ -154,7 +154,7 @@ class System {
       const lowBrightBatterySaver = settingService.getSetting(
         "lowBrightnessOnBatterySaver"
       );
-      const batterySaveOn = settingService.getSetting("batterySaveOn");
+      const thresholdAutoBatterySaver = settingService.getSetting("thresholdAutoBatterySaver");
       const turnOffBluetooth = settingService.getSetting("turnOffBluetooth");
       const turnOffWifi = settingService.getSetting("turnOffWifi");
       /// more here
@@ -163,7 +163,7 @@ class System {
         brightness,
         powerMode,
         lowBrightBatterySaver,
-        batterySaveOn,
+        thresholdAutoBatterySaver,
         batterySleep,
         screenTurnOff,
         pluggedInSleep,
@@ -196,6 +196,7 @@ class System {
   getBatteryHistory = async (event, value) => {
     try {
       let data;
+      console.log(value)
       switch (Number(value)) {
         case 24:
           data = await execCommand(getBatteryHistory(24 * 3600, 10));
@@ -226,11 +227,12 @@ class System {
           state: Number(struct[2]),
         });
       });
+      console.log(result);
       result.sort((a, b) => a.timestamps - b.timestamps);
       result = result.filter(({ level }) => level > 0);
-      let mid = Math.floor(result.length / 2);
+
       if (result.length > 8) {
-        result.splice(mid, result.length - 8);
+        result.splice(4, result.length - 8);
       }
       return result;
     } catch (error) {
