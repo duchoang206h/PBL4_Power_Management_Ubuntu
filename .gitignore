@@ -1,6 +1,0 @@
-node_modules
-.env
-yarn-error.log
-settings.json
-.gitignore
-dist/**/*
