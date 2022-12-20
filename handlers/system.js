@@ -83,9 +83,11 @@ class System {
         execCommand(changeBright(Number(value))).then(resolve()).catch(resolve())
       })
       await delay(1000);
-      await new Promise((resolve, reject)=> {
-        execCommand(changeBright(100)).then(resolve()).catch(resolve())
-      })
+      if (!(settingService.getSetting("batterySaver") && (settingService.getSetting("lowBrightnessOnBatterySaver")))) {
+        await new Promise((resolve, reject) => {
+          execCommand(changeBright(100)).then(resolve()).catch(resolve())
+        })
+      }
       return settingService.updateSetting("brightness", value);
     } catch (error) {}
   }
