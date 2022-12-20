@@ -192,6 +192,7 @@ class System {
         });
       });
       result.sort((a, b) => a.timestamps - b.timestamps);
+      result = result.filter((value) => value > 0);
       let mid = Math.floor(result.length / 2);
       if (result.length > 8) {
         result.splice(mid, result.length - 8);
