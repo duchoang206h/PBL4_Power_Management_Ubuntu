@@ -30,12 +30,28 @@ async function handleBatterySaveOn(mainWindow){
 			system.getChargingState(),
 			system.getBatteryRemainingTime()
 		])
-		await mainWindow.webContents.send('currentBattery', { 
-			batteryLevel,
-			chargingState: isCharging,
-			remainingTime
+		await new Promise((resolve, _)=> {
+			try {
+				mainWindow.webContents.send('currentBattery', { 
+					batteryLevel,
+					chargingState: isCharging,
+					remainingTime
+				});
+				resolve()
+			} catch (error) {
+				resolve()
+			}
 		})
-		await mainWindow.webContents.send('updateChargingState', isCharging)
+		await new Promise((resolve, _)=> {
+			try {
+				mainWindow.webContents.send('updateChargingState', isCharging)
+				resolve()
+			} catch (error) {
+				resolve()
+			}
+			
+			
+		})
 		// handle when on battery
 		console.log(`batteryLevel`, batteryLevel)
 		console.log(`chargingState`, isCharging);
@@ -45,19 +61,29 @@ async function handleBatterySaveOn(mainWindow){
 				// handle thresholdAutoBatterySaver
 				if (!batterySaver) {
 					
-				settingService.getSetting("lowBrightnessOnBatterySaver") ? await new Promise((resolve, reject)=> {
+				settingService.getSetting("lowBrightnessOnBatterySaver") ? await new Promise((resolve, _)=> {
 					execCommand(changeBright(settingService.getSetting('brightness'))).then(resolve()).catch(resolve())
 				}) : null;
-				settingService.getSetting("turnOffBluetooth") ? await new Promise((resolve, reject)=> {
+				settingService.getSetting("turnOffBluetooth") ? await new Promise((resolve, _)=> {
 					execCommand(turnOffBluetooth).then(resolve()).catch(resolve())
 				}) : null
-				settingService.getSetting("turnOffWifi") ? await new Promise((resolve, reject)=> {
+				settingService.getSetting("turnOffWifi") ? await new Promise((resolve, _)=> {
 					execCommand(turnOffWifi).then(resolve()).catch(resolve())
 				}) : null;
-				await execCommand(setPowerMode('power-saver'))
-				await mainWindow.webContents.send('updateBatterySaver', {
-					batterySaver: true,
-					chargingState: isCharging
+				await new Promise((resolve, _)=> {
+					execCommand(setPowerMode('power-saver')).then(()=> resolve())
+				})
+				await new Promise((resolve, _)=> {
+					try {
+						mainWindow.webContents.send('updateBatterySaver', {
+							batterySaver: true,
+							chargingState: isCharging
+						})
+						resolve()
+					} catch (error) {
+						resolve()
+					}
+					
 				})
 				settingService.updateSetting('batterySaver', true)
 				
@@ -68,12 +94,23 @@ async function handleBatterySaveOn(mainWindow){
 		// handle when on power
 		else{
 			///
-			await mainWindow.webContents.send('updateBatterySaver', {
-				batterySaver: false,
-				chargingState: isCharging
-			})
+			await new Promise((resolve, _)=> {
+				try {
+					mainWindow.webContents.send('updateBatterySaver', {
+						batterySaver: false,
+						chargingState: isCharging
+					})
+					resolve()
+				} catch (error) {
+					resolve()
+				}
+				
+			}) 
 			settingService.updateSetting('batterySaver', false)
-			await execCommand(changeBright(100))
+			await new Promise((resolve, _)=> {
+				execCommand(changeBright(100)).then(()=> resolve())
+				.catch(()=> resolve())
+			}) 
 		}
 	} catch (error) {
 		console.log(error)
