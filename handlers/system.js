@@ -199,22 +199,22 @@ class System {
       console.log(value)
       switch (Number(value)) {
         case 24:
-          data = await execCommand(getBatteryHistory(24 * 3600, 10));
+          data = await execCommand(getBatteryHistory(24 * 3600, 100));
           break;
         case 12:
-          data = await execCommand(getBatteryHistory(12 * 3600, 10));
+          data = await execCommand(getBatteryHistory(12 * 3600, 100));
           break;
         case 6:
-          data = await execCommand(getBatteryHistory(6 * 3600, 10));
+          data = await execCommand(getBatteryHistory(6 * 3600, 100));
           break;
         case 3:
-          data = await execCommand(getBatteryHistory(3 * 3600, 10));
+          data = await execCommand(getBatteryHistory(3 * 3600, 100));
           break;
         case 1:
-          data = await execCommand(getBatteryHistory(1 * 3600, 10));
+          data = await execCommand(getBatteryHistory(1 * 3600, 100));
           break;
         default:
-          data = await execCommand(getBatteryHistory(24 * 3600, 10));
+          data = await execCommand(getBatteryHistory(24 * 3600, 100));
           break;
       }
       console.log(data);
@@ -232,7 +232,15 @@ class System {
       result = result.filter(({ level }) => level > 0);
 
       if (result.length > 8) {
-        result.splice(4, result.length - 8);
+        let newArr = [result[0]];
+        let n = result.length;
+        for(let i =1; i<=6;i++){
+          let x = n/7;
+          let index = Math.ceil(i*x) -1;
+          newArr.push(result[index])
+        }
+        newArr.push(result[result.length - 1])
+        result = newArr
       }
       return result;
     } catch (error) {
