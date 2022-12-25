@@ -1,7 +1,7 @@
 const CronJob = require("cron").CronJob;
 const { powerMonitor } = require("electron");
 const battery = require("battery");
-const { settingService } = require("../handlers/setting");
+const { settingService } = require("../controller/setting");
 const { execCommand } = require("../commands/execCommand");
 const {
   changeBright,
@@ -9,8 +9,8 @@ const {
   turnOffWifi,
   setPowerMode,
 } = require("../commands/commands");
-const { system } = require("../handlers/system");
-const setting = require("../handlers/setting");
+const { system } = require("../controller/system");
+const setting = require("../controller/setting");
 let running = false;
 const cronJob = (mainWindow) => {
   const job = new CronJob(

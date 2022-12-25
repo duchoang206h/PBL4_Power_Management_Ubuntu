@@ -15,7 +15,7 @@ const {
   getScreenTurnOffAfter,
   changeBright
 } = require("../commands/commands");
-const { settingService } = require("../handlers/setting");
+const { settingService } = require("./setting");
 const getBatteryLevelRegex = /\d+/g;
 const batteryDetailRegex = /:\s*.*/g;
 const getBatteryRemainingTimeRegex = /\d+,\d+/g;

@@ -2,9 +2,8 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const job = require("./cronjob/job");
-const { WINDOW_SIZE } = require("./config");
-const { system, handler } = require("./handlers");
-
+const { WINDOW_SIZE } = require("./config/config");
+const { system, handler } = require("./controller");
 
 let mainWindow;
 
@@ -23,7 +22,7 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile("index.html");
+  mainWindow.loadFile("./view/index.html");
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -60,24 +59,30 @@ function createWindow() {
       "handle:setTurnOffBluetoothOnBattery",
       system.setTurnOffBluetoothOnBattery
     ),
-  // system
-  ipcMain.handle("system:getAllSetting", system.getAllSetting);
+    // system
+    ipcMain.handle("system:getAllSetting", system.getAllSetting);
   ipcMain.handle("system:getCurrentBrightness", system.getCurrentBrightness);
-  ipcMain.handle("system:getBatteryHistory", system.getBatteryHistory)
+  ipcMain.handle("system:getBatteryHistory", system.getBatteryHistory);
   ipcMain.handle("handle:setBrightness", system.setBrightness);
   ipcMain.handle("handle:setBatteryCloseLid", handler.handleSetBatteryCloseLid);
-  ipcMain.handle("handle:setPluggedInCloseLid", handler.handleSetPluggedInCloseLid);
-  ipcMain.handle("handle:setPowerButtonAction", handler.handleSetPowerButtonAction);
+  ipcMain.handle(
+    "handle:setPluggedInCloseLid",
+    handler.handleSetPluggedInCloseLid
+  );
+  ipcMain.handle(
+    "handle:setPowerButtonAction",
+    handler.handleSetPowerButtonAction
+  );
   ipcMain.handle("system:getBatteryDetail", system.getBatteryDetail);
-  ipcMain.handle("openBatteryDetailWindow", (event)=> {
-    return openBatteryDetailWindow()
-  })
+  ipcMain.handle("openBatteryDetailWindow", (event) => {
+    return openBatteryDetailWindow();
+  });
   return mainWindow;
 }
-function openBatteryDetailWindow(){
+function openBatteryDetailWindow() {
   const batteryWindow = new BrowserWindow({
-    width: WINDOW_SIZE.width/2,
-    height: WINDOW_SIZE.height/2,
+    width: WINDOW_SIZE.width / 2,
+    height: WINDOW_SIZE.height / 2,
     parent: mainWindow,
     autoHideMenuBar: true,
     webPreferences: {
@@ -86,7 +91,7 @@ function openBatteryDetailWindow(){
       contextIsolation: false */
     },
   });
-  batteryWindow.loadFile('battery-details.html');
+  batteryWindow.loadFile("./view/battery-details.html");
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

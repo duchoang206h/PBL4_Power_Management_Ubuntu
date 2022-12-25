@@ -91,33 +91,29 @@ class Handler {
       await execCommand(setPowerMode(value));
     } catch (error) {}
   };
-  handleSetPowerButtonAction = async(event, value) => {
+  handleSetPowerButtonAction = async (event, value) => {
     try {
-      console.log("handleSetPowerButtonAction", value)
+      console.log("handleSetPowerButtonAction", value);
       settingService.updateSetting("powerButtonAction", value);
       await execCommand(setPowerButtonAction(value));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   handleSetBatteryCloseLid = async (event, value) => {
     try {
       settingService.updateSetting("batteryCloseLid", value);
       await execCommand(setCloseLidOnBattery(value));
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 
   handleSetPluggedInCloseLid = async (event, value) => {
     try {
-      console.log(`handleSetPluggedInCloseLid`, value)
+      console.log(`handleSetPluggedInCloseLid`, value);
       settingService.updateSetting("pluggedInCloseLid", value);
       await execCommand(setCloseLidOnPluggedIn(value));
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 }
 module.exports = {
   handler: new Handler(),
