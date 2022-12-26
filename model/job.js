@@ -1,21 +1,17 @@
 const CronJob = require("cron").CronJob;
-const { powerMonitor } = require("electron");
-const battery = require("battery");
-const { settingService } = require("../controller/setting");
-const { execCommand } = require("../commands/execCommand");
+const { settingService } = require("./setting");
+const { execCommand } = require("./execCommand");
 const {
   changeBright,
   turnOffBluetooth,
   turnOffWifi,
   setPowerMode,
 } = require("../commands/commands");
-const { system } = require("../controller/system");
-const setting = require("../controller/setting");
-let running = false;
+const { system } = require("./system");
 const cronJob = (mainWindow) => {
   const job = new CronJob(
     "*/5 * * * * *", //repeat 5s
-    () => handleBatterySaveOn(mainWindow),
+    () => handleBatterySaverOn(mainWindow),
     null,
     true,
     "utc"
@@ -23,7 +19,7 @@ const cronJob = (mainWindow) => {
   job.start();
 };
 
-async function handleBatterySaveOn(mainWindow) {
+async function handleBatterySaverOn(mainWindow) {
   try {
     const [batteryLevel, isCharging, remainingTime] = await Promise.all([
       system.getBatteryLevel(),
@@ -51,8 +47,6 @@ async function handleBatterySaveOn(mainWindow) {
       }
     });
     // handle when on battery
-    console.log(`batteryLevel`, batteryLevel);
-    console.log(`chargingState`, isCharging);
     const batterySaver = settingService.getSetting("batterySaver");
     if (!isCharging) {
       if (

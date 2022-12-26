@@ -1,65 +1,90 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <!-- RESET CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <!-- LINE AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- APP CSS -->
+    <link rel="stylesheet" href="./style/styles.css" />
+    <link rel="stylesheet" href="./style/chartist.css" />
+    <title>Power Management</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="">
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-  <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-    crossorigin="anonymous"></script>
-  <!-- RESET CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <!-- LINE AWESOME -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" />
-  <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet"
-    type="text/css" />
-  <!-- APP CSS -->
-  <link rel="stylesheet" href="./style/styles.css">
-  <link rel="stylesheet" href="./style/chartist.css">
-  <title>Power Management</title>
-</head>
-
-<body>
-  <div class="main">
-    <div class="section" style="
-    margin-bottom: 20px;
-    display: flex;
-    height: 200px;
-
-">
-      <div class="battery-info">
-        <div class="battery-information--text">
-          <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
-          <div class="battery-information--text__percentage" id="batteryLevel">
-            55%
+  <body>
+    <div class="main">
+      <div
+        class="section"
+        style="margin-bottom: 20px; display: flex; height: 200px"
+      >
+        <div class="battery-info">
+          <div class="battery-information--text">
+            <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
+            <div
+              class="battery-information--text__percentage"
+              id="batteryLevel"
+            >
+              55%
+            </div>
+            <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "time to empty"" -->
+            <div
+              class="battery-information--text__remaining-time"
+              id="batteryRemainingTime"
+            >
+              2 hours 25 minutes remaining
+            </div>
           </div>
-          <!-- Replace with "upower -i $(upower -e | grep 'BAT') | grep -E "time to empty"" -->
-          <div class="battery-information--text__remaining-time" id="batteryRemainingTime">
-            2 hours 25 minutes remaining
-          </div>
-        </div>
-        <!-- Replace width with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
-        <div class="battery-information--range">
-
-          <div class="w3-green" style="height:24px;width:80%; border-top-left-radius: 5px;
-          border-bottom-left-radius: 5px;" id="batteryLevelRange">
-            <div class="battery-information--range__is-charging" id="chargingState">
-              <i class="fas fa-battery-bolt"></i>
+          <!-- Replace width with "upower -i $(upower -e | grep 'BAT') | grep -E "percentage"" -->
+          <div class="battery-information--range">
+            <div
+              class="w3-green"
+              style="
+                height: 24px;
+                width: 80%;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+              "
+              id="batteryLevelRange"
+            >
+              <div
+                class="battery-information--range__is-charging"
+                id="chargingState"
+              >
+                <i class="fas fa-battery-bolt"></i>
+              </div>
             </div>
           </div>
         </div>
-        
-      </div>
-      
-      <div class="battery-history-chart">
-        
+
+        <div class="battery-history-chart">
           <select id="batteryChartSelect">
             <option value="1">1h</option>
             <option value="3">3h</option>
@@ -67,280 +92,302 @@
             <option value="12">12h</option>
             <option value="24">24h</option>
           </select>
-        
-        <a onclick="openBatteryDetail(event)" class="battery-detail">View battery details</a>
-        <div class="ct-chart ct-golden-section" id="chart"></div>
+
+          <a onclick="openBatteryDetail(event)" class="battery-detail"
+            >View battery details</a
+          >
+          <div class="ct-chart ct-golden-section" id="chart"></div>
+        </div>
       </div>
-    </div>
 
-    <!-- POWER -->
-    <div class="section">
-      <h2 class="section__heading font-sans ">
-        Power
-      </h2>
-      <div class="section__content">
-        <div class="section__content-item">
-          <div class="section__content-item__description">
-            <span class="section__content-item__icon">
-              <i class="las la-desktop"></i>
-            </span>
-            <div class="section__content-item__text">Screen and sleep</div>
-            <div class="section__content-item__toggle-btn">
-              <i class="las la-angle-right"></i>
+      <!-- POWER -->
+      <div class="section">
+        <h2 class="section__heading font-sans">Power</h2>
+        <div class="section__content">
+          <div class="section__content-item">
+            <div class="section__content-item__description">
+              <span class="section__content-item__icon">
+                <i class="las la-desktop"></i>
+              </span>
+              <div class="section__content-item__text">Screen and sleep</div>
+              <div class="section__content-item__toggle-btn">
+                <i class="las la-angle-right"></i>
+              </div>
+            </div>
+            <div class="section__content-item__list">
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text font-sans">
+                  Turn off my screen after
+                </div>
+                <select
+                  name=""
+                  id="screenTurnOff"
+                  class="section__content-item__list-item__select section__content-item__list-item__setter"
+                >
+                  <option value="1">1 minutes</option>
+                  <option value="2">2 minutes</option>
+                  <option value="3">3 minutes</option>
+                  <option value="4">4 minutes</option>
+                  <option value="5">5 minutes</option>
+
+                  <option value="8" selected>8 minutes</option>
+                  <option value="10">10 minutes</option>
+                  <option value="12">12 minutes</option>
+                  <option value="15">15 minutes</option>
+                  <option value="0">Never</option>
+                </select>
+              </div>
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text">
+                  On battery power, put my device to sleep after
+                </div>
+                <select
+                  name=""
+                  id="batterySleep"
+                  class="section__content-item__list-item__select section__content-item__list-item__setter"
+                >
+                  <option value="15">15 minutes</option>
+                  <option value="20">20 minutes</option>
+                  <option value="25">25 minutes</option>
+                  <option value="30" selected>30 minutes</option>
+                  <option value="60">1 hour</option>
+                  <option value="80">80 minutes</option>
+                  <option value="90">90 minutes</option>
+                  <option value="100">100 minutes</option>
+                  <option value="120">2 hours</option>
+                  <option value="0">Never</option>
+                </select>
+              </div>
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text">
+                  When plugged in, put my device to sleep after
+                </div>
+                <select
+                  name=""
+                  id="pluggedInSleep"
+                  class="section__content-item__list-item__select section__content-item__list-item__setter"
+                >
+                  <option value="15">15 minutes</option>
+                  <option value="20">20 minutes</option>
+                  <option value="25">25 minutes</option>
+                  <option value="30" selected>30 minutes</option>
+                  <option value="60">1 hour</option>
+                  <option value="80">80 minutes</option>
+                  <option value="90">90 minutes</option>
+                  <option value="100">100 minutes</option>
+                  <option value="120">2 hours</option>
+                  <option value="0">Never</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="section__content-item__list">
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text font-sans ">
-                Turn off my screen after
+          <div class="section__content-item">
+            <div class="section__content-item__description">
+              <span class="section__content-item__icon">
+                <i class="las la-desktop"></i>
+              </span>
+              <div class="section__content-item__text">Power button</div>
+              <div class="section__content-item__toggle-btn">
+                <i class="las la-angle-right"></i>
               </div>
-              <select name="" id="screenTurnOff"
-                class="section__content-item__list-item__select section__content-item__list-item__setter">
-                <option value="1">1 minutes</option>
-                <option value="2">2 minutes</option>
-                <option value="3">3 minutes</option>
-                <option value="4">4 minutes</option>
-                <option value="5">5 minutes</option>
-
-                <option value="8" selected>8 minutes</option>
-                <option value="10">10 minutes</option>
-                <option value="12">12 minutes</option>
-                <option value="15">15 minutes</option>
-                <option value="0">Never</option>
-              </select>
             </div>
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
-                On battery power, put my device to sleep after
+            <div class="section__content-item__list">
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text font-sans">
+                  When i press the power button
+                </div>
+                <select
+                  name=""
+                  id="powerButtonAction"
+                  class="section__content-item__list-item__select section__content-item__list-item__setter"
+                >
+                  <option value="nothing">Nothing</option>
+                  <option value="suspend">Suspend</option>
+                  <option value="hibernate">Hibernate</option>
+                  <option value="interactive">Interactive</option>
+                </select>
               </div>
-              <select name="" id="batterySleep"
-                class="section__content-item__list-item__select section__content-item__list-item__setter">
-                <option value="15">15 minutes</option>
-                <option value="20">20 minutes</option>
-                <option value="25">25 minutes</option>
-                <option value="30" selected>30 minutes</option>
-                <option value="60">1 hour</option>
-                <option value="80">80 minutes</option>
-                <option value="90">90 minutes</option>
-                <option value="100">100 minutes</option>
-                <option value="120">2 hours</option>
-                <option value="0">Never</option>
-              </select>
             </div>
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
-                When plugged in, put my device to sleep after
+          </div>
+          <div class="section__content-item">
+            <div class="section__content-item__description">
+              <span class="section__content-item__icon">
+                <i class="las la-battery-three-quarters"></i>
+              </span>
+              <div class="section__content-item__text">
+                Power mode
+                <div class="section__content-item__text__description">
+                  Optimize your device based on power use and performance
+                </div>
               </div>
-              <select name="" id="pluggedInSleep"
-                class="section__content-item__list-item__select section__content-item__list-item__setter">
-                <option value="15">15 minutes</option>
-                <option value="20">20 minutes</option>
-                <option value="25">25 minutes</option>
-                <option value="30" selected>30 minutes</option>
-                <option value="60">1 hour</option>
-                <option value="80">80 minutes</option>
-                <option value="90">90 minutes</option>
-                <option value="100">100 minutes</option>
-                <option value="120">2 hours</option>
-                <option value="0">Never</option>
+              <select
+                id="powerMode"
+                class="section__content-item__select section__content-item__list-item__setter"
+              >
+                <option value="performance">Best performance</option>
+                <option value="balanced" selected>
+                  Balanced (Recommended)
+                </option>
+                <option value="power-saver">Power save</option>
               </select>
             </div>
           </div>
-
-
         </div>
-        <div class="section__content-item">
-          <div class="section__content-item__description">
-            <span class="section__content-item__icon">
-              <i class="las la-desktop"></i>
-            </span>
-            <div class="section__content-item__text">Power button</div>
-            <div class="section__content-item__toggle-btn">
-              <i class="las la-angle-right"></i>
-            </div>
-          </div>
-          <div class="section__content-item__list">
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text font-sans ">
-                When i press the power button
-              </div>
-              <select name="" id="powerButtonAction"
-                class="section__content-item__list-item__select section__content-item__list-item__setter">
-                <option value="nothing">Nothing</option>
-                <option value="suspend">Suspend</option>
-                <option value="hibernate">Hibernate</option>
-                <option value="interactive">Interactive</option>
-
-              </select>
-            </div>
-          </div>
-
-
-        </div>
-        <div class="section__content-item">
-          <div class="section__content-item__description">
-            <span class="section__content-item__icon">
-              <i class="las la-battery-three-quarters"></i>
-            </span>
-            <div class="section__content-item__text">
-              Power mode
-              <div class="section__content-item__text__description">
-                Optimize your device based on power use and performance
-              </div>
-            </div>
-            <select id="powerMode" class="section__content-item__select section__content-item__list-item__setter">
-              <option value="performance">Best performance</option>
-              <option value="balanced" selected>Balanced (Recommended)</option>
-              <option value="power-saver">Power save</option>
-
-            </select>
-          </div>
-
-
-        </div>
-
-
       </div>
-    </div>
-    <!-- BATTERY -->
-    <div class="section">
-      <h2 class="section__heading">
-        Battery
-      </h2>
-      <div class="section__content">
-        <div class="section__content-item">
-          <div class="section__content-item__description">
-            <span class="section__content-item__icon">
-              <i class="las la-car-battery"></i>
-            </span>
-            <div class="section__content-item__text">Battery saver
-              <div class="section__content-item__text__description">
-                Extend battery life by limiting some notifications and background activity
-              </div>
-            </div>
-            <div class="section__content-item__toggle-btn">
-              <i class="las la-angle-right"></i>
-            </div>
-          </div>
-          <div class="section__content-item__list">
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
+      <!-- BATTERY -->
+      <div class="section">
+        <h2 class="section__heading">Battery</h2>
+        <div class="section__content">
+          <div class="section__content-item">
+            <div class="section__content-item__description">
+              <span class="section__content-item__icon">
+                <i class="las la-car-battery"></i>
+              </span>
+              <div class="section__content-item__text">
                 Battery saver
+                <div class="section__content-item__text__description">
+                  Extend battery life by limiting some notifications and
+                  background activity
+                </div>
               </div>
-              <button id="turnOnBatterySaver" onclick="handleTurnOnBatterySaver()"
-                class="btn section__content-item__list-item__setter">
-                Turn on now
-              </button>
+              <div class="section__content-item__toggle-btn">
+                <i class="las la-angle-right"></i>
+              </div>
             </div>
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
-                Turn battery saver on automatically at
+            <div class="section__content-item__list">
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text">
+                  Battery saver
+                </div>
+                <button
+                  id="turnOnBatterySaver"
+                  onclick="handleTurnOnBatterySaver()"
+                  class="btn section__content-item__list-item__setter"
+                >
+                  Turn on now
+                </button>
               </div>
-              <select name="" id="thresholdAutoBatterySaver"
-                class="section__content-item__list-item__select section__content-item__list-item__setter">
-                <option value="20">20%</option>
-                <option value="25">25%</option>
-                <option value="30">30%</option>
-                <option value="35">35%</option>
-                <option value="40">40%</option>
-                <option value="50">50%</option>
-                <option value="60">60%</option>
-                <option value="70">70%</option>
-                <option value="80">80%</option>
-                <option value="90">90%</option>
-                <option value="95">95%</option>
-                <option value="100">Always</option>
-              </select>
-            </div>
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
-                Lower screen brightness when using battery saver
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text">
+                  Turn battery saver on automatically at
+                </div>
+                <select
+                  name=""
+                  id="thresholdAutoBatterySaver"
+                  class="section__content-item__list-item__select section__content-item__list-item__setter"
+                >
+                  <option value="20">20%</option>
+                  <option value="25">25%</option>
+                  <option value="30">30%</option>
+                  <option value="35">35%</option>
+                  <option value="40">40%</option>
+                  <option value="50">50%</option>
+                  <option value="60">60%</option>
+                  <option value="70">70%</option>
+                  <option value="80">80%</option>
+                  <option value="90">90%</option>
+                  <option value="95">95%</option>
+                  <option value="100">Always</option>
+                </select>
               </div>
-              <div class="section__content-item__list-item__switch">
-                <span class="section__content-item__list-item__text">
-                  On
-                </span>
-                <!-- <div class="switch-btn">
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text">
+                  Lower screen brightness when using battery saver
+                </div>
+                <div class="section__content-item__list-item__switch">
+                  <span class="section__content-item__list-item__text">
+                    On
+                  </span>
+                  <!-- <div class="switch-btn">
                   <span class="switch-btn__status"></span>
                 </div> -->
-                <label class="switch">
-                  <input id="lowBrightnessOnBattery" onchange="handleSetLowBrightnessOnBattery()" type="checkbox"
-                    checked>
-                  <span class="slider round"></span>
+                  <label class="switch">
+                    <input
+                      id="lowBrightnessOnBattery"
+                      onchange="handleSetLowBrightnessOnBattery()"
+                      type="checkbox"
+                      checked
+                    />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <div
+                class="section__content-item__list-item"
+                style="border-top: none; margin-left: 40px"
+              >
+                <label>Brightness</label>
+                <input
+                  type="range"
+                  id="brightness_range"
+                  onchange="handleBrightnessChange()"
+                  name="vol"
+                  min="0"
+                  max="100"
+                  style="
+                    width: 50%;
+                    margin-left: calc(50% - 26px);
+                    width: 50%;
+                    margin-left: calc(50% - 26px);
+                  "
+                />
+                <label id="brightness_value" style="margin-left: 4px">
+                  0%
                 </label>
-
               </div>
-
-
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text">
+                  Turn off wifi when using battery saver
+                </div>
+                <div class="section__content-item__list-item__switch">
+                  <span class="section__content-item__list-item__text">
+                    On
+                  </span>
+                  <label class="switch">
+                    <input
+                      id="turnOffWifiOnBattery"
+                      onchange="handleSetTurnOffWifiOnBattery()"
+                      type="checkbox"
+                      checked
+                    />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="section__content-item__list-item">
+                <div class="section__content-item__list-item__text">
+                  Turn off bluetooth when using battery saver
+                </div>
+                <div class="section__content-item__list-item__switch">
+                  <span class="section__content-item__list-item__text">
+                    On
+                  </span>
+                  <label class="switch">
+                    <input
+                      id="turnOffBluetoothOnBattery"
+                      onchange="handleSetTurnOffBluetoothOnBattery()"
+                      type="checkbox"
+                      checked
+                    />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
             </div>
-            <div class="section__content-item__list-item" style="
-    border-top: none;
-    margin-left: 40px;
-">
-              <label>Brightness</label>
-              <input type="range" id="brightness_range" onchange="handleBrightnessChange()" name="vol" min="0" max="100"
-                style="
-                  width: 50%;
-                  margin-left: calc(50% - 26px); 
-                  width: 50%;
-                  margin-left: calc(50% - 26px);
-              
-              ">
-              <label id="brightness_value" style="margin-left: 4px;"> 0% </label>
-            </div>
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
-                Turn off wifi when using battery saver
-              </div>
-              <div class="section__content-item__list-item__switch">
-                <span class="section__content-item__list-item__text">
-                  On
-                </span>
-                <label class="switch">
-                  <input id="turnOffWifiOnBattery" onchange="handleSetTurnOffWifiOnBattery()" type="checkbox" checked>
-                  <span class="slider round"></span>
-                </label>
-
-              </div>
-
-
-            </div>
-            <div class="section__content-item__list-item">
-              <div class="section__content-item__list-item__text">
-                Turn off bluetooth when using battery saver
-              </div>
-              <div class="section__content-item__list-item__switch">
-                <span class="section__content-item__list-item__text">
-                  On
-                </span>
-                <label class="switch">
-                  <input id="turnOffBluetoothOnBattery" onchange="handleSetTurnOffBluetoothOnBattery()" type="checkbox"
-                    checked>
-                  <span class="slider round"></span>
-                </label>
-
-              </div>
-
-
-            </div>
-
           </div>
-
-
         </div>
-
       </div>
     </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js"
-    integrity="sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="./renderer.js"></script>
-  <script src="./script/chart.js"></script>
-  <script src="./script/constant.js"></script>
-  <script src="./script/toggleList.js"></script>
-  <script src="./script/handleClick.js"></script>
-  <script src="./script/common.js"></script>
-</body>
-
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js"
+      integrity="sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./script/chart.js"></script>
+    <script src="./script/constant.js"></script>
+    <script src="./script/toggleList.js"></script>
+    <script src="./script/handleClick.js"></script>
+    <script src="./script/common.js"></script>
+  </body>
 </html>

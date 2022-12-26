@@ -1,10 +1,9 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const job = require("./cronjob/job");
-const { WINDOW_SIZE } = require("./config/config");
-const { system, handler } = require("./controller");
-
+const job = require("./model/job");
+const { WINDOW_SIZE } = require("./config/constant");
+const { controller } = require("./controller/controller");
 let mainWindow;
 
 function createWindow() {
@@ -28,52 +27,53 @@ function createWindow() {
   // mainWindow.webContents.openDevTools()
   // handle ipcMain
   ipcMain.handle(
-    "handle:setBatteryTurnOffScreenAfter",
-    handler.handleBatteryTurnOffScreenAfter
-  );
-  ipcMain.handle(
-    "handle:setPluggedInTurnOffScreenAfter",
-    handler.handlePluggedInTurnOffScreenAfter
+    "handle:turnOffScreenAfter",
+    controller.handleTurnOffScreenAfter
   );
   ipcMain.handle(
     "handle:setBatterySleepAfter",
-    handler.handleBatterySleepAfter
+    controller.handleBatterySleepAfter
   );
   ipcMain.handle(
     "handle:setPluggedInSleepAfter",
-    handler.handlePluggedInSleepAfter
+    controller.handlePluggedInSleepAfter
   );
-  /* ipcMain.handle('handle:batteryUsage', handler.handleBatteryUsage) */
-  ipcMain.handle("handle:powerMode", handler.handleSetPowerMode);
-  ipcMain.handle("handle:setBatterySaveOn", system.setBatterySaveOn);
-  ipcMain.handle("handle:turnOnBatterySaver", handler.handleTurnOnBatterySaver);
+  /* ipcMain.handle('handle:batteryUsage', controller.handleBatteryUsage) */
+  ipcMain.handle("handle:powerMode", controller.handleSetPowerMode);
+  ipcMain.handle("handle:setBatterySaveOn", controller.handleSetBatterySaveOn);
+  ipcMain.handle(
+    "handle:turnOnBatterySaver",
+    controller.handleTurnOnBatterySaver
+  );
   ipcMain.handle(
     "handle:setLowBrightnessOnBattery",
-    system.setLowBrightnessOnBatterySaver
+    controller.handleSetLowBrightnessOnBatterySaver
   );
   ipcMain.handle(
     "handle:setTurnOffWifiOnBattery",
-    system.setTurnOffWifiOnBattery
+    controller.handleSetTurnOffWifiOnBattery
   ),
     ipcMain.handle(
       "handle:setTurnOffBluetoothOnBattery",
-      system.setTurnOffBluetoothOnBattery
+      controller.handleSetTurnOffBluetoothOnBattery
     ),
-    // system
-    ipcMain.handle("system:getAllSetting", system.getAllSetting);
-  ipcMain.handle("system:getCurrentBrightness", system.getCurrentBrightness);
-  ipcMain.handle("system:getBatteryHistory", system.getBatteryHistory);
-  ipcMain.handle("handle:setBrightness", system.setBrightness);
-  ipcMain.handle("handle:setBatteryCloseLid", handler.handleSetBatteryCloseLid);
+    // handle
+    ipcMain.handle("handle:getAllSetting", controller.handleGetAllSetting);
   ipcMain.handle(
-    "handle:setPluggedInCloseLid",
-    handler.handleSetPluggedInCloseLid
+    "handle:getCurrentBrightness",
+    controller.handleGetCurrentBrightness
   );
+  ipcMain.handle(
+    "handle:getBatteryHistory",
+    controller.handleGetBatteryHistory
+  );
+  ipcMain.handle("handle:setBrightness", controller.handleSetBrightness);
+
   ipcMain.handle(
     "handle:setPowerButtonAction",
-    handler.handleSetPowerButtonAction
+    controller.handleSetPowerButtonAction
   );
-  ipcMain.handle("system:getBatteryDetail", system.getBatteryDetail);
+  ipcMain.handle("handle:getBatteryDetail", controller.handleGetBatteryDetail);
   ipcMain.handle("openBatteryDetailWindow", (event) => {
     return openBatteryDetailWindow();
   });
@@ -99,7 +99,7 @@ function openBatteryDetailWindow() {
 app.whenReady().then(() => {
   const mainWindow = createWindow();
   // init setting when startup
-  handler.initSetting();
+  controller.initSetting();
   // cronjob
   job(mainWindow);
   app.on("activate", function () {

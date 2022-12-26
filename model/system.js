@@ -1,5 +1,5 @@
-const delay = require('delay')
-const { execCommand } = require("../commands/execCommand");
+const delay = require("delay");
+const { execCommand } = require("./execCommand");
 const {
   getChargingState,
   getBatteryLevel,
@@ -13,7 +13,13 @@ const {
   getBatteryPowerSleepAfter,
   getACPowerSleepAfter,
   getScreenTurnOffAfter,
-  changeBright
+  changeBright,
+  setPowerButtonAction,
+  setBatteryPowerSleepAfter,
+  setACPowerSleepAfter,
+  setScreenTurnOffAfter,
+  turnOffBluetooth,
+  turnOffWifi,
 } = require("../commands/commands");
 const { settingService } = require("./setting");
 const getBatteryLevelRegex = /\d+/g;
@@ -22,14 +28,11 @@ const getBatteryRemainingTimeRegex = /\d+,\d+/g;
 const batteryHistoryRegex =
   /(struct\s*{\s*uint32\s*\d+\s*double\s*\d.*\s*uint32\s*\d+\s*})/g;
 const digitsRegex = /\s+\d+/g;
-class System {
-  constructor() {
-    console.log(this);
-  }
+class SystemService {
+  constructor() {}
   getCurrentPowerMode = async () => {
     try {
       const result = await execCommand(getPowerMode);
-      console.log(result);
       if (result.includes("performance")) return "performance";
       if (result.includes("balanced")) return "balanced";
       if (result.includes("power-saver")) return "power-saver";
@@ -57,9 +60,7 @@ class System {
     try {
       const result = await execCommand(getRemainingTime);
       const match = result.match(getBatteryRemainingTimeRegex);
-      console.log(match);
       if (match) return Number(match[0].replace(",", "."));
-      // default
       return 10;
     } catch (error) {
       return 10;
@@ -77,71 +78,86 @@ class System {
       return 100;
     }
   };
-  setBrightness = async (event, value) => {
+  setBrightness = async (value) => {
     try {
-      await new Promise((resolve, reject)=> {
-        execCommand(changeBright(Number(value))).then(resolve()).catch(resolve())
-      })
+      await new Promise((resolve, reject) => {
+        execCommand(changeBright(Number(value)))
+          .then(resolve())
+          .catch(resolve());
+      });
       await delay(1000);
-      if (!(settingService.getSetting("batterySaver") && (settingService.getSetting("lowBrightnessOnBatterySaver")))) {
+      if (
+        !(
+          settingService.getSetting("batterySaver") &&
+          settingService.getSetting("lowBrightnessOnBatterySaver")
+        )
+      ) {
         await new Promise((resolve, reject) => {
-          execCommand(changeBright(100)).then(resolve()).catch(resolve())
-        })
+          execCommand(changeBright(100)).then(resolve()).catch(resolve());
+        });
       }
       return settingService.updateSetting("brightness", value);
     } catch (error) {}
-  }
-  setLowBrightnessOnBatterySaver(event, value) {
+  };
+  setLowBrightnessOnBatterySaver(value) {
     try {
-      console.log("setLowBrightnessOnBatterySaver", value);
       return settingService.updateSetting("lowBrightnessOnBatterySaver", value);
     } catch (error) {}
   }
-  setPowerMode(event, value) {
+  setPowerMode = async (value) => {
     try {
-      return settingService.updateSetting("powerMode", value);
-    } catch (error) {}
-  }
-  setBatterySaveOn(event, value) {
+      return await execCommand(setPowerMode(value));
+    } catch (error) {
+      return false;
+    }
+  };
+  setBatterySaveOn(value) {
     try {
-      console.log(value);
       return settingService.updateSetting("thresholdAutoBatterySaver", value);
     } catch (error) {}
   }
-  setBatterySaver(event, value) {
+  setBatterySaver(value) {
     try {
       return settingService.updateSetting("batterySaver", value);
     } catch (error) {}
   }
   getBatterySleep = async () => {
     try {
-        const data = await execCommand(getBatteryPowerSleepAfter);
-        return Number(data)
+      const data = await execCommand(getBatteryPowerSleepAfter);
+      return Number(data);
     } catch (error) {
-      return 0
+      return 0;
     }
-  }
+  };
   getPluggedInSleep = async () => {
     try {
       const data = await execCommand(getACPowerSleepAfter);
-      return Number(data)
+      return Number(data);
     } catch (error) {
-      return 0
+      return 0;
     }
-  }
+  };
   getScreenTurnOff = async () => {
     try {
-        let data = await execCommand(getScreenTurnOffAfter);
-        console.log(data.split(" "))
-        return Number(data.split(" ")[1].trim().replaceAll('/\n', ''))
+      let data = await execCommand(getScreenTurnOffAfter);
+      return Number(data.split(" ")[1].trim().replaceAll("/\n", ""));
     } catch (error) {
-      return 0
+      return 0;
     }
-  }
-  getAllSetting = async (event, value) => {
+  };
+  getAllSetting = async (value) => {
     try {
       const batterySaver = settingService.getSetting("batterySaver");
-      const [batteryLevel, brightness, powerMode, screenTurnOff, batterySleep, pluggedInSleep, chargingState, powerButtonAction] = await Promise.all([
+      const [
+        batteryLevel,
+        brightness,
+        powerMode,
+        screenTurnOff,
+        batterySleep,
+        pluggedInSleep,
+        chargingState,
+        powerButtonAction,
+      ] = await Promise.all([
         this.getBatteryLevel(),
         this.getCurrentBrightness(),
         this.getCurrentPowerMode(),
@@ -150,11 +166,13 @@ class System {
         this.getPluggedInSleep(),
         this.getChargingState(),
         this.getPowerButtonAction(),
-      ])
+      ]);
       const lowBrightBatterySaver = settingService.getSetting(
         "lowBrightnessOnBatterySaver"
       );
-      const thresholdAutoBatterySaver = settingService.getSetting("thresholdAutoBatterySaver");
+      const thresholdAutoBatterySaver = settingService.getSetting(
+        "thresholdAutoBatterySaver"
+      );
       const turnOffBluetooth = settingService.getSetting("turnOffBluetooth");
       const turnOffWifi = settingService.getSetting("turnOffWifi");
       /// more here
@@ -177,26 +195,24 @@ class System {
       console.log(error);
     }
   };
-  setLowBrightnessOnBatterySaver = (event, value) => {
+  setLowBrightnessOnBatterySaver = (value) => {
     try {
-      console.log(`lowBrightnessOnBatterySaver`, value);
       return settingService.updateSetting("lowBrightnessOnBatterySaver", value);
     } catch (error) {}
   };
-  setTurnOffWifiOnBattery = (event, value) => {
+  setTurnOffWifiOnBattery = (value) => {
     try {
       return settingService.updateSetting("turnOffWifi", value);
     } catch (error) {}
   };
-  setTurnOffBluetoothOnBattery = (event, value) => {
+  setTurnOffBluetoothOnBattery = (value) => {
     try {
       return settingService.updateSetting("turnOffBluetooth", value);
     } catch (error) {}
   };
-  getBatteryHistory = async (event, value) => {
+  getBatteryHistory = async (value) => {
     try {
       let data;
-      console.log(value)
       switch (Number(value)) {
         case 24:
           data = await execCommand(getBatteryHistory(24 * 3600, 10));
@@ -217,7 +233,6 @@ class System {
           data = await execCommand(getBatteryHistory(24 * 3600, 10));
           break;
       }
-      console.log(data);
       let result = [];
       data.match(batteryHistoryRegex).forEach((element) => {
         const struct = element.match(digitsRegex).map((e) => e.trim());
@@ -227,7 +242,6 @@ class System {
           state: Number(struct[2]),
         });
       });
-      console.log(result);
       result.sort((a, b) => a.timestamps - b.timestamps);
       result = result.filter(({ level }) => level > 0);
 
@@ -243,7 +257,6 @@ class System {
   getPowerButtonAction = async () => {
     try {
       const data = await execCommand(getPowerButtonAction);
-      console.log(data);
       return String(data.replaceAll("'", "")).trim();
     } catch (error) {
       return "nothing";
@@ -293,7 +306,6 @@ class System {
           };
         })
       );
-      console.log(data);
       data.forEach((d) => {
         result[d.property] = d.data.match(batteryDetailRegex)
           ? d.data
@@ -303,14 +315,59 @@ class System {
           : "N/A";
       });
       result["time-to-empty"] = await this.getBatteryRemainingTime();
-      console.log(result);
       return result;
     } catch (error) {
-      console.log(error);
       return {};
+    }
+  };
+  setPowerButtonAction = async (value) => {
+    try {
+      return await execCommand(setPowerButtonAction(value));
+    } catch (error) {
+      return false;
+    }
+  };
+  setPluggedInSleepAfter = async (value) => {
+    try {
+      return await execCommand(setACPowerSleepAfter(value));
+    } catch (error) {
+      return false;
+    }
+  };
+  setBatterySleepAfter = async (value) => {
+    try {
+      return await execCommand(setBatteryPowerSleepAfter(value));
+    } catch (error) {
+      return false;
+    }
+  };
+  setScreenTurnOffAfter = async (value) => {
+    try {
+      return await execCommand(setScreenTurnOffAfter(value));
+    } catch (error) {
+      return false;
+    }
+  };
+  changeBright = async (value) => {
+    try {
+      return await execCommand(changeBright(value));
+    } catch (error) {
+      return false;
+    }
+  };
+  turnOffBluetooth = async () => {
+    try {
+      return await execCommand(turnOffBluetooth);
+    } catch (error) {}
+  };
+  turnOffWifi = async () => {
+    try {
+      return await execCommand(turnOffWifi);
+    } catch (error) {
+      return false;
     }
   };
 }
 module.exports = {
-  system: new System(),
+  systemService: new SystemService(),
 };

@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 // expose ipMain
 contextBridge.exposeInMainWorld("handle", {
   setBatteryTurnOff: (seconds) =>
-    ipcRenderer.invoke("handle:setBatteryTurnOffScreenAfter", seconds),
+    ipcRenderer.invoke("handle:turnOffScreenAfter", seconds),
   setPluggedInTurnOff: (seconds) =>
     ipcRenderer.invoke("handle:setPluggedInTurnOffScreenAfter", seconds),
   setBatterySleep: (seconds) =>
@@ -28,14 +28,16 @@ contextBridge.exposeInMainWorld("handle", {
     ipcRenderer.invoke("handle:setTurnOffWifiOnBattery", value),
   setTurnOffBluetoothOnBattery: (value) =>
     ipcRenderer.invoke("handle:setTurnOffBluetoothOnBattery", value),
-  setPowerButtonAction: (value) => ipcRenderer.invoke("handle:setPowerButtonAction", value),
-  setBatteryCloseLid: (value) => ipcRenderer.invoke("handle:setBatteryCloseLid", value),
-  setPluggedInCloseLid: (value) => ipcRenderer.invoke("handle:setPluggedInCloseLid", value),
-  openBatteryDetailWindow: () => ipcRenderer.invoke("openBatteryDetailWindow")
-});
-contextBridge.exposeInMainWorld("system", {
-  getCurrentBrightness: () => ipcRenderer.invoke("system:getCurrentBrightness"),
-  getAllSetting: () => ipcRenderer.invoke("system:getAllSetting"),
-  getBatteryHistory: (value) => ipcRenderer.invoke("system:getBatteryHistory", value),
-  getBatteryDetail: () => ipcRenderer.invoke("system:getBatteryDetail")
+  setPowerButtonAction: (value) =>
+    ipcRenderer.invoke("handle:setPowerButtonAction", value),
+  setBatteryCloseLid: (value) =>
+    ipcRenderer.invoke("handle:setBatteryCloseLid", value),
+  setPluggedInCloseLid: (value) =>
+    ipcRenderer.invoke("handle:setPluggedInCloseLid", value),
+  openBatteryDetailWindow: () => ipcRenderer.invoke("openBatteryDetailWindow"),
+  getCurrentBrightness: () => ipcRenderer.invoke("handle:getCurrentBrightness"),
+  getAllSetting: () => ipcRenderer.invoke("handle:getAllSetting"),
+  getBatteryHistory: (value) =>
+    ipcRenderer.invoke("handle:getBatteryHistory", value),
+  getBatteryDetail: () => ipcRenderer.invoke("handle:getBatteryDetail"),
 });
