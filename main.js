@@ -99,7 +99,6 @@ function openBatteryDetailWindow() {
 app.whenReady().then(() => {
   const mainWindow = createWindow();
   // init setting when startup
-  controller.initSetting();
   // cronjob
   job(mainWindow);
   app.on("activate", function () {

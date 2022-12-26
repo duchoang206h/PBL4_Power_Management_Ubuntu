@@ -7,7 +7,7 @@ const {
   turnOffWifi,
   setPowerMode,
 } = require("../commands/commands");
-const { system } = require("./system");
+const { systemService } = require("./system");
 const cronJob = (mainWindow) => {
   const job = new CronJob(
     "*/5 * * * * *", //repeat 5s
@@ -22,9 +22,9 @@ const cronJob = (mainWindow) => {
 async function handleBatterySaverOn(mainWindow) {
   try {
     const [batteryLevel, isCharging, remainingTime] = await Promise.all([
-      system.getBatteryLevel(),
-      system.getChargingState(),
-      system.getBatteryRemainingTime(),
+      systemService.getBatteryLevel(),
+      systemService.getChargingState(),
+      systemService.getBatteryRemainingTime(),
     ]);
     await new Promise((resolve, _) => {
       try {
