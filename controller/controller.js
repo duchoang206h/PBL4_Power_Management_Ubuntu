@@ -1,16 +1,3 @@
-const { execCommand } = require("../model/execCommand");
-const {
-  changeBright,
-  turnOffBluetooth,
-  setACPowerSleepAfter,
-  setBatteryPowerSleepAfter,
-  setScreenTurnOffAfter,
-  setPowerMode,
-  turnOffWifi,
-  setPowerButtonAction,
-  setCloseLidOnBattery,
-  setCloseLidOnPluggedIn,
-} = require("../commands/commands");
 const { settingService } = require("../model/setting");
 const { systemService } = require("../model/system");
 class Controller {
