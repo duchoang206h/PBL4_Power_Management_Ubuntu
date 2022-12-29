@@ -246,7 +246,15 @@ class SystemService {
       result = result.filter(({ level }) => level > 0);
 
       if (result.length > 8) {
-        result.splice(4, result.length - 8);
+        let newArr = [result[0]];
+        let n = result.length;
+        for(let i =1; i<=6;i++){
+          let x = n/7;
+          let index = Math.ceil(i*x) -1;
+          newArr.push(result[index])
+        }
+        newArr.push(result[result.length - 1])
+        result = newArr
       }
       return result;
     } catch (error) {
